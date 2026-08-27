@@ -1,0 +1,3658 @@
+[
+  {
+    "id": "p-1",
+    "slug": "ocean-morning",
+    "name": "Ocean Morning",
+    "colors": [
+      "#0F4C81",
+      "#2A9D8F",
+      "#8ABEB7",
+      "#E8F1F2",
+      "#F4A261"
+    ],
+    "creator": {
+      "id": "u-1",
+      "name": "Elena Vance",
+      "verified": true
+    },
+    "likes": 542,
+    "views": 4890,
+    "copies": 820,
+    "saves": 310,
+    "category": "Nature",
+    "tags": [
+      "ocean",
+      "cool",
+      "morning",
+      "teal",
+      "blue",
+      "website"
+    ],
+    "createdAt": "2025-01-14",
+    "isFeatured": true
+  },
+  {
+    "id": "p-2",
+    "slug": "soft-terracotta",
+    "name": "Soft Terracotta",
+    "colors": [
+      "#3D2622",
+      "#C86D51",
+      "#E09F67",
+      "#F5DFBB",
+      "#FAF3E0"
+    ],
+    "creator": {
+      "id": "u-2",
+      "name": "Marcus Chen",
+      "verified": true
+    },
+    "likes": 890,
+    "views": 7420,
+    "copies": 1240,
+    "saves": 560,
+    "category": "Warm",
+    "tags": [
+      "terracotta",
+      "earthy",
+      "warm",
+      "interior",
+      "minimal"
+    ],
+    "createdAt": "2025-01-18",
+    "isFeatured": true
+  },
+  {
+    "id": "p-3",
+    "slug": "midnight-garden",
+    "name": "Midnight Garden",
+    "colors": [
+      "#0B132B",
+      "#1C2541",
+      "#3A506B",
+      "#5BC0BE",
+      "#6FFFE9"
+    ],
+    "creator": {
+      "id": "u-3",
+      "name": "Sora Tanaka",
+      "verified": true
+    },
+    "likes": 672,
+    "views": 5310,
+    "copies": 980,
+    "saves": 420,
+    "category": "Dark",
+    "tags": [
+      "dark",
+      "cyan",
+      "midnight",
+      "ui/ux",
+      "neon"
+    ],
+    "createdAt": "2025-01-20",
+    "isFeatured": true
+  },
+  {
+    "id": "p-4",
+    "slug": "desert-bloom",
+    "name": "Desert Bloom",
+    "colors": [
+      "#2B2D42",
+      "#8D99AE",
+      "#EDF2F4",
+      "#EF233C",
+      "#D90429"
+    ],
+    "creator": {
+      "id": "u-4",
+      "name": "Zara K.",
+      "verified": false
+    },
+    "likes": 415,
+    "views": 3120,
+    "copies": 510,
+    "saves": 230,
+    "category": "Vibrant",
+    "tags": [
+      "red",
+      "vibrant",
+      "modern",
+      "high-contrast",
+      "branding"
+    ],
+    "createdAt": "2025-01-22"
+  },
+  {
+    "id": "p-5",
+    "slug": "modern-coffee",
+    "name": "Modern Coffee",
+    "colors": [
+      "#2F1B17",
+      "#6F4E37",
+      "#A67B5B",
+      "#DDB892",
+      "#EDE0D4"
+    ],
+    "creator": {
+      "id": "u-5",
+      "name": "Liam O’Connor",
+      "verified": true
+    },
+    "likes": 924,
+    "views": 8910,
+    "copies": 1450,
+    "saves": 730,
+    "category": "Neutral",
+    "tags": [
+      "coffee",
+      "brown",
+      "neutral",
+      "warm",
+      "café",
+      "interior"
+    ],
+    "createdAt": "2025-01-25",
+    "isFeatured": true
+  },
+  {
+    "id": "p-6",
+    "slug": "arctic-calm",
+    "name": "Arctic Calm",
+    "colors": [
+      "#1B263B",
+      "#415A77",
+      "#778DA9",
+      "#E0E1DD",
+      "#FFFFFF"
+    ],
+    "creator": {
+      "id": "u-1",
+      "name": "Elena Vance",
+      "verified": true
+    },
+    "likes": 731,
+    "views": 6100,
+    "copies": 910,
+    "saves": 480,
+    "category": "Cool",
+    "tags": [
+      "blue",
+      "slate",
+      "clean",
+      "minimal",
+      "business",
+      "ui/ux"
+    ],
+    "createdAt": "2025-01-27"
+  },
+  {
+    "id": "p-7",
+    "slug": "golden-hour",
+    "name": "Golden Hour",
+    "colors": [
+      "#3A1C06",
+      "#9B450B",
+      "#E38B29",
+      "#F1A661",
+      "#FFD8A8"
+    ],
+    "creator": {
+      "id": "u-6",
+      "name": "Chloe Dubois",
+      "verified": true
+    },
+    "likes": 1120,
+    "views": 9800,
+    "copies": 1820,
+    "saves": 890,
+    "category": "Trending",
+    "tags": [
+      "sunset",
+      "amber",
+      "gold",
+      "warm",
+      "photography"
+    ],
+    "createdAt": "2025-01-28",
+    "isFeatured": true
+  },
+  {
+    "id": "p-8",
+    "slug": "sage-linen",
+    "name": "Sage & Linen",
+    "colors": [
+      "#283618",
+      "#606C38",
+      "#DDA15E",
+      "#BC6C25",
+      "#FEFAE0"
+    ],
+    "creator": {
+      "id": "u-2",
+      "name": "Marcus Chen",
+      "verified": true
+    },
+    "likes": 840,
+    "views": 7100,
+    "copies": 1190,
+    "saves": 520,
+    "category": "Nature",
+    "tags": [
+      "sage",
+      "green",
+      "organic",
+      "wedding",
+      "natural"
+    ],
+    "createdAt": "2025-01-30"
+  },
+  {
+    "id": "p-9",
+    "slug": "velvet-plum",
+    "name": "Velvet Plum",
+    "colors": [
+      "#1D0D1E",
+      "#3D153B",
+      "#7A2268",
+      "#BD4089",
+      "#F199B9"
+    ],
+    "creator": {
+      "id": "u-7",
+      "name": "Aria Thorne",
+      "verified": false
+    },
+    "likes": 460,
+    "views": 3900,
+    "copies": 640,
+    "saves": 290,
+    "category": "Luxury",
+    "tags": [
+      "purple",
+      "luxury",
+      "plum",
+      "fashion",
+      "velvet"
+    ],
+    "createdAt": "2025-02-01"
+  },
+  {
+    "id": "p-10",
+    "slug": "tokyo-neon",
+    "name": "Tokyo Neon",
+    "colors": [
+      "#050505",
+      "#16003B",
+      "#7209B7",
+      "#F72585",
+      "#4CC9F0"
+    ],
+    "creator": {
+      "id": "u-3",
+      "name": "Sora Tanaka",
+      "verified": true
+    },
+    "likes": 1350,
+    "views": 12400,
+    "copies": 2310,
+    "saves": 990,
+    "category": "Vibrant",
+    "tags": [
+      "neon",
+      "cyberpunk",
+      "pink",
+      "dark",
+      "fashion",
+      "ui/ux"
+    ],
+    "createdAt": "2025-02-02",
+    "isFeatured": true
+  },
+  {
+    "id": "p-11",
+    "slug": "lavender-macaron",
+    "name": "Lavender Macaron",
+    "colors": [
+      "#D6C7E8",
+      "#F5D5E0",
+      "#FDE2E4",
+      "#E2ECE9",
+      "#BEE1E6"
+    ],
+    "creator": {
+      "id": "u-8",
+      "name": "Mila Rosier",
+      "verified": true
+    },
+    "likes": 680,
+    "views": 5400,
+    "copies": 880,
+    "saves": 410,
+    "category": "Pastel",
+    "tags": [
+      "pastel",
+      "lavender",
+      "pink",
+      "soft",
+      "cute",
+      "bakery"
+    ],
+    "createdAt": "2025-02-03"
+  },
+  {
+    "id": "p-12",
+    "slug": "tuscan-wedding",
+    "name": "Tuscan Wedding",
+    "colors": [
+      "#4A4036",
+      "#877B66",
+      "#C5A880",
+      "#E5D4C0",
+      "#F7F3E9"
+    ],
+    "creator": {
+      "id": "u-8",
+      "name": "Mila Rosier",
+      "verified": true
+    },
+    "likes": 810,
+    "views": 6700,
+    "copies": 1040,
+    "saves": 620,
+    "category": "Wedding",
+    "tags": [
+      "wedding",
+      "champagne",
+      "elegance",
+      "neutral",
+      "luxury"
+    ],
+    "createdAt": "2025-02-05"
+  },
+  {
+    "id": "p-13",
+    "slug": "nordic-mist",
+    "name": "Nordic Mist",
+    "colors": [
+      "#1C2321",
+      "#5D737E",
+      "#A4B0B7",
+      "#D8E2DC",
+      "#F8F9FA"
+    ],
+    "creator": {
+      "id": "u-1",
+      "name": "Elena Vance",
+      "verified": true
+    },
+    "likes": 610,
+    "views": 4900,
+    "copies": 730,
+    "saves": 370,
+    "category": "Minimal",
+    "tags": [
+      "minimal",
+      "slate",
+      "nordic",
+      "scandi",
+      "interior"
+    ],
+    "createdAt": "2025-02-06"
+  },
+  {
+    "id": "p-14",
+    "slug": "matcha-latte",
+    "name": "Matcha Latte",
+    "colors": [
+      "#283618",
+      "#588157",
+      "#A3B18A",
+      "#DAD7CD",
+      "#F4F1DE"
+    ],
+    "creator": {
+      "id": "u-3",
+      "name": "Sora Tanaka",
+      "verified": true
+    },
+    "likes": 990,
+    "views": 8400,
+    "copies": 1380,
+    "saves": 690,
+    "category": "Nature",
+    "tags": [
+      "matcha",
+      "green",
+      "latte",
+      "warm",
+      "cafe"
+    ],
+    "createdAt": "2025-02-08"
+  },
+  {
+    "id": "p-15",
+    "slug": "emerald-soiree",
+    "name": "Emerald Soirée",
+    "colors": [
+      "#0A231C",
+      "#134E39",
+      "#2D8A68",
+      "#C5A059",
+      "#EAD8B1"
+    ],
+    "creator": {
+      "id": "u-6",
+      "name": "Chloe Dubois",
+      "verified": true
+    },
+    "likes": 950,
+    "views": 7900,
+    "copies": 1420,
+    "saves": 710,
+    "category": "Luxury",
+    "tags": [
+      "emerald",
+      "gold",
+      "luxury",
+      "cocktail",
+      "jewelry"
+    ],
+    "createdAt": "2025-02-09",
+    "isFeatured": true
+  },
+  {
+    "id": "p-16",
+    "slug": "sorbet-sunset",
+    "name": "Sorbet Sunset",
+    "colors": [
+      "#FF5E7E",
+      "#FFAA67",
+      "#FFD166",
+      "#88D4AB",
+      "#4E9F3D"
+    ],
+    "creator": {
+      "id": "u-9",
+      "name": "Leo Gomez",
+      "verified": false
+    },
+    "likes": 520,
+    "views": 4100,
+    "copies": 670,
+    "saves": 310,
+    "category": "Vibrant",
+    "tags": [
+      "sunset",
+      "sorbet",
+      "playful",
+      "fruit",
+      "brand"
+    ],
+    "createdAt": "2025-02-10"
+  },
+  {
+    "id": "p-17",
+    "slug": "swiss-typographic",
+    "name": "Swiss Typographic",
+    "colors": [
+      "#000000",
+      "#D80032",
+      "#EDF2F4",
+      "#8D99AE",
+      "#FFFFFF"
+    ],
+    "creator": {
+      "id": "u-2",
+      "name": "Marcus Chen",
+      "verified": true
+    },
+    "likes": 1250,
+    "views": 11200,
+    "copies": 2050,
+    "saves": 980,
+    "category": "Minimal",
+    "tags": [
+      "swiss",
+      "poster",
+      "red",
+      "black",
+      "editorial",
+      "ui/ux"
+    ],
+    "createdAt": "2025-02-12",
+    "isFeatured": true
+  },
+  {
+    "id": "p-18",
+    "slug": "coastal-dune",
+    "name": "Coastal Dune",
+    "colors": [
+      "#1E3D59",
+      "#17B978",
+      "#FF6E40",
+      "#F5F0E1"
+    ],
+    "creator": {
+      "id": "u-4",
+      "name": "Zara K.",
+      "verified": false
+    },
+    "likes": 430,
+    "views": 3500,
+    "copies": 580,
+    "saves": 260,
+    "category": "Nature",
+    "tags": [
+      "coastal",
+      "beach",
+      "summer",
+      "fresh",
+      "website"
+    ],
+    "createdAt": "2025-02-13"
+  },
+  {
+    "id": "p-19",
+    "slug": "obsidian-gold",
+    "name": "Obsidian & Gold",
+    "colors": [
+      "#121212",
+      "#242424",
+      "#795548",
+      "#CBB26A",
+      "#E6D5AC"
+    ],
+    "creator": {
+      "id": "u-6",
+      "name": "Chloe Dubois",
+      "verified": true
+    },
+    "likes": 1180,
+    "views": 10400,
+    "copies": 1910,
+    "saves": 850,
+    "category": "Luxury",
+    "tags": [
+      "luxury",
+      "dark",
+      "gold",
+      "premium",
+      "watch",
+      "fashion"
+    ],
+    "createdAt": "2025-02-14",
+    "isFeatured": true
+  },
+  {
+    "id": "p-20",
+    "slug": "peachy-keens",
+    "name": "Peachy Keen",
+    "colors": [
+      "#F7A072",
+      "#EDAB90",
+      "#F9E2D2",
+      "#D3E0EA",
+      "#1687A7"
+    ],
+    "creator": {
+      "id": "u-8",
+      "name": "Mila Rosier",
+      "verified": true
+    },
+    "likes": 670,
+    "views": 5200,
+    "copies": 840,
+    "saves": 430,
+    "category": "Pastel",
+    "tags": [
+      "peach",
+      "pastel",
+      "teal",
+      "delicate",
+      "website"
+    ],
+    "createdAt": "2025-02-15"
+  },
+  {
+    "id": "p-21",
+    "slug": "saas-indigo-dash",
+    "name": "SaaS Indigo Cloud",
+    "colors": [
+      "#0F172A",
+      "#312E81",
+      "#4F46E5",
+      "#818CF8",
+      "#F8FAFC"
+    ],
+    "creator": {
+      "id": "u-10",
+      "name": "Devin Vance",
+      "verified": true
+    },
+    "likes": 1480,
+    "views": 13900,
+    "copies": 2600,
+    "saves": 1100,
+    "category": "UI/UX",
+    "tags": [
+      "saas",
+      "indigo",
+      "dashboard",
+      "clean",
+      "tech",
+      "ui/ux"
+    ],
+    "createdAt": "2025-02-16",
+    "isFeatured": true
+  },
+  {
+    "id": "p-22",
+    "slug": "fintech-teal-slate",
+    "name": "Fintech Precision",
+    "colors": [
+      "#06283D",
+      "#1363DF",
+      "#47B5FF",
+      "#DFF6FF",
+      "#FFFFFF"
+    ],
+    "creator": {
+      "id": "u-10",
+      "name": "Devin Vance",
+      "verified": true
+    },
+    "likes": 910,
+    "views": 7800,
+    "copies": 1340,
+    "saves": 620,
+    "category": "Business",
+    "tags": [
+      "fintech",
+      "finance",
+      "blue",
+      "trust",
+      "business"
+    ],
+    "createdAt": "2025-02-17"
+  },
+  {
+    "id": "p-23",
+    "slug": "monochrome-editorial",
+    "name": "Monochrome Editorial",
+    "colors": [
+      "#111111",
+      "#333333",
+      "#666666",
+      "#CCCCCC",
+      "#F5F5F5"
+    ],
+    "creator": {
+      "id": "u-2",
+      "name": "Marcus Chen",
+      "verified": true
+    },
+    "likes": 830,
+    "views": 7100,
+    "copies": 1200,
+    "saves": 590,
+    "category": "Minimal",
+    "tags": [
+      "monochrome",
+      "grayscale",
+      "editorial",
+      "minimal",
+      "fashion"
+    ],
+    "createdAt": "2025-02-18"
+  },
+  {
+    "id": "p-24",
+    "slug": "autumn-maple",
+    "name": "Autumn Maple",
+    "colors": [
+      "#3A0E07",
+      "#7A1C10",
+      "#BF3A08",
+      "#F08A4B",
+      "#F3E9D2"
+    ],
+    "creator": {
+      "id": "u-5",
+      "name": "Liam O’Connor",
+      "verified": true
+    },
+    "likes": 760,
+    "views": 6300,
+    "copies": 990,
+    "saves": 450,
+    "category": "Warm",
+    "tags": [
+      "autumn",
+      "fall",
+      "orange",
+      "warm",
+      "nature"
+    ],
+    "createdAt": "2025-02-19"
+  },
+  {
+    "id": "p-25",
+    "slug": "synthwave-horizon",
+    "name": "Synthwave Horizon",
+    "colors": [
+      "#241734",
+      "#2E2157",
+      "#FD3A69",
+      "#FECD1A",
+      "#00F0FF"
+    ],
+    "creator": {
+      "id": "u-3",
+      "name": "Sora Tanaka",
+      "verified": true
+    },
+    "likes": 1290,
+    "views": 11800,
+    "copies": 2150,
+    "saves": 950,
+    "category": "Vibrant",
+    "tags": [
+      "synthwave",
+      "retro",
+      "neon",
+      "80s",
+      "vibrant"
+    ],
+    "createdAt": "2025-02-20"
+  },
+  {
+    "id": "p-26",
+    "slug": "raw-concrete-clay",
+    "name": "Raw Concrete & Clay",
+    "colors": [
+      "#2B2C28",
+      "#424B54",
+      "#93A8AC",
+      "#D7CEB2",
+      "#EFE6DD"
+    ],
+    "creator": {
+      "id": "u-2",
+      "name": "Marcus Chen",
+      "verified": true
+    },
+    "likes": 640,
+    "views": 5300,
+    "copies": 870,
+    "saves": 390,
+    "category": "Interior",
+    "tags": [
+      "architecture",
+      "concrete",
+      "clay",
+      "interior",
+      "neutral"
+    ],
+    "createdAt": "2025-02-21"
+  },
+  {
+    "id": "p-27",
+    "slug": "blush-champagne",
+    "name": "Blush & Champagne",
+    "colors": [
+      "#4E3629",
+      "#AC8B7E",
+      "#D9C5B2",
+      "#F3E8EE",
+      "#FFFFFF"
+    ],
+    "creator": {
+      "id": "u-8",
+      "name": "Mila Rosier",
+      "verified": true
+    },
+    "likes": 880,
+    "views": 7500,
+    "copies": 1300,
+    "saves": 670,
+    "category": "Wedding",
+    "tags": [
+      "blush",
+      "champagne",
+      "wedding",
+      "delicate",
+      "invitation"
+    ],
+    "createdAt": "2025-02-22"
+  },
+  {
+    "id": "p-28",
+    "slug": "deep-abyss",
+    "name": "Deep Abyss",
+    "colors": [
+      "#03071E",
+      "#0B2545",
+      "#134074",
+      "#8DA9C4",
+      "#EEF4F8"
+    ],
+    "creator": {
+      "id": "u-1",
+      "name": "Elena Vance",
+      "verified": true
+    },
+    "likes": 810,
+    "views": 6900,
+    "copies": 1150,
+    "saves": 530,
+    "category": "Dark",
+    "tags": [
+      "deep",
+      "ocean",
+      "navy",
+      "dark",
+      "abyss"
+    ],
+    "createdAt": "2025-02-23"
+  },
+  {
+    "id": "p-29",
+    "slug": "citrus-grove",
+    "name": "Citrus Grove",
+    "colors": [
+      "#1C3144",
+      "#007E8A",
+      "#3F88C5",
+      "#FFBA08",
+      "#D00000"
+    ],
+    "creator": {
+      "id": "u-9",
+      "name": "Leo Gomez",
+      "verified": false
+    },
+    "likes": 590,
+    "views": 4700,
+    "copies": 780,
+    "saves": 340,
+    "category": "Vibrant",
+    "tags": [
+      "citrus",
+      "lemon",
+      "orange",
+      "fresh",
+      "vibrant"
+    ],
+    "createdAt": "2025-02-24"
+  },
+  {
+    "id": "p-30",
+    "slug": "matcha-cookie",
+    "name": "Matcha & Sesame",
+    "colors": [
+      "#1F2421",
+      "#40534C",
+      "#677E68",
+      "#9DB8A1",
+      "#E7ECEF"
+    ],
+    "creator": {
+      "id": "u-3",
+      "name": "Sora Tanaka",
+      "verified": true
+    },
+    "likes": 720,
+    "views": 6100,
+    "copies": 960,
+    "saves": 440,
+    "category": "Nature",
+    "tags": [
+      "matcha",
+      "calm",
+      "zen",
+      "green",
+      "packaging"
+    ],
+    "createdAt": "2025-02-25"
+  },
+  {
+    "id": "p-31",
+    "slug": "parisian-atelier",
+    "name": "Parisian Atelier",
+    "colors": [
+      "#181818",
+      "#493829",
+      "#816C5B",
+      "#A89F91",
+      "#F4F1EA"
+    ],
+    "creator": {
+      "id": "u-6",
+      "name": "Chloe Dubois",
+      "verified": true
+    },
+    "likes": 990,
+    "views": 8600,
+    "copies": 1470,
+    "saves": 720,
+    "category": "Fashion",
+    "tags": [
+      "fashion",
+      "paris",
+      "haute-couture",
+      "luxury",
+      "beige"
+    ],
+    "createdAt": "2025-02-26",
+    "isFeatured": true
+  },
+  {
+    "id": "p-32",
+    "slug": "crypto-cyber-matrix",
+    "name": "Cyber Matrix",
+    "colors": [
+      "#080E08",
+      "#0D2818",
+      "#04724D",
+      "#34D399",
+      "#D1FAE5"
+    ],
+    "creator": {
+      "id": "u-10",
+      "name": "Devin Vance",
+      "verified": true
+    },
+    "likes": 850,
+    "views": 7400,
+    "copies": 1220,
+    "saves": 580,
+    "category": "Dark",
+    "tags": [
+      "cyber",
+      "matrix",
+      "terminal",
+      "tech",
+      "crypto"
+    ],
+    "createdAt": "2025-02-27"
+  },
+  {
+    "id": "p-33",
+    "slug": "dusty-rose-slate",
+    "name": "Dusty Rose & Slate",
+    "colors": [
+      "#2F3E46",
+      "#52796F",
+      "#84A98C",
+      "#CAD2C5",
+      "#F28482"
+    ],
+    "creator": {
+      "id": "u-8",
+      "name": "Mila Rosier",
+      "verified": true
+    },
+    "likes": 910,
+    "views": 7900,
+    "copies": 1390,
+    "saves": 650,
+    "category": "Pastel",
+    "tags": [
+      "dusty-rose",
+      "sage",
+      "soft",
+      "nature",
+      "ui/ux"
+    ],
+    "createdAt": "2025-02-28"
+  },
+  {
+    "id": "p-34",
+    "slug": "mid-century-modern",
+    "name": "Mid-Century Modern",
+    "colors": [
+      "#264653",
+      "#2A9D8F",
+      "#E9C46A",
+      "#F4A261",
+      "#E76F51"
+    ],
+    "creator": {
+      "id": "u-2",
+      "name": "Marcus Chen",
+      "verified": true
+    },
+    "likes": 1650,
+    "views": 15400,
+    "copies": 2900,
+    "saves": 1320,
+    "category": "Trending",
+    "tags": [
+      "mid-century",
+      "retro",
+      "warm",
+      "interior",
+      "classic"
+    ],
+    "createdAt": "2025-03-01",
+    "isFeatured": true
+  },
+  {
+    "id": "p-35",
+    "slug": "warm-sandstone",
+    "name": "Warm Sandstone",
+    "colors": [
+      "#3A302A",
+      "#7A6253",
+      "#B89B72",
+      "#E0D0B8",
+      "#FBF8F3"
+    ],
+    "creator": {
+      "id": "u-5",
+      "name": "Liam O’Connor",
+      "verified": true
+    },
+    "likes": 670,
+    "views": 5600,
+    "copies": 910,
+    "saves": 420,
+    "category": "Neutral",
+    "tags": [
+      "sandstone",
+      "warm",
+      "desert",
+      "minimal",
+      "neutral"
+    ],
+    "createdAt": "2025-03-02"
+  },
+  {
+    "id": "p-36",
+    "slug": "neon-tokyo-night",
+    "name": "Neon Tokyo Rain",
+    "colors": [
+      "#0A0908",
+      "#22333B",
+      "#390040",
+      "#9B5DE5",
+      "#F15BB5"
+    ],
+    "creator": {
+      "id": "u-3",
+      "name": "Sora Tanaka",
+      "verified": true
+    },
+    "likes": 1110,
+    "views": 9900,
+    "copies": 1750,
+    "saves": 780,
+    "category": "Vibrant",
+    "tags": [
+      "tokyo",
+      "neon",
+      "rain",
+      "magenta",
+      "night"
+    ],
+    "createdAt": "2025-03-03"
+  },
+  {
+    "id": "p-37",
+    "slug": "editorial-coral-blue",
+    "name": "Editorial Coral & Slate",
+    "colors": [
+      "#1D2D44",
+      "#3E5C76",
+      "#748CAB",
+      "#F0EBD8",
+      "#FF6B6B"
+    ],
+    "creator": {
+      "id": "u-1",
+      "name": "Elena Vance",
+      "verified": true
+    },
+    "likes": 820,
+    "views": 7000,
+    "copies": 1250,
+    "saves": 600,
+    "category": "Website",
+    "tags": [
+      "editorial",
+      "coral",
+      "slate",
+      "website",
+      "branding"
+    ],
+    "createdAt": "2025-03-04"
+  },
+  {
+    "id": "p-38",
+    "slug": "vintage-botanical",
+    "name": "Vintage Botanical",
+    "colors": [
+      "#1E3F20",
+      "#4A6B35",
+      "#90A955",
+      "#ECF39E",
+      "#31572C"
+    ],
+    "creator": {
+      "id": "u-4",
+      "name": "Zara K.",
+      "verified": false
+    },
+    "likes": 630,
+    "views": 5200,
+    "copies": 880,
+    "saves": 410,
+    "category": "Nature",
+    "tags": [
+      "botanical",
+      "vintage",
+      "olive",
+      "forest",
+      "green"
+    ],
+    "createdAt": "2025-03-05"
+  },
+  {
+    "id": "p-39",
+    "slug": "royal-monaco",
+    "name": "Royal Monaco",
+    "colors": [
+      "#0B1B3D",
+      "#1B3B6F",
+      "#21295C",
+      "#C29B38",
+      "#E9D758"
+    ],
+    "creator": {
+      "id": "u-6",
+      "name": "Chloe Dubois",
+      "verified": true
+    },
+    "likes": 920,
+    "views": 8100,
+    "copies": 1390,
+    "saves": 680,
+    "category": "Luxury",
+    "tags": [
+      "royal",
+      "navy",
+      "gold",
+      "monaco",
+      "luxury"
+    ],
+    "createdAt": "2025-03-06"
+  },
+  {
+    "id": "p-40",
+    "slug": "pastel-gelato",
+    "name": "Pastel Gelato",
+    "colors": [
+      "#FFAAA6",
+      "#FF8B94",
+      "#FFD3B6",
+      "#DCEDC1",
+      "#A8E6CF"
+    ],
+    "creator": {
+      "id": "u-8",
+      "name": "Mila Rosier",
+      "verified": true
+    },
+    "likes": 870,
+    "views": 7400,
+    "copies": 1310,
+    "saves": 610,
+    "category": "Pastel",
+    "tags": [
+      "gelato",
+      "mint",
+      "peach",
+      "spring",
+      "dessert"
+    ],
+    "createdAt": "2025-03-07"
+  },
+  {
+    "id": "p-41",
+    "slug": "nordic-fjord",
+    "name": "Nordic Fjord",
+    "colors": [
+      "#0F2027",
+      "#203A43",
+      "#2C5364",
+      "#79A9D1",
+      "#EBF4F6"
+    ],
+    "creator": {
+      "id": "u-1",
+      "name": "Elena Vance",
+      "verified": true
+    },
+    "likes": 980,
+    "views": 8700,
+    "copies": 1540,
+    "saves": 730,
+    "category": "Cool",
+    "tags": [
+      "fjord",
+      "nordic",
+      "deep-blue",
+      "nature",
+      "cool"
+    ],
+    "createdAt": "2025-03-08"
+  },
+  {
+    "id": "p-42",
+    "slug": "baked-clay-terrace",
+    "name": "Baked Clay Terrace",
+    "colors": [
+      "#4A2810",
+      "#8A3B14",
+      "#D45D2A",
+      "#F1935C",
+      "#F8E9DE"
+    ],
+    "creator": {
+      "id": "u-2",
+      "name": "Marcus Chen",
+      "verified": true
+    },
+    "likes": 740,
+    "views": 6200,
+    "copies": 1020,
+    "saves": 480,
+    "category": "Warm",
+    "tags": [
+      "clay",
+      "terrace",
+      "mediterranean",
+      "interior",
+      "warm"
+    ],
+    "createdAt": "2025-03-09"
+  },
+  {
+    "id": "p-43",
+    "slug": "deep-space-purple",
+    "name": "Deep Nebula",
+    "colors": [
+      "#090A0F",
+      "#1A1423",
+      "#372549",
+      "#774C60",
+      "#B75D69"
+    ],
+    "creator": {
+      "id": "u-7",
+      "name": "Aria Thorne",
+      "verified": false
+    },
+    "likes": 690,
+    "views": 5800,
+    "copies": 960,
+    "saves": 450,
+    "category": "Dark",
+    "tags": [
+      "nebula",
+      "space",
+      "purple",
+      "dark",
+      "cosmic"
+    ],
+    "createdAt": "2025-03-10"
+  },
+  {
+    "id": "p-44",
+    "slug": "modern-banking-blue",
+    "name": "Capital Core",
+    "colors": [
+      "#0B192C",
+      "#1E3E62",
+      "#000000",
+      "#FF6500",
+      "#FFFFFF"
+    ],
+    "creator": {
+      "id": "u-10",
+      "name": "Devin Vance",
+      "verified": true
+    },
+    "likes": 820,
+    "views": 7000,
+    "copies": 1180,
+    "saves": 540,
+    "category": "Business",
+    "tags": [
+      "banking",
+      "orange-accent",
+      "navy",
+      "corporate",
+      "business"
+    ],
+    "createdAt": "2025-03-11"
+  },
+  {
+    "id": "p-45",
+    "slug": "sun-drenched-kyoto",
+    "name": "Kyoto Maple & Moss",
+    "colors": [
+      "#231B1B",
+      "#5A3D31",
+      "#964F4C",
+      "#C48B71",
+      "#E7D8C9"
+    ],
+    "creator": {
+      "id": "u-3",
+      "name": "Sora Tanaka",
+      "verified": true
+    },
+    "likes": 910,
+    "views": 7900,
+    "copies": 1360,
+    "saves": 660,
+    "category": "Nature",
+    "tags": [
+      "kyoto",
+      "japan",
+      "moss",
+      "autumn",
+      "zen"
+    ],
+    "createdAt": "2025-03-12"
+  },
+  {
+    "id": "p-46",
+    "slug": "cozy-wool-blanket",
+    "name": "Cozy Cashmere",
+    "colors": [
+      "#3E363F",
+      "#6E675F",
+      "#9B9B93",
+      "#D3D0CB",
+      "#F4F4F2"
+    ],
+    "creator": {
+      "id": "u-5",
+      "name": "Liam O’Connor",
+      "verified": true
+    },
+    "likes": 620,
+    "views": 5100,
+    "copies": 830,
+    "saves": 390,
+    "category": "Neutral",
+    "tags": [
+      "cashmere",
+      "wool",
+      "neutral",
+      "minimal",
+      "fashion"
+    ],
+    "createdAt": "2025-03-13"
+  },
+  {
+    "id": "p-47",
+    "slug": "electric-violet-glow",
+    "name": "Electric Prism",
+    "colors": [
+      "#0D0221",
+      "#0F084B",
+      "#26408B",
+      "#0D6EFD",
+      "#00EBFF"
+    ],
+    "creator": {
+      "id": "u-10",
+      "name": "Devin Vance",
+      "verified": true
+    },
+    "likes": 1140,
+    "views": 10100,
+    "copies": 1820,
+    "saves": 830,
+    "category": "Vibrant",
+    "tags": [
+      "electric",
+      "blue",
+      "prism",
+      "neon",
+      "ui/ux"
+    ],
+    "createdAt": "2025-03-14"
+  },
+  {
+    "id": "p-48",
+    "slug": "minimalist-arch-concrete",
+    "name": "Brutalist Concrete",
+    "colors": [
+      "#1A1A1A",
+      "#404040",
+      "#737373",
+      "#A3A3A3",
+      "#E5E5E5"
+    ],
+    "creator": {
+      "id": "u-2",
+      "name": "Marcus Chen",
+      "verified": true
+    },
+    "likes": 1040,
+    "views": 9300,
+    "copies": 1610,
+    "saves": 770,
+    "category": "Minimal",
+    "tags": [
+      "brutalist",
+      "grayscale",
+      "mono",
+      "architectural",
+      "minimal"
+    ],
+    "createdAt": "2025-03-15"
+  },
+  {
+    "id": "p-49",
+    "slug": "pistachio-blossom",
+    "name": "Pistachio Blossom",
+    "colors": [
+      "#4A5759",
+      "#EDAFB8",
+      "#F7E1D7",
+      "#DEDBD2",
+      "#B0C4B1"
+    ],
+    "creator": {
+      "id": "u-8",
+      "name": "Mila Rosier",
+      "verified": true
+    },
+    "likes": 750,
+    "views": 6400,
+    "copies": 1110,
+    "saves": 530,
+    "category": "Pastel",
+    "tags": [
+      "pistachio",
+      "blossom",
+      "spring",
+      "soft",
+      "boutique"
+    ],
+    "createdAt": "2025-03-16"
+  },
+  {
+    "id": "p-50",
+    "slug": "dark-amber-whiskey",
+    "name": "Old Fashioned",
+    "colors": [
+      "#1A0C02",
+      "#401F08",
+      "#73370E",
+      "#B36B22",
+      "#F2AA4C"
+    ],
+    "creator": {
+      "id": "u-5",
+      "name": "Liam O’Connor",
+      "verified": true
+    },
+    "likes": 890,
+    "views": 7700,
+    "copies": 1330,
+    "saves": 640,
+    "category": "Warm",
+    "tags": [
+      "whiskey",
+      "amber",
+      "bar",
+      "warm",
+      "evening"
+    ],
+    "createdAt": "2025-03-17"
+  },
+  {
+    "id": "p-51",
+    "slug": "clean-developer-ide",
+    "name": "Developer Dark Slate",
+    "colors": [
+      "#0D1117",
+      "#161B22",
+      "#30363D",
+      "#58A6FF",
+      "#7EE787"
+    ],
+    "creator": {
+      "id": "u-10",
+      "name": "Devin Vance",
+      "verified": true
+    },
+    "likes": 1560,
+    "views": 14200,
+    "copies": 2840,
+    "saves": 1250,
+    "category": "UI/UX",
+    "tags": [
+      "developer",
+      "code",
+      "ide",
+      "dark",
+      "ui/ux",
+      "website"
+    ],
+    "createdAt": "2025-03-18",
+    "isFeatured": true
+  },
+  {
+    "id": "p-52",
+    "slug": "champagne-silk",
+    "name": "Champagne Silk",
+    "colors": [
+      "#2A2421",
+      "#6E5D53",
+      "#BFA588",
+      "#E6D7C3",
+      "#FAF6F0"
+    ],
+    "creator": {
+      "id": "u-6",
+      "name": "Chloe Dubois",
+      "verified": true
+    },
+    "likes": 840,
+    "views": 7200,
+    "copies": 1260,
+    "saves": 600,
+    "category": "Luxury",
+    "tags": [
+      "silk",
+      "champagne",
+      "elegance",
+      "neutral",
+      "fashion"
+    ],
+    "createdAt": "2025-03-19"
+  },
+  {
+    "id": "p-53",
+    "slug": "wild-poppy-field",
+    "name": "Wild Poppy Field",
+    "colors": [
+      "#1B2E1B",
+      "#3E5C3E",
+      "#9E2A2B",
+      "#E01E37",
+      "#FFE3E0"
+    ],
+    "creator": {
+      "id": "u-4",
+      "name": "Zara K.",
+      "verified": false
+    },
+    "likes": 580,
+    "views": 4600,
+    "copies": 790,
+    "saves": 370,
+    "category": "Nature",
+    "tags": [
+      "poppy",
+      "field",
+      "red",
+      "wildflower",
+      "nature"
+    ],
+    "createdAt": "2025-03-20"
+  },
+  {
+    "id": "p-54",
+    "slug": "coastal-fog-morning",
+    "name": "Coastal Fog",
+    "colors": [
+      "#2B3A42",
+      "#4F6D7A",
+      "#C0D6DF",
+      "#DBE9EE",
+      "#FFFFFF"
+    ],
+    "creator": {
+      "id": "u-1",
+      "name": "Elena Vance",
+      "verified": true
+    },
+    "likes": 770,
+    "views": 6500,
+    "copies": 1140,
+    "saves": 520,
+    "category": "Cool",
+    "tags": [
+      "fog",
+      "coastal",
+      "mist",
+      "cool",
+      "calm"
+    ],
+    "createdAt": "2025-03-21"
+  },
+  {
+    "id": "p-55",
+    "slug": "sunset-in-oia",
+    "name": "Santorini Sunset",
+    "colors": [
+      "#1D3557",
+      "#457B9D",
+      "#A8DADC",
+      "#F1FAEE",
+      "#E63946"
+    ],
+    "creator": {
+      "id": "u-6",
+      "name": "Chloe Dubois",
+      "verified": true
+    },
+    "likes": 1420,
+    "views": 12900,
+    "copies": 2430,
+    "saves": 1090,
+    "category": "Trending",
+    "tags": [
+      "santorini",
+      "greece",
+      "ocean",
+      "sunset",
+      "travel"
+    ],
+    "createdAt": "2025-03-22",
+    "isFeatured": true
+  },
+  {
+    "id": "p-56",
+    "slug": "clay-and-eucalyptus",
+    "name": "Eucalyptus & Clay",
+    "colors": [
+      "#2E382E",
+      "#506C59",
+      "#90A996",
+      "#C17C64",
+      "#F4E9CD"
+    ],
+    "creator": {
+      "id": "u-2",
+      "name": "Marcus Chen",
+      "verified": true
+    },
+    "likes": 830,
+    "views": 7100,
+    "copies": 1240,
+    "saves": 580,
+    "category": "Interior",
+    "tags": [
+      "eucalyptus",
+      "terracotta",
+      "interior",
+      "boho",
+      "calm"
+    ],
+    "createdAt": "2025-03-23"
+  },
+  {
+    "id": "p-57",
+    "slug": "vapor-glitch",
+    "name": "Vapor Glitch",
+    "colors": [
+      "#1A002C",
+      "#541388",
+      "#D902EE",
+      "#FFD400",
+      "#00FFF5"
+    ],
+    "creator": {
+      "id": "u-3",
+      "name": "Sora Tanaka",
+      "verified": true
+    },
+    "likes": 990,
+    "views": 8900,
+    "copies": 1620,
+    "saves": 710,
+    "category": "Vibrant",
+    "tags": [
+      "glitch",
+      "vaporwave",
+      "purple",
+      "neon",
+      "bold"
+    ],
+    "createdAt": "2025-03-24"
+  },
+  {
+    "id": "p-58",
+    "slug": "matte-black-copper",
+    "name": "Matte Obsidian & Copper",
+    "colors": [
+      "#111111",
+      "#222222",
+      "#4D4D4D",
+      "#B87333",
+      "#E6C280"
+    ],
+    "creator": {
+      "id": "u-6",
+      "name": "Chloe Dubois",
+      "verified": true
+    },
+    "likes": 1190,
+    "views": 10800,
+    "copies": 1980,
+    "saves": 900,
+    "category": "Luxury",
+    "tags": [
+      "copper",
+      "metal",
+      "luxury",
+      "dark",
+      "industrial"
+    ],
+    "createdAt": "2025-03-25"
+  },
+  {
+    "id": "p-59",
+    "slug": "fresh-lime-sorbet",
+    "name": "Lime & Mint Sorbet",
+    "colors": [
+      "#0A3622",
+      "#285943",
+      "#77BFA3",
+      "#C7F9CC",
+      "#F7FFF7"
+    ],
+    "creator": {
+      "id": "u-9",
+      "name": "Leo Gomez",
+      "verified": false
+    },
+    "likes": 640,
+    "views": 5200,
+    "copies": 870,
+    "saves": 380,
+    "category": "Nature",
+    "tags": [
+      "lime",
+      "mint",
+      "fresh",
+      "summer",
+      "green"
+    ],
+    "createdAt": "2025-03-26"
+  },
+  {
+    "id": "p-60",
+    "slug": "corporate-slate-azure",
+    "name": "Enterprise Azure",
+    "colors": [
+      "#0F172A",
+      "#1E293B",
+      "#2563EB",
+      "#60A5FA",
+      "#EFF6FF"
+    ],
+    "creator": {
+      "id": "u-10",
+      "name": "Devin Vance",
+      "verified": true
+    },
+    "likes": 1030,
+    "views": 9200,
+    "copies": 1740,
+    "saves": 810,
+    "category": "Business",
+    "tags": [
+      "enterprise",
+      "azure",
+      "corporate",
+      "saas",
+      "tech"
+    ],
+    "createdAt": "2025-03-27"
+  },
+  {
+    "id": "p-61",
+    "slug": "dusty-lilac-dusk",
+    "name": "Lilac Dusk",
+    "colors": [
+      "#281E32",
+      "#4F3B66",
+      "#87709F",
+      "#BFB1D5",
+      "#EFE9F4"
+    ],
+    "creator": {
+      "id": "u-8",
+      "name": "Mila Rosier",
+      "verified": true
+    },
+    "likes": 710,
+    "views": 6100,
+    "copies": 980,
+    "saves": 450,
+    "category": "Pastel",
+    "tags": [
+      "lilac",
+      "dusk",
+      "purple",
+      "soft",
+      "evening"
+    ],
+    "createdAt": "2025-03-28"
+  },
+  {
+    "id": "p-62",
+    "slug": "espresso-crema",
+    "name": "Espresso & Crema",
+    "colors": [
+      "#1C110A",
+      "#422415",
+      "#6D432A",
+      "#9B6A47",
+      "#E5D4C0"
+    ],
+    "creator": {
+      "id": "u-5",
+      "name": "Liam O’Connor",
+      "verified": true
+    },
+    "likes": 860,
+    "views": 7400,
+    "copies": 1320,
+    "saves": 620,
+    "category": "Neutral",
+    "tags": [
+      "espresso",
+      "coffee",
+      "crema",
+      "warm",
+      "cafe"
+    ],
+    "createdAt": "2025-03-29"
+  },
+  {
+    "id": "p-63",
+    "slug": "cherry-blossom-evening",
+    "name": "Sakura Twilight",
+    "colors": [
+      "#1D1328",
+      "#3F234F",
+      "#8C4372",
+      "#E27396",
+      "#FBE5EC"
+    ],
+    "creator": {
+      "id": "u-3",
+      "name": "Sora Tanaka",
+      "verified": true
+    },
+    "likes": 1180,
+    "views": 10300,
+    "copies": 1950,
+    "saves": 880,
+    "category": "Pastel",
+    "tags": [
+      "sakura",
+      "cherry-blossom",
+      "pink",
+      "japan",
+      "twilight"
+    ],
+    "createdAt": "2025-03-30"
+  },
+  {
+    "id": "p-64",
+    "slug": "desert-canyon-sun",
+    "name": "Grand Canyon Red",
+    "colors": [
+      "#3B130E",
+      "#7E2E1E",
+      "#B84A39",
+      "#DF7A67",
+      "#F6D2C9"
+    ],
+    "creator": {
+      "id": "u-4",
+      "name": "Zara K.",
+      "verified": false
+    },
+    "likes": 670,
+    "views": 5500,
+    "copies": 910,
+    "saves": 410,
+    "category": "Warm",
+    "tags": [
+      "canyon",
+      "desert",
+      "rust",
+      "red",
+      "southwest"
+    ],
+    "createdAt": "2025-04-01"
+  },
+  {
+    "id": "p-65",
+    "slug": "modern-fintech-gradient",
+    "name": "Prism Velocity",
+    "colors": [
+      "#0A091A",
+      "#1C1548",
+      "#4338CA",
+      "#06B6D4",
+      "#67E8F9"
+    ],
+    "creator": {
+      "id": "u-10",
+      "name": "Devin Vance",
+      "verified": true
+    },
+    "likes": 1220,
+    "views": 11100,
+    "copies": 2100,
+    "saves": 940,
+    "category": "UI/UX",
+    "tags": [
+      "velocity",
+      "cyan",
+      "indigo",
+      "modern",
+      "app"
+    ],
+    "createdAt": "2025-04-02"
+  },
+  {
+    "id": "p-66",
+    "slug": "french-riviera-yacht",
+    "name": "Riviera Nautical",
+    "colors": [
+      "#0C1B33",
+      "#003F91",
+      "#035E7B",
+      "#83C5BE",
+      "#EDF6F9"
+    ],
+    "creator": {
+      "id": "u-6",
+      "name": "Chloe Dubois",
+      "verified": true
+    },
+    "likes": 790,
+    "views": 6800,
+    "copies": 1170,
+    "saves": 560,
+    "category": "Cool",
+    "tags": [
+      "riviera",
+      "nautical",
+      "sea",
+      "marina",
+      "summer"
+    ],
+    "createdAt": "2025-04-03"
+  },
+  {
+    "id": "p-67",
+    "slug": "vintage-70s-funk",
+    "name": "Retro 70s Soul",
+    "colors": [
+      "#28112B",
+      "#5A1846",
+      "#900C3F",
+      "#C70039",
+      "#FF5733"
+    ],
+    "creator": {
+      "id": "u-9",
+      "name": "Leo Gomez",
+      "verified": false
+    },
+    "likes": 830,
+    "views": 7200,
+    "copies": 1280,
+    "saves": 590,
+    "category": "Vibrant",
+    "tags": [
+      "retro",
+      "70s",
+      "vintage",
+      "warm",
+      "bold"
+    ],
+    "createdAt": "2025-04-04"
+  },
+  {
+    "id": "p-68",
+    "slug": "marble-and-charcoal",
+    "name": "Italian Marble",
+    "colors": [
+      "#12161A",
+      "#2E383F",
+      "#687B8A",
+      "#B5C2CA",
+      "#F0F4F8"
+    ],
+    "creator": {
+      "id": "u-2",
+      "name": "Marcus Chen",
+      "verified": true
+    },
+    "likes": 760,
+    "views": 6400,
+    "copies": 1090,
+    "saves": 490,
+    "category": "Minimal",
+    "tags": [
+      "marble",
+      "charcoal",
+      "luxury",
+      "stone",
+      "interior"
+    ],
+    "createdAt": "2025-04-05"
+  },
+  {
+    "id": "p-69",
+    "slug": "monochrome-warm-stone",
+    "name": "Warm Limestone",
+    "colors": [
+      "#2D2A26",
+      "#544E48",
+      "#8B8378",
+      "#C4BCB0",
+      "#F2EFEB"
+    ],
+    "creator": {
+      "id": "u-5",
+      "name": "Liam O’Connor",
+      "verified": true
+    },
+    "likes": 680,
+    "views": 5700,
+    "copies": 940,
+    "saves": 420,
+    "category": "Neutral",
+    "tags": [
+      "limestone",
+      "stone",
+      "warm",
+      "neutral",
+      "calm"
+    ],
+    "createdAt": "2025-04-06"
+  },
+  {
+    "id": "p-70",
+    "slug": "neon-cyber-cyan",
+    "name": "Cyberpunk Arcade",
+    "colors": [
+      "#050510",
+      "#10002B",
+      "#3C096C",
+      "#7B2CBF",
+      "#00FFA3"
+    ],
+    "creator": {
+      "id": "u-3",
+      "name": "Sora Tanaka",
+      "verified": true
+    },
+    "likes": 1290,
+    "views": 11900,
+    "copies": 2260,
+    "saves": 990,
+    "category": "Vibrant",
+    "tags": [
+      "arcade",
+      "neon",
+      "green",
+      "violet",
+      "dark"
+    ],
+    "createdAt": "2025-04-07"
+  },
+  {
+    "id": "p-71",
+    "slug": "olive-grove-harvest",
+    "name": "Olive Harvest",
+    "colors": [
+      "#262A10",
+      "#4A5023",
+      "#7D8443",
+      "#B8BE76",
+      "#EFF2C6"
+    ],
+    "creator": {
+      "id": "u-4",
+      "name": "Zara K.",
+      "verified": false
+    },
+    "likes": 610,
+    "views": 5100,
+    "copies": 840,
+    "saves": 370,
+    "category": "Nature",
+    "tags": [
+      "olive",
+      "green",
+      "harvest",
+      "organic",
+      "earthy"
+    ],
+    "createdAt": "2025-04-08"
+  },
+  {
+    "id": "p-72",
+    "slug": "rosemary-gin-tonic",
+    "name": "Botanical Gin",
+    "colors": [
+      "#14281D",
+      "#2B4A37",
+      "#628B71",
+      "#9BC1A9",
+      "#EAF4EC"
+    ],
+    "creator": {
+      "id": "u-1",
+      "name": "Elena Vance",
+      "verified": true
+    },
+    "likes": 850,
+    "views": 7300,
+    "copies": 1310,
+    "saves": 610,
+    "category": "Nature",
+    "tags": [
+      "botanical",
+      "gin",
+      "green",
+      "clean",
+      "bar"
+    ],
+    "createdAt": "2025-04-09"
+  },
+  {
+    "id": "p-73",
+    "slug": "honey-honeycomb",
+    "name": "Wild Honeycomb",
+    "colors": [
+      "#2B1A00",
+      "#663F00",
+      "#B37400",
+      "#E5A91A",
+      "#FFE494"
+    ],
+    "creator": {
+      "id": "u-9",
+      "name": "Leo Gomez",
+      "verified": false
+    },
+    "likes": 740,
+    "views": 6200,
+    "copies": 1040,
+    "saves": 470,
+    "category": "Warm",
+    "tags": [
+      "honey",
+      "yellow",
+      "gold",
+      "amber",
+      "sweet"
+    ],
+    "createdAt": "2025-04-10"
+  },
+  {
+    "id": "p-74",
+    "slug": "modern-health-wellness",
+    "name": "Holistic Sage & Coral",
+    "colors": [
+      "#1C312E",
+      "#3D5A53",
+      "#829E96",
+      "#F4A261",
+      "#FAF5EB"
+    ],
+    "creator": {
+      "id": "u-8",
+      "name": "Mila Rosier",
+      "verified": true
+    },
+    "likes": 920,
+    "views": 8000,
+    "copies": 1420,
+    "saves": 680,
+    "category": "Website",
+    "tags": [
+      "wellness",
+      "health",
+      "sage",
+      "coral",
+      "clean"
+    ],
+    "createdAt": "2025-04-11"
+  },
+  {
+    "id": "p-75",
+    "slug": "stormy-mountain-peak",
+    "name": "Stormy Mountain",
+    "colors": [
+      "#1A1D20",
+      "#2E3840",
+      "#4E6E81",
+      "#B3C5D7",
+      "#F0F5F9"
+    ],
+    "creator": {
+      "id": "u-1",
+      "name": "Elena Vance",
+      "verified": true
+    },
+    "likes": 780,
+    "views": 6600,
+    "copies": 1160,
+    "saves": 530,
+    "category": "Cool",
+    "tags": [
+      "mountain",
+      "storm",
+      "slate",
+      "blue",
+      "nature"
+    ],
+    "createdAt": "2025-04-12"
+  },
+  {
+    "id": "p-76",
+    "slug": "burnt-caramel-latte",
+    "name": "Caramel Macchiato",
+    "colors": [
+      "#23120B",
+      "#542E16",
+      "#874E23",
+      "#C08552",
+      "#F3E9DC"
+    ],
+    "creator": {
+      "id": "u-5",
+      "name": "Liam O’Connor",
+      "verified": true
+    },
+    "likes": 940,
+    "views": 8200,
+    "copies": 1470,
+    "saves": 700,
+    "category": "Neutral",
+    "tags": [
+      "caramel",
+      "coffee",
+      "warm",
+      "cozy",
+      "autumn"
+    ],
+    "createdAt": "2025-04-13"
+  },
+  {
+    "id": "p-77",
+    "slug": "dark-ruby-velvet",
+    "name": "Imperial Ruby",
+    "colors": [
+      "#1A0006",
+      "#3D0014",
+      "#7A0026",
+      "#BD0036",
+      "#FF809B"
+    ],
+    "creator": {
+      "id": "u-7",
+      "name": "Aria Thorne",
+      "verified": false
+    },
+    "likes": 810,
+    "views": 6900,
+    "copies": 1210,
+    "saves": 570,
+    "category": "Luxury",
+    "tags": [
+      "ruby",
+      "velvet",
+      "wine",
+      "luxury",
+      "dark"
+    ],
+    "createdAt": "2025-04-14"
+  },
+  {
+    "id": "p-78",
+    "slug": "summer-apricot-breeze",
+    "name": "Apricot Breeze",
+    "colors": [
+      "#422013",
+      "#944428",
+      "#E27D60",
+      "#E8A87C",
+      "#C38D9E"
+    ],
+    "creator": {
+      "id": "u-8",
+      "name": "Mila Rosier",
+      "verified": true
+    },
+    "likes": 700,
+    "views": 5900,
+    "copies": 970,
+    "saves": 440,
+    "category": "Warm",
+    "tags": [
+      "apricot",
+      "summer",
+      "breeze",
+      "soft",
+      "fashion"
+    ],
+    "createdAt": "2025-04-15"
+  },
+  {
+    "id": "p-79",
+    "slug": "modern-ai-interface",
+    "name": "Synthetic Intelligence",
+    "colors": [
+      "#0A0B10",
+      "#13182C",
+      "#3B82F6",
+      "#8B5CF6",
+      "#EC4899"
+    ],
+    "creator": {
+      "id": "u-10",
+      "name": "Devin Vance",
+      "verified": true
+    },
+    "likes": 1720,
+    "views": 16500,
+    "copies": 3100,
+    "saves": 1420,
+    "category": "UI/UX",
+    "tags": [
+      "ai",
+      "tech",
+      "future",
+      "gradient",
+      "ui/ux",
+      "website"
+    ],
+    "createdAt": "2025-04-16",
+    "isFeatured": true
+  },
+  {
+    "id": "p-80",
+    "slug": "coastal-pebble-shore",
+    "name": "Pebble Shore",
+    "colors": [
+      "#25282A",
+      "#4C5257",
+      "#7F8B94",
+      "#BCC5CC",
+      "#EAECEE"
+    ],
+    "creator": {
+      "id": "u-2",
+      "name": "Marcus Chen",
+      "verified": true
+    },
+    "likes": 620,
+    "views": 5200,
+    "copies": 850,
+    "saves": 390,
+    "category": "Minimal",
+    "tags": [
+      "pebble",
+      "shore",
+      "slate",
+      "clean",
+      "minimal"
+    ],
+    "createdAt": "2025-04-17"
+  },
+  {
+    "id": "p-81",
+    "slug": "bordeaux-vintage-wine",
+    "name": "Bordeaux Cellar",
+    "colors": [
+      "#1A050B",
+      "#380D1A",
+      "#601A2D",
+      "#9A334E",
+      "#D9899C"
+    ],
+    "creator": {
+      "id": "u-6",
+      "name": "Chloe Dubois",
+      "verified": true
+    },
+    "likes": 880,
+    "views": 7500,
+    "copies": 1330,
+    "saves": 630,
+    "category": "Luxury",
+    "tags": [
+      "bordeaux",
+      "wine",
+      "luxury",
+      "deep-red",
+      "classy"
+    ],
+    "createdAt": "2025-04-18"
+  },
+  {
+    "id": "p-82",
+    "slug": "cozy-reading-nook",
+    "name": "Reading Nook",
+    "colors": [
+      "#2B2118",
+      "#5E493A",
+      "#9B8270",
+      "#CDBBA7",
+      "#F5EFEB"
+    ],
+    "creator": {
+      "id": "u-5",
+      "name": "Liam O’Connor",
+      "verified": true
+    },
+    "likes": 710,
+    "views": 6000,
+    "copies": 990,
+    "saves": 470,
+    "category": "Neutral",
+    "tags": [
+      "reading",
+      "cozy",
+      "books",
+      "brown",
+      "interior"
+    ],
+    "createdAt": "2025-04-19"
+  },
+  {
+    "id": "p-83",
+    "slug": "deep-emerald-velvet",
+    "name": "Deep Forest Moss",
+    "colors": [
+      "#081C15",
+      "#1B4332",
+      "#2D6A4F",
+      "#52B788",
+      "#D8F3DC"
+    ],
+    "creator": {
+      "id": "u-4",
+      "name": "Zara K.",
+      "verified": false
+    },
+    "likes": 980,
+    "views": 8600,
+    "copies": 1530,
+    "saves": 720,
+    "category": "Nature",
+    "tags": [
+      "forest",
+      "moss",
+      "emerald",
+      "green",
+      "nature"
+    ],
+    "createdAt": "2025-04-20"
+  },
+  {
+    "id": "p-84",
+    "slug": "electric-lime-dark",
+    "name": "Cyberpunk Acid",
+    "colors": [
+      "#0A0A0A",
+      "#141E11",
+      "#2C4A1D",
+      "#70E000",
+      "#CCFF33"
+    ],
+    "creator": {
+      "id": "u-3",
+      "name": "Sora Tanaka",
+      "verified": true
+    },
+    "likes": 1120,
+    "views": 9900,
+    "copies": 1840,
+    "saves": 830,
+    "category": "Dark",
+    "tags": [
+      "acid",
+      "lime",
+      "cyber",
+      "terminal",
+      "dark"
+    ],
+    "createdAt": "2025-04-21"
+  },
+  {
+    "id": "p-85",
+    "slug": "sunflower-field-sunset",
+    "name": "Sunflower Twilight",
+    "colors": [
+      "#281E0C",
+      "#5C4417",
+      "#A87C1D",
+      "#F4B942",
+      "#FFF1C5"
+    ],
+    "creator": {
+      "id": "u-9",
+      "name": "Leo Gomez",
+      "verified": false
+    },
+    "likes": 670,
+    "views": 5600,
+    "copies": 910,
+    "saves": 420,
+    "category": "Warm",
+    "tags": [
+      "sunflower",
+      "yellow",
+      "summer",
+      "sunset",
+      "warm"
+    ],
+    "createdAt": "2025-04-22"
+  },
+  {
+    "id": "p-86",
+    "slug": "clean-slate-white",
+    "name": "Modern Crisp White",
+    "colors": [
+      "#09090B",
+      "#27272A",
+      "#71717A",
+      "#E4E4E7",
+      "#FAFAFA"
+    ],
+    "creator": {
+      "id": "u-2",
+      "name": "Marcus Chen",
+      "verified": true
+    },
+    "likes": 1340,
+    "views": 12100,
+    "copies": 2390,
+    "saves": 1080,
+    "category": "Minimal",
+    "tags": [
+      "zinc",
+      "modern",
+      "clean",
+      "ui/ux",
+      "website"
+    ],
+    "createdAt": "2025-04-23",
+    "isFeatured": true
+  },
+  {
+    "id": "p-87",
+    "slug": "japanese-indigo-denim",
+    "name": "Kuroshio Indigo",
+    "colors": [
+      "#0B1320",
+      "#15243B",
+      "#203E6B",
+      "#41729F",
+      "#C3E0E5"
+    ],
+    "creator": {
+      "id": "u-3",
+      "name": "Sora Tanaka",
+      "verified": true
+    },
+    "likes": 890,
+    "views": 7800,
+    "copies": 1360,
+    "saves": 650,
+    "category": "Cool",
+    "tags": [
+      "indigo",
+      "japan",
+      "denim",
+      "blue",
+      "traditional"
+    ],
+    "createdAt": "2025-04-24"
+  },
+  {
+    "id": "p-88",
+    "slug": "provence-lavender-field",
+    "name": "Provence Sunset",
+    "colors": [
+      "#2E1F3D",
+      "#583D72",
+      "#9F5F80",
+      "#FFBA93",
+      "#FF8E71"
+    ],
+    "creator": {
+      "id": "u-6",
+      "name": "Chloe Dubois",
+      "verified": true
+    },
+    "likes": 950,
+    "views": 8300,
+    "copies": 1470,
+    "saves": 690,
+    "category": "Nature",
+    "tags": [
+      "provence",
+      "lavender",
+      "sunset",
+      "france",
+      "travel"
+    ],
+    "createdAt": "2025-04-25"
+  },
+  {
+    "id": "p-89",
+    "slug": "minimal-charcoal-mustard",
+    "name": "Bauhaus Mustard",
+    "colors": [
+      "#1A1A1A",
+      "#333333",
+      "#E63946",
+      "#F4A261",
+      "#E9C46A"
+    ],
+    "creator": {
+      "id": "u-2",
+      "name": "Marcus Chen",
+      "verified": true
+    },
+    "likes": 1080,
+    "views": 9600,
+    "copies": 1720,
+    "saves": 790,
+    "category": "Minimal",
+    "tags": [
+      "bauhaus",
+      "art",
+      "mustard",
+      "minimal",
+      "poster"
+    ],
+    "createdAt": "2025-04-26"
+  },
+  {
+    "id": "p-90",
+    "slug": "pastel-rainbow-dream",
+    "name": "Pastel Rainbow",
+    "colors": [
+      "#FFB5E8",
+      "#FF9CEE",
+      "#BFFCC6",
+      "#85E3FF",
+      "#ACE7FF",
+      "#FFC9DE"
+    ],
+    "creator": {
+      "id": "u-8",
+      "name": "Mila Rosier",
+      "verified": true
+    },
+    "likes": 820,
+    "views": 7100,
+    "copies": 1250,
+    "saves": 590,
+    "category": "Pastel",
+    "tags": [
+      "rainbow",
+      "dream",
+      "6-colors",
+      "cute",
+      "kawaii"
+    ],
+    "createdAt": "2025-04-27"
+  },
+  {
+    "id": "p-91",
+    "slug": "deep-espresso-gold",
+    "name": "Espresso Barocco",
+    "colors": [
+      "#1F1610",
+      "#3D2D20",
+      "#664C36",
+      "#B38B59",
+      "#F0DEB4"
+    ],
+    "creator": {
+      "id": "u-6",
+      "name": "Chloe Dubois",
+      "verified": true
+    },
+    "likes": 910,
+    "views": 7900,
+    "copies": 1380,
+    "saves": 660,
+    "category": "Luxury",
+    "tags": [
+      "baroque",
+      "gold",
+      "espresso",
+      "luxury",
+      "interior"
+    ],
+    "createdAt": "2025-04-28"
+  },
+  {
+    "id": "p-92",
+    "slug": "caribbean-coral-reef",
+    "name": "Caribbean Reef",
+    "colors": [
+      "#003049",
+      "#028090",
+      "#00A896",
+      "#02C39A",
+      "#F0F3F4"
+    ],
+    "creator": {
+      "id": "u-1",
+      "name": "Elena Vance",
+      "verified": true
+    },
+    "likes": 860,
+    "views": 7400,
+    "copies": 1290,
+    "saves": 610,
+    "category": "Cool",
+    "tags": [
+      "caribbean",
+      "reef",
+      "teal",
+      "marine",
+      "fresh"
+    ],
+    "createdAt": "2025-04-29"
+  },
+  {
+    "id": "p-93",
+    "slug": "autumn-harvest-pumpkin",
+    "name": "Harvest Pumpkin",
+    "colors": [
+      "#3A1F04",
+      "#78350F",
+      "#B45309",
+      "#F59E0B",
+      "#FEF3C7"
+    ],
+    "creator": {
+      "id": "u-5",
+      "name": "Liam O’Connor",
+      "verified": true
+    },
+    "likes": 740,
+    "views": 6200,
+    "copies": 1050,
+    "saves": 480,
+    "category": "Warm",
+    "tags": [
+      "pumpkin",
+      "amber",
+      "harvest",
+      "warm",
+      "spice"
+    ],
+    "createdAt": "2025-04-30"
+  },
+  {
+    "id": "p-94",
+    "slug": "brand-identity-creator-violet",
+    "name": "Creator Studio Pro",
+    "colors": [
+      "#18181B",
+      "#27272A",
+      "#6366F1",
+      "#A855F7",
+      "#F43F5E"
+    ],
+    "creator": {
+      "id": "u-10",
+      "name": "Devin Vance",
+      "verified": true
+    },
+    "likes": 1420,
+    "views": 13100,
+    "copies": 2580,
+    "saves": 1140,
+    "category": "Trending",
+    "tags": [
+      "creator",
+      "purple",
+      "violet",
+      "modern",
+      "brand",
+      "ui/ux"
+    ],
+    "createdAt": "2025-05-01",
+    "isFeatured": true
+  },
+  {
+    "id": "p-95",
+    "slug": "soft-cotton-cloud",
+    "name": "Soft Cotton Cloud",
+    "colors": [
+      "#293241",
+      "#3D5A80",
+      "#98C1D9",
+      "#E0FBFC",
+      "#EE6C4D"
+    ],
+    "creator": {
+      "id": "u-4",
+      "name": "Zara K.",
+      "verified": false
+    },
+    "likes": 1210,
+    "views": 11000,
+    "copies": 2010,
+    "saves": 920,
+    "category": "Website",
+    "tags": [
+      "cotton",
+      "slate",
+      "coral",
+      "clean",
+      "website"
+    ],
+    "createdAt": "2025-05-02"
+  },
+  {
+    "id": "p-96",
+    "slug": "emerald-mint-fresh",
+    "name": "Fresh Spearmint",
+    "colors": [
+      "#0A2E20",
+      "#155D40",
+      "#34A078",
+      "#68D391",
+      "#E6FFFA"
+    ],
+    "creator": {
+      "id": "u-1",
+      "name": "Elena Vance",
+      "verified": true
+    },
+    "likes": 790,
+    "views": 6700,
+    "copies": 1180,
+    "saves": 540,
+    "category": "Nature",
+    "tags": [
+      "spearmint",
+      "green",
+      "clean",
+      "fresh",
+      "organic"
+    ],
+    "createdAt": "2025-05-03"
+  },
+  {
+    "id": "p-97",
+    "slug": "sunset-boulevard",
+    "name": "Sunset Boulevard",
+    "colors": [
+      "#1A0B2E",
+      "#4B1248",
+      "#881B4B",
+      "#CB3C3C",
+      "#F27438",
+      "#F9B248"
+    ],
+    "creator": {
+      "id": "u-3",
+      "name": "Sora Tanaka",
+      "verified": true
+    },
+    "likes": 1350,
+    "views": 12400,
+    "copies": 2420,
+    "saves": 1030,
+    "category": "Trending",
+    "tags": [
+      "sunset",
+      "boulevard",
+      "6-colors",
+      "radiant",
+      "warm"
+    ],
+    "createdAt": "2025-05-04",
+    "isFeatured": true
+  },
+  {
+    "id": "p-98",
+    "slug": "monochrome-warm-taupe",
+    "name": "Velvet Taupe",
+    "colors": [
+      "#221E1C",
+      "#453E3A",
+      "#7A6E67",
+      "#B3A69C",
+      "#EAE6E1"
+    ],
+    "creator": {
+      "id": "u-5",
+      "name": "Liam O’Connor",
+      "verified": true
+    },
+    "likes": 690,
+    "views": 5800,
+    "copies": 970,
+    "saves": 450,
+    "category": "Neutral",
+    "tags": [
+      "taupe",
+      "neutral",
+      "minimal",
+      "interior",
+      "calm"
+    ],
+    "createdAt": "2025-05-05"
+  },
+  {
+    "id": "p-99",
+    "slug": "candy-pop-pastel",
+    "name": "Sweet Bubblegum",
+    "colors": [
+      "#F72585",
+      "#7209B7",
+      "#3A0CA3",
+      "#4361EE",
+      "#4CC9F0"
+    ],
+    "creator": {
+      "id": "u-9",
+      "name": "Leo Gomez",
+      "verified": false
+    },
+    "likes": 920,
+    "views": 8100,
+    "copies": 1410,
+    "saves": 650,
+    "category": "Vibrant",
+    "tags": [
+      "bubblegum",
+      "pop",
+      "candy",
+      "playful",
+      "music"
+    ],
+    "createdAt": "2025-05-06"
+  },
+  {
+    "id": "p-100",
+    "slug": "midnight-emerald-glow",
+    "name": "Midnight Aurora",
+    "colors": [
+      "#051313",
+      "#0C2A2A",
+      "#165B50",
+      "#2EC4B6",
+      "#CBF3F0"
+    ],
+    "creator": {
+      "id": "u-1",
+      "name": "Elena Vance",
+      "verified": true
+    },
+    "likes": 1160,
+    "views": 10600,
+    "copies": 1940,
+    "saves": 870,
+    "category": "Dark",
+    "tags": [
+      "aurora",
+      "emerald",
+      "midnight",
+      "glow",
+      "nature"
+    ],
+    "createdAt": "2025-05-07",
+    "isFeatured": true
+  },
+  {
+    "id": "p-101",
+    "slug": "vintage-polaroid-warm",
+    "name": "Vintage Polaroid",
+    "colors": [
+      "#2F241D",
+      "#634735",
+      "#A87B51",
+      "#D4B483",
+      "#E4DFDA"
+    ],
+    "creator": {
+      "id": "u-2",
+      "name": "Marcus Chen",
+      "verified": true
+    },
+    "likes": 870,
+    "views": 7600,
+    "copies": 1350,
+    "saves": 630,
+    "category": "Neutral",
+    "tags": [
+      "polaroid",
+      "vintage",
+      "nostalgia",
+      "warm",
+      "photography"
+    ],
+    "createdAt": "2025-05-08"
+  },
+  {
+    "id": "p-102",
+    "slug": "deep-oceanic-trench",
+    "name": "Mariana Blue",
+    "colors": [
+      "#03071E",
+      "#0A1128",
+      "#001F54",
+      "#034078",
+      "#1282A2"
+    ],
+    "creator": {
+      "id": "u-1",
+      "name": "Elena Vance",
+      "verified": true
+    },
+    "likes": 830,
+    "views": 7100,
+    "copies": 1220,
+    "saves": 560,
+    "category": "Dark",
+    "tags": [
+      "mariana",
+      "deep",
+      "navy",
+      "ocean",
+      "dark"
+    ],
+    "createdAt": "2025-05-09"
+  },
+  {
+    "id": "p-103",
+    "slug": "desert-sage-sunset",
+    "name": "Mojave Twilight",
+    "colors": [
+      "#2A2826",
+      "#5C5549",
+      "#9C8F7A",
+      "#D4A373",
+      "#FAEDCD"
+    ],
+    "creator": {
+      "id": "u-4",
+      "name": "Zara K.",
+      "verified": false
+    },
+    "likes": 760,
+    "views": 6500,
+    "copies": 1080,
+    "saves": 510,
+    "category": "Nature",
+    "tags": [
+      "mojave",
+      "desert",
+      "sage",
+      "twilight",
+      "boho"
+    ],
+    "createdAt": "2025-05-10"
+  },
+  {
+    "id": "p-104",
+    "slug": "nordic-spruce-snow",
+    "name": "Nordic Winter Spruce",
+    "colors": [
+      "#1C2826",
+      "#2D4739",
+      "#4E725A",
+      "#A3C4BC",
+      "#E7ECEF"
+    ],
+    "creator": {
+      "id": "u-1",
+      "name": "Elena Vance",
+      "verified": true
+    },
+    "likes": 890,
+    "views": 7700,
+    "copies": 1360,
+    "saves": 640,
+    "category": "Cool",
+    "tags": [
+      "spruce",
+      "winter",
+      "nordic",
+      "snow",
+      "green"
+    ],
+    "createdAt": "2025-05-11"
+  },
+  {
+    "id": "p-105",
+    "slug": "ultra-modern-amber-dark",
+    "name": "Cyberpunk Amber Core",
+    "colors": [
+      "#0B0B0C",
+      "#18181B",
+      "#27272A",
+      "#D97706",
+      "#FBBF24"
+    ],
+    "creator": {
+      "id": "u-10",
+      "name": "Devin Vance",
+      "verified": true
+    },
+    "likes": 1380,
+    "views": 12600,
+    "copies": 2470,
+    "saves": 1110,
+    "category": "Dark",
+    "tags": [
+      "amber",
+      "dark",
+      "cyber",
+      "ui/ux",
+      "dashboard"
+    ],
+    "createdAt": "2025-05-12",
+    "isFeatured": true
+  },
+  {
+    "id": "p-106",
+    "slug": "catppuccin-mocha",
+    "name": "Catppuccin Mocha",
+    "colors": [
+      "#1E1E2E",
+      "#313244",
+      "#89B4FA",
+      "#F5C2E7",
+      "#A6E3A1"
+    ],
+    "creator": {
+      "id": "u-3",
+      "name": "Sora Tanaka",
+      "verified": true
+    },
+    "likes": 2150,
+    "views": 18400,
+    "copies": 3890,
+    "saves": 1620,
+    "category": "Dark",
+    "tags": [
+      "catppuccin",
+      "developer",
+      "theme",
+      "code",
+      "pastel-dark",
+      "ui/ux"
+    ],
+    "createdAt": "2025-05-13",
+    "isFeatured": true
+  },
+  {
+    "id": "p-107",
+    "slug": "dracula-pro-vampire",
+    "name": "Dracula Classic Theme",
+    "colors": [
+      "#282A36",
+      "#44475A",
+      "#BD93F9",
+      "#FF79C6",
+      "#50FA7B"
+    ],
+    "creator": {
+      "id": "u-10",
+      "name": "Devin Vance",
+      "verified": true
+    },
+    "likes": 2890,
+    "views": 24100,
+    "copies": 4920,
+    "saves": 2100,
+    "category": "Dark",
+    "tags": [
+      "dracula",
+      "ide",
+      "purple",
+      "neon",
+      "high-contrast",
+      "developer"
+    ],
+    "createdAt": "2025-05-14",
+    "isFeatured": true
+  },
+  {
+    "id": "p-108",
+    "slug": "nord-frost-aurora",
+    "name": "Nord Aurora Frost",
+    "colors": [
+      "#2E3440",
+      "#3B4252",
+      "#88C0D0",
+      "#81A1C1",
+      "#ECEFF4"
+    ],
+    "creator": {
+      "id": "u-1",
+      "name": "Elena Vance",
+      "verified": true
+    },
+    "likes": 1940,
+    "views": 16800,
+    "copies": 3410,
+    "saves": 1490,
+    "category": "Cool",
+    "tags": [
+      "nord",
+      "arctic",
+      "slate",
+      "frost",
+      "minimal",
+      "developer"
+    ],
+    "createdAt": "2025-05-15",
+    "isFeatured": true
+  },
+  {
+    "id": "p-109",
+    "slug": "tokyo-night-storm",
+    "name": "Tokyo Night Storm",
+    "colors": [
+      "#1A1B26",
+      "#24283B",
+      "#7AA2F7",
+      "#BB9AF7",
+      "#7DCFFF"
+    ],
+    "creator": {
+      "id": "u-3",
+      "name": "Sora Tanaka",
+      "verified": true
+    },
+    "likes": 2310,
+    "views": 19900,
+    "copies": 4120,
+    "saves": 1820,
+    "category": "Dark",
+    "tags": [
+      "tokyo",
+      "night",
+      "storm",
+      "indigo",
+      "neon",
+      "editor"
+    ],
+    "createdAt": "2025-05-16",
+    "isFeatured": true
+  },
+  {
+    "id": "p-110",
+    "slug": "retro-synthwave-80s",
+    "name": "Retro 80s Synthwave",
+    "colors": [
+      "#2B0938",
+      "#5E117D",
+      "#FF2A85",
+      "#FF7E47",
+      "#FFE066"
+    ],
+    "creator": {
+      "id": "u-7",
+      "name": "Aria Thorne",
+      "verified": false
+    },
+    "likes": 1780,
+    "views": 14500,
+    "copies": 2980,
+    "saves": 1320,
+    "category": "Vibrant",
+    "tags": [
+      "80s",
+      "synthwave",
+      "sunset",
+      "magenta",
+      "retro",
+      "arcade"
+    ],
+    "createdAt": "2025-05-17",
+    "isFeatured": true
+  },
+  {
+    "id": "p-111",
+    "slug": "strawberry-matcha-latte",
+    "name": "Strawberry Matcha Latte",
+    "colors": [
+      "#3A5A40",
+      "#A3B18A",
+      "#F9DEC9",
+      "#E5989B",
+      "#B5838D"
+    ],
+    "creator": {
+      "id": "u-8",
+      "name": "Mila Rosier",
+      "verified": true
+    },
+    "likes": 1450,
+    "views": 12200,
+    "copies": 2430,
+    "saves": 1090,
+    "category": "Pastel",
+    "tags": [
+      "matcha",
+      "strawberry",
+      "latte",
+      "cafe",
+      "soft",
+      "cozy"
+    ],
+    "createdAt": "2025-05-18"
+  },
+  {
+    "id": "p-112",
+    "slug": "amalfi-lemon-spritz",
+    "name": "Amalfi Lemon Spritz",
+    "colors": [
+      "#1D3557",
+      "#457B9D",
+      "#A8DADC",
+      "#F1FAEE",
+      "#FFD166"
+    ],
+    "creator": {
+      "id": "u-6",
+      "name": "Chloe Dubois",
+      "verified": true
+    },
+    "likes": 1620,
+    "views": 13900,
+    "copies": 2780,
+    "saves": 1210,
+    "category": "Cool",
+    "tags": [
+      "amalfi",
+      "italy",
+      "lemon",
+      "mediterranean",
+      "summer",
+      "travel"
+    ],
+    "createdAt": "2025-05-19"
+  },
+  {
+    "id": "p-113",
+    "slug": "santorini-white-blue",
+    "name": "Santorini Blue Dome",
+    "colors": [
+      "#003566",
+      "#0077B6",
+      "#90E0EF",
+      "#CAF0F8",
+      "#FFFFFF"
+    ],
+    "creator": {
+      "id": "u-1",
+      "name": "Elena Vance",
+      "verified": true
+    },
+    "likes": 1890,
+    "views": 15400,
+    "copies": 3120,
+    "saves": 1400,
+    "category": "Cool",
+    "tags": [
+      "santorini",
+      "greece",
+      "aegean",
+      "white",
+      "cobalt",
+      "website"
+    ],
+    "createdAt": "2025-05-20",
+    "isFeatured": true
+  },
+  {
+    "id": "p-114",
+    "slug": "warm-cappuccino-art",
+    "name": "Barista Cappuccino Art",
+    "colors": [
+      "#38220F",
+      "#634832",
+      "#9C6644",
+      "#DDB892",
+      "#EDE0D4"
+    ],
+    "creator": {
+      "id": "u-5",
+      "name": "Liam O’Connor",
+      "verified": true
+    },
+    "likes": 1540,
+    "views": 12900,
+    "copies": 2610,
+    "saves": 1180,
+    "category": "Neutral",
+    "tags": [
+      "cappuccino",
+      "coffee",
+      "latte",
+      "warm",
+      "cozy",
+      "minimal"
+    ],
+    "createdAt": "2025-05-21"
+  },
+  {
+    "id": "p-115",
+    "slug": "emerald-brass-luxury",
+    "name": "Emerald & Brushed Brass",
+    "colors": [
+      "#09231B",
+      "#134E3F",
+      "#2D7F67",
+      "#D4AF37",
+      "#F3E5AB"
+    ],
+    "creator": {
+      "id": "u-9",
+      "name": "Julian Mercer",
+      "verified": true
+    },
+    "likes": 1720,
+    "views": 14200,
+    "copies": 2910,
+    "saves": 1310,
+    "category": "Luxury",
+    "tags": [
+      "emerald",
+      "brass",
+      "gold",
+      "jewelry",
+      "luxury",
+      "architecture"
+    ],
+    "createdAt": "2025-05-22",
+    "isFeatured": true
+  },
+  {
+    "id": "p-116",
+    "slug": "sakura-blossom-kyoto",
+    "name": "Kyoto Sakura Blossom",
+    "colors": [
+      "#2B2D42",
+      "#8D99AE",
+      "#FFB7B2",
+      "#FFDAC1",
+      "#FFF1E6"
+    ],
+    "creator": {
+      "id": "u-3",
+      "name": "Sora Tanaka",
+      "verified": true
+    },
+    "likes": 1680,
+    "views": 13800,
+    "copies": 2840,
+    "saves": 1250,
+    "category": "Pastel",
+    "tags": [
+      "sakura",
+      "cherry-blossom",
+      "japan",
+      "kyoto",
+      "soft-pink",
+      "spring"
+    ],
+    "createdAt": "2025-05-23"
+  },
+  {
+    "id": "p-117",
+    "slug": "linear-modern-dark-ui",
+    "name": "Linear Dark Studio",
+    "colors": [
+      "#0D0E11",
+      "#16181D",
+      "#5E6AD2",
+      "#8F9BFF",
+      "#F7F8F8"
+    ],
+    "creator": {
+      "id": "u-10",
+      "name": "Devin Vance",
+      "verified": true
+    },
+    "likes": 2450,
+    "views": 21300,
+    "copies": 4560,
+    "saves": 2010,
+    "category": "Dark",
+    "tags": [
+      "linear",
+      "saas",
+      "modern",
+      "dark-mode",
+      "purple",
+      "ui/ux"
+    ],
+    "createdAt": "2025-05-24",
+    "isFeatured": true
+  },
+  {
+    "id": "p-118",
+    "slug": "stripe-violet-gradient",
+    "name": "Stripe Indigo Flow",
+    "colors": [
+      "#0A2540",
+      "#635BFF",
+      "#00D4FF",
+      "#7A73FF",
+      "#F6F9FC"
+    ],
+    "creator": {
+      "id": "u-10",
+      "name": "Devin Vance",
+      "verified": true
+    },
+    "likes": 2210,
+    "views": 19100,
+    "copies": 3980,
+    "saves": 1740,
+    "category": "Website",
+    "tags": [
+      "stripe",
+      "fintech",
+      "indigo",
+      "cyan",
+      "saas",
+      "landing-page"
+    ],
+    "createdAt": "2025-05-25",
+    "isFeatured": true
+  },
+  {
+    "id": "p-119",
+    "slug": "supabase-emerald-hacker",
+    "name": "Supabase Forest Hack",
+    "colors": [
+      "#1C1C1C",
+      "#242424",
+      "#3ECF8E",
+      "#2E9C68",
+      "#FAFAFA"
+    ],
+    "creator": {
+      "id": "u-10",
+      "name": "Devin Vance",
+      "verified": true
+    },
+    "likes": 1990,
+    "views": 17300,
+    "copies": 3620,
+    "saves": 1580,
+    "category": "Dark",
+    "tags": [
+      "supabase",
+      "green",
+      "emerald",
+      "dark",
+      "developer",
+      "ui/ux"
+    ],
+    "createdAt": "2025-05-26"
+  },
+  {
+    "id": "p-120",
+    "slug": "monochrome-brutalism",
+    "name": "Neo Brutalism Monochrome",
+    "colors": [
+      "#000000",
+      "#262626",
+      "#737373",
+      "#D4D4D4",
+      "#FFFFFF"
+    ],
+    "creator": {
+      "id": "u-2",
+      "name": "Marcus Chen",
+      "verified": true
+    },
+    "likes": 1810,
+    "views": 15600,
+    "copies": 3200,
+    "saves": 1390,
+    "category": "Minimal",
+    "tags": [
+      "brutalism",
+      "black-and-white",
+      "monochrome",
+      "clean",
+      "swiss",
+      "ui/ux"
+    ],
+    "createdAt": "2025-05-27"
+  }
+]
