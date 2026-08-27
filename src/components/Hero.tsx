@@ -1,6 +1,6 @@
 import React from 'react';
 import { usePalette } from '../context/PaletteContext';
-import { Sparkles, ArrowRight, Image as ImageIcon, Zap, ShieldCheck, Download, Code2 } from 'lucide-react';
+import { Gem, Sparkles, ArrowRight, Image as ImageIcon, Zap, ShieldCheck, Download, Code2 } from 'lucide-react';
 import { HeroInteractiveBar } from './HeroInteractiveBar';
 
 interface HeroProps {
@@ -37,8 +37,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCreate }) => {
         {/* Top Header & Value Proposition */}
         <div className="text-center max-w-3xl mx-auto space-y-3.5">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold uppercase tracking-wider shadow-2xs">
-            <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
-            <span>Curated Design Schemes & Generator</span>
+            <Gem className="w-3.5 h-3.5 text-indigo-600" />
+            <span>7,900+ Curated Design Schemes & Generator</span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-900 tracking-tight leading-[1.12]">

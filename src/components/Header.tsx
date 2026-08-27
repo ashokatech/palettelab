@@ -3,8 +3,9 @@ import { usePalette } from '../context/PaletteContext';
 import { IntelligentSearchBar } from './IntelligentSearchBar';
 import { 
   Palette as PaletteIcon, 
-  Sparkles, 
-  Wrench, 
+  Wand2,
+  Wrench,
+  Sparkles,
   Bookmark, 
   Search, 
   Plus, 
@@ -98,24 +99,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCreate }) => {
                   : 'hover:text-neutral-900 hover:bg-neutral-50'
               }`}
             >
-              <Sparkles className="w-4 h-4 text-amber-500" />
+              <Wand2 className="w-4 h-4 text-amber-500" />
               <span>Generator</span>
               <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-md bg-amber-100 text-amber-800 ml-0.5">
                 Space
               </span>
-            </button>
-
-            <button
-              id="nav-tools"
-              onClick={() => handleNavClick('tools')}
-              className={`px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
-                activeTab === 'tools'
-                  ? 'text-neutral-900 bg-neutral-100 font-semibold'
-                  : 'hover:text-neutral-900 hover:bg-neutral-50'
-              }`}
-            >
-              <Wrench className="w-4 h-4 text-purple-500" />
-              <span>Tools</span>
             </button>
 
             <button

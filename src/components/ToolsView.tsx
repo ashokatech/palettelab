@@ -233,91 +233,9 @@ export const ToolsView: React.FC = () => {
           </p>
         </div>
 
-        {/* Tab Pills — horizontal scroll on mobile, previously wrapped + hidden */}
-        <div className="flex items-center bg-neutral-100 p-1 rounded-2xl text-xs font-semibold text-neutral-600 gap-1 overflow-x-auto scrollbar-hide flex-nowrap max-w-full">
-          <button
-            onClick={() => setToolSubTab('image-extractor')}
-            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5 ${
-              toolSubTab === 'image-extractor'
-                ? 'bg-white text-neutral-900 shadow-xs'
-                : 'hover:text-neutral-900'
-            }`}
-          >
-            <ImageIcon className="w-3.5 h-3.5 text-indigo-500" />
-            <span>Image Extractor</span>
-          </button>
-
-          <button
-            onClick={() => setToolSubTab('contrast-checker')}
-            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5 ${
-              toolSubTab === 'contrast-checker'
-                ? 'bg-white text-neutral-900 shadow-xs'
-                : 'hover:text-neutral-900'
-            }`}
-          >
-            <CheckCircle className="w-3.5 h-3.5 text-emerald-500" />
-            <span>WCAG Contrast</span>
-          </button>
-
-          <button
-            onClick={() => setToolSubTab('gradient-maker')}
-            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5 ${
-              toolSubTab === 'gradient-maker'
-                ? 'bg-white text-neutral-900 shadow-xs'
-                : 'hover:text-neutral-900'
-            }`}
-          >
-            <Sliders className="w-3.5 h-3.5 text-rose-500" />
-            <span>CSS Gradients</span>
-          </button>
-
-          <button
-            onClick={() => setToolSubTab('color-blindness')}
-            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5 ${
-              toolSubTab === 'color-blindness'
-                ? 'bg-white text-neutral-900 shadow-xs'
-                : 'hover:text-neutral-900'
-            }`}
-          >
-            <Eye className="w-3.5 h-3.5 text-emerald-500" />
-            <span>Color Blindness</span>
-          </button>
-
-          <button
-            onClick={() => setToolSubTab('brand-colors')}
-            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5 ${
-              toolSubTab === 'brand-colors'
-                ? 'bg-white text-neutral-900 shadow-xs'
-                : 'hover:text-neutral-900'
-            }`}
-          >
-            <Layers className="w-3.5 h-3.5 text-indigo-500" />
-            <span>Brand Tokens</span>
-          </button>
-
-          <button
-            onClick={() => setToolSubTab('ui-preview')}
-            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5 ${
-              toolSubTab === 'ui-preview'
-                ? 'bg-white text-neutral-900 shadow-xs'
-                : 'hover:text-neutral-900'
-            }`}
-          >
-            <Laptop className="w-3.5 h-3.5 text-amber-500" />
-            <span>Live UI Preview</span>
-          </button>
-
-          <button
-            onClick={() => setToolSubTab('ai-studio')}
-            className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5 ${
-              toolSubTab === 'ai-studio'
-                ? 'bg-white text-neutral-900 shadow-xs'
-                : 'hover:text-neutral-900'
-            }`}
-          >
-            <Sparkles className="w-3.5 h-3.5 text-purple-500" />
-            <span>Prompt Studio</span>
-          </button>
+        {/* Active tool breadcrumb — header rail is now the nav, no duplicate pills */}
+        <div className="text-xs text-neutral-500">
+          <span className="font-semibold text-neutral-700 capitalize">{toolSubTab.replace('-',' ')}</span> <span className="text-neutral-400">• Use the tools rail above to switch</span>
         </div>
       </div>
 

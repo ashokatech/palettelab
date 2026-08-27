@@ -181,6 +181,18 @@ const KEYWORD_DICTIONARY: Record<string, MoodPreset> = {
   mono: { category: 'Minimal', baseHues: [0,0,0,0,0], satRange: [0,0], lightRange: [8,95], description: 'Pure monochrome grayscale from pitch black to crisp white.', tags: ['mono','grayscale','minimal','black-white'] },
   jungle: { category: 'Nature', baseHues: [140,135,90,160,120], satRange: [45,80], lightRange: [15,70], description: 'Dense jungle canopy with emerald, moss, and sun flecks.', tags: ['jungle','emerald','tropical','green'] },
   dusk: { category: 'Warm', baseHues: [280,320,340,260,25], satRange: [50,80], lightRange: [20,70], description: 'Evening dusk with plum, mauve, and twilight amber.', tags: ['dusk','plum','mauve','twilight'] },
+  // --- CITY & CONCEPT EXTENSIONS — prompt studio suggestions coverage ---
+  tokyo: { category: 'Vibrant', baseHues: [320, 285, 200, 180, 340], satRange: [80,100], lightRange: [18,65], description: 'Tokyo neon nightscape — electric violet, hot pink, and rain-slick cyan under midnight haze.', tags: ['tokyo','neon','city','night'] },
+  rain: { category: 'Cool', baseHues: [210, 205, 220, 195, 200], satRange: [30,60], lightRange: [25,75], description: 'Rain-washed city palette with storm slate, asphalt charcoal, and reflective puddle teal.', tags: ['rain','storm','wet','urban'] },
+  fjord: { category: 'Cool', baseHues: [195,205,200,210,185], satRange: [25,55], lightRange: [30,85], description: 'Norwegian fjord — deep glacial teal, mist grey, and cold-water stone.', tags: ['fjord','nordic','glacial','cold'] },
+  cabin: { category: 'Warm', baseHues: [30,25,35,20,15], satRange: [30,60], lightRange: [18,75], description: 'Rustic cabin woods with cedar, pine smoke, and warm wool.', tags: ['cabin','wood','rustic','cozy'] },
+  santorini: { category: 'Cool', baseHues: [210,200,195,45,0], satRange: [60,90], lightRange: [35,92], description: 'Santorini coast — aegean blue, whitewashed lime, and sun-baked terracotta.', tags: ['santorini','aegean','mediterranean','coast'] },
+  bauhaus: { category: 'Minimal', baseHues: [0, 210, 45, 0, 240], satRange: [85,100], lightRange: [15,60], description: 'Bauhaus primary system — pure red, blue, yellow on grid black and white.', tags: ['bauhaus','primary','modern','grid'] },
+  arcade: { category: 'Cyberpunk', baseHues: [300, 180, 55, 280, 340], satRange: [85,100], lightRange: [30,70], description: 'Retro arcade — synth magenta, pixel amber, and CRT cyan on midnight.', tags: ['arcade','retro','pixel','synth'] },
+  retro: { category: 'Neutral', baseHues: [35, 15, 70, 190, 25], satRange: [30,60], lightRange: [35,82], description: '70s retro — mustard, burnt orange, avocado, and harvest sepia.', tags: ['retro','70s','mustard','vintage'] },
+  trust: { category: 'Minimal', baseHues: [215, 210, 205, 220, 160], satRange: [60,90], lightRange: [20,85], description: 'Trust & security palette — deep navy foundation, reliable blue, and assurance teal.', tags: ['trust','secure','reliable','navy'] },
+  secure: { category: 'Minimal', baseHues: [215, 210, 205, 220, 160], satRange: [60,90], lightRange: [20,85], description: 'Security-grade palette — authority navy, shield blue, and vault teal.', tags: ['secure','shield','safe','navy'] },
+  organic: { category: 'Nature', baseHues: [110, 95, 85, 75, 140], satRange: [25,55], lightRange: [30,80], description: 'Organic earth palette — leaf, moss, clay, and oat milk.', tags: ['organic','earth','natural','green'] },
 };
 
 /**
@@ -219,64 +231,51 @@ function hashString(str: string): number {
 export function generateSemanticPalette(prompt: string, count: number = 5): SemanticPaletteResult {
   const cleanPrompt = prompt.trim().toLowerCase();
   const tokens = cleanPrompt.split(/[\s,_\-+]+/);
-
-  // 1. Find matching keyword in dictionary
-  let matchedPreset: MoodPreset | null = null;
-  let matchedKey = '';
-
-  for (const token of tokens) {
-    if (KEYWORD_DICTIONARY[token]) {
-      matchedPreset = KEYWORD_DICTIONARY[token];
-      matchedKey = token;
-      break;
-    }
-  }
-
-  // Check substring matches if exact word match failed
-  if (!matchedPreset) {
-    for (const [key, preset] of Object.entries(KEYWORD_DICTIONARY)) {
-      if (cleanPrompt.includes(key)) {
-        matchedPreset = preset;
-        matchedKey = key;
-        break;
-      }
-    }
-  }
-
   const hash = hashString(cleanPrompt);
 
-  // 2. If matched a known mood preset
-  if (matchedPreset) {
-    const { baseHues, satRange, lightRange, category, description, tags } = matchedPreset;
+  // 1. Collect ALL matching presets (up to 3) — fixes single-token junk for multi-word prompts like "Cyberpunk Tokyo Neon Rain"
+  const matched: {key:string, preset:MoodPreset}[] = [];
+  const seen = new Set<string>();
+  // exact token matches first
+  for (const token of tokens) {
+    if (KEYWORD_DICTIONARY[token] && !seen.has(token)) { matched.push({key:token, preset:KEYWORD_DICTIONARY[token]}); seen.add(token); }
+  }
+  // substring matches for longer keys
+  for (const [key, preset] of Object.entries(KEYWORD_DICTIONARY)) {
+    if (seen.has(key)) continue;
+    if (key.length >= 3 && cleanPrompt.includes(key)) { matched.push({key, preset}); seen.add(key); }
+    if (matched.length >= 3) break;
+  }
+
+  // 2. If we have 1+ matches — blend them for relevance
+  if (matched.length > 0) {
+    const primary = matched[0].preset;
+    // Blend sat/light by averaging, hues by interleaving
+    const allHues = matched.flatMap(m=>m.preset.baseHues);
+    const avgSatMin = Math.round(matched.reduce((a,m)=>a+m.preset.satRange[0],0)/matched.length);
+    const avgSatMax = Math.round(matched.reduce((a,m)=>a+m.preset.satRange[1],0)/matched.length);
+    const avgLightMin = Math.round(matched.reduce((a,m)=>a+m.preset.lightRange[0],0)/matched.length);
+    const avgLightMax = Math.round(matched.reduce((a,m)=>a+m.preset.lightRange[1],0)/matched.length);
+    const allTags = Array.from(new Set(matched.flatMap(m=>m.preset.tags)));
+    const desc = matched.length===1 ? primary.description : `Mashup of ${matched.map(m=>m.key).join(' + ')} — ${matched.map(m=>m.preset.description.split('—')[0].trim().toLowerCase()).join(' + ')}.`;
+
     const colors: string[] = [];
-
     for (let i = 0; i < count; i++) {
-      // Pick hue from preset base hues or step harmoniously
-      const hueBase = baseHues[i % baseHues.length];
-      const hueJitter = ((hash * (i + 1)) % 15) - 7;
+      const hueBase = allHues[i % allHues.length];
+      const hueJitter = ((hash * (i + 1)) % 13) - 6;
       const h = (hueBase + hueJitter + 360) % 360;
-
-      // Calculate saturation and lightness with smooth steps
-      const sMin = satRange[0];
-      const sMax = satRange[1];
-      const s = sMin + ((hash * (i + 3)) % (sMax - sMin + 1));
-
-      const lMin = lightRange[0];
-      const lMax = lightRange[1];
-      const lStep = (lMax - lMin) / Math.max(1, count - 1);
-      const l = Math.min(lMax, Math.max(lMin, lMin + i * lStep + (((hash + i) % 10) - 5)));
-
-      colors.push(hslToHex(h, s, Math.round(l)));
+      const s = avgSatMin + ((hash * (i + 7)) % (avgSatMax - avgSatMin + 1));
+      const l = Math.min(avgLightMax, Math.max(avgLightMin, avgLightMin + i * ((avgLightMax-avgLightMin)/Math.max(1,count-1)) + (((hash+i)%7)-3)));
+      colors.push(hslToHex(h, Math.round(s), Math.round(l)));
     }
-
     const titleCaseName = prompt.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
-
+    const matchedKeys = matched.map(m=>m.key);
     return {
       name: titleCaseName,
       colors,
-      category,
-      description,
-      tags: Array.from(new Set([...tags, 'harmonic', 'aesthetic'])),
+      category: primary.category,
+      description: matched.length===1 ? desc : `${desc} Matched: ${matchedKeys.join(', ')}.`,
+      tags: Array.from(new Set([...allTags, 'prompt-blend', 'aesthetic'])),
     };
   }
 
