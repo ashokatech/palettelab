@@ -1,0 +1,9 @@
+# Cloudflare Pages SPA fallback — keep /api, /sitemap.xml, static assets
+/api/* /api/:splat 200
+/sitemap.xml /sitemap.xml 200
+/robots.txt /robots.txt 200
+/ads.txt /ads.txt 200
+/generated_palettes.json /generated_palettes.json 200
+/privacy.html /privacy.html 200
+/terms.html /terms.html 200
+/* /index.html 200
