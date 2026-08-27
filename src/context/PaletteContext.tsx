@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo, useDeferredValue } from 'react';
 import { Palette, FilterState, ActiveTab, ToolSubTab, ToastMessage, ColorBlindnessType } from '../types';
 import { INITIAL_PALETTES, loadGeneratedPalettes } from '../data/seedPalettes';
 import { generateHarmonicPalette, detectColorTone, normalizeHex } from '../utils/colorUtils';
@@ -508,62 +508,73 @@ export const PaletteProvider: React.FC<{ children: React.ReactNode }> = ({ child
     [showToast]
   );
 
-  // Filtered palettes calculation
-  const filteredPalettes = palettes.filter((palette) => {
-    // 1. Search Query
-    if (filters.searchQuery.trim()) {
-      const q = filters.searchQuery.toLowerCase().trim();
-      const matchName = palette.name.toLowerCase().includes(q);
-      const matchCategory = palette.category.toLowerCase().includes(q);
-      const matchTags = palette.tags.some((t) => t.toLowerCase().includes(q));
-      const matchHex = palette.colors.some((c) => c.toLowerCase().includes(q.replace('#', '')));
-      const matchCreator = palette.creator.name.toLowerCase().includes(q);
+  // Deferred search query prevents main thread blocking on rapid key strokes across 7,900+ palettes
+  const deferredSearchQuery = useDeferredValue(filters.searchQuery);
 
-      if (!matchName && !matchCategory && !matchTags && !matchHex && !matchCreator) {
-        return false;
+  // Memoized filtered palettes calculation
+  const filteredPalettes = useMemo(() => {
+    const q = deferredSearchQuery.toLowerCase().trim();
+    const qWithoutHash = q.replace('#', '');
+    const hasSearch = q.length > 0;
+    const catLower = (filters.category || 'all').toLowerCase();
+    const hasCategory = catLower !== 'all';
+    const hasTone = Boolean(filters.colorTone && filters.colorTone !== 'all');
+    const hasCount = filters.colorCount !== 'all';
+
+    return palettes.filter((palette) => {
+      // 1. Search Query
+      if (hasSearch) {
+        const matchName = palette.name.toLowerCase().includes(q);
+        const matchCategory = palette.category.toLowerCase().includes(q);
+        const matchTags = palette.tags.some((t) => t.toLowerCase().includes(q));
+        const matchHex = palette.colors.some((c) => c.toLowerCase().includes(qWithoutHash));
+        const matchCreator = palette.creator.name.toLowerCase().includes(q);
+
+        if (!matchName && !matchCategory && !matchTags && !matchHex && !matchCreator) {
+          return false;
+        }
       }
-    }
 
-    // 2. Category Filter
-    if (filters.category && filters.category !== 'all') {
-      const catLower = filters.category.toLowerCase();
-      if (catLower === 'trending') {
-        if (!palette.isFeatured && palette.likes < 800) return false;
-      } else if (catLower === 'popular') {
-        if (palette.likes < 700) return false;
-      } else if (catLower === 'new') {
-        // Recent
-      } else if (catLower === 'random') {
-        // Random
-      } else {
-        const matchCategory = palette.category.toLowerCase() === catLower;
-        const matchTags = palette.tags.some((t) => t.toLowerCase() === catLower);
-        if (!matchCategory && !matchTags) return false;
+      // 2. Category Filter
+      if (hasCategory) {
+        if (catLower === 'trending') {
+          if (!palette.isFeatured && palette.likes < 800) return false;
+        } else if (catLower === 'popular') {
+          if (palette.likes < 700) return false;
+        } else if (catLower === 'new') {
+          // Recent
+        } else if (catLower === 'random') {
+          // Random
+        } else {
+          const matchCategory = palette.category.toLowerCase() === catLower;
+          const matchTags = palette.tags.some((t) => t.toLowerCase() === catLower);
+          if (!matchCategory && !matchTags) return false;
+        }
       }
-    }
 
-    // 3. Color Tone Filter
-    if (filters.colorTone && filters.colorTone !== 'all') {
-      const hasTone = palette.colors.some((hex) => {
-        const tone = detectColorTone(hex);
-        return tone === filters.colorTone;
-      });
-      if (!hasTone) return false;
-    }
+      // 3. Color Tone Filter
+      if (hasTone) {
+        const matchesTone = palette.colors.some((hex) => {
+          const tone = detectColorTone(hex);
+          return tone === filters.colorTone;
+        });
+        if (!matchesTone) return false;
+      }
 
-    // 4. Color Count
-    if (filters.colorCount !== 'all') {
-      if (palette.colors.length !== filters.colorCount) return false;
-    }
+      // 4. Color Count
+      if (hasCount) {
+        if (palette.colors.length !== filters.colorCount) return false;
+      }
 
-    return true;
-  }).sort((a, b) => {
-    if (filters.sortBy === 'likes') return b.likes - a.likes;
-    if (filters.sortBy === 'views') return b.views - a.views;
-    if (filters.sortBy === 'date') return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-    if (filters.sortBy === 'random') return Math.sin(a.likes) - Math.sin(b.likes);
-    return (b.likes * 2 + b.views * 0.1) - (a.likes * 2 + a.views * 0.1);
-  });
+      return true;
+    }).sort((a, b) => {
+      if (filters.sortBy === 'likes') return b.likes - a.likes;
+      if (filters.sortBy === 'views') return b.views - a.views;
+      if (filters.sortBy === 'date') return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+      if (filters.sortBy === 'random') return Math.sin(a.likes) - Math.sin(b.likes);
+      return (b.likes * 2 + b.views * 0.1) - (a.likes * 2 + a.views * 0.1);
+    });
+  }, [palettes, deferredSearchQuery, filters.category, filters.colorTone, filters.colorCount, filters.sortBy]);
 
   return (
     <PaletteContext.Provider

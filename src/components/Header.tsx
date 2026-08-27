@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { usePalette } from '../context/PaletteContext';
+import { IntelligentSearchBar } from './IntelligentSearchBar';
 import { 
   Palette as PaletteIcon, 
   Sparkles, 
@@ -11,7 +12,6 @@ import {
   X, 
   Heart,
   Layers,
-  ArrowUpRight,
   Image as ImageIcon
 } from 'lucide-react';
 
@@ -24,8 +24,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCreate }) => {
     activeTab, 
     setActiveTab, 
     setToolSubTab,
-    filters, 
-    updateFilter, 
     closePalette, 
     likedPaletteIds, 
     savedPaletteIds 
@@ -46,12 +44,12 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCreate }) => {
   return (
     <header
       id="main-header"
-      className="sticky top-0 z-40 w-full bg-white/90 backdrop-blur-md border-b border-neutral-200/80 transition-all"
+      className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-neutral-200/80 transition-all"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
         
-        {/* Brand Logo */}
-        <div className="flex items-center gap-6">
+        {/* Brand Logo & Core Nav */}
+        <div className="flex items-center gap-4 shrink-0">
           <button
             id="brand-logo-btn"
             onClick={() => handleNavClick('discover')}
@@ -73,86 +71,60 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCreate }) => {
           </button>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 text-sm font-medium text-neutral-600">
+          <nav className="hidden lg:flex items-center gap-1 text-sm font-medium text-neutral-600">
             <button
               id="nav-discover"
               onClick={() => handleNavClick('discover')}
-              className={`px-3.5 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
                 activeTab === 'discover'
                   ? 'text-neutral-900 bg-neutral-100 font-semibold'
                   : 'hover:text-neutral-900 hover:bg-neutral-50'
               }`}
             >
               <PaletteIcon className="w-4 h-4 text-indigo-500" />
-              Discover
+              <span>Discover</span>
             </button>
 
             <button
               id="nav-generate"
               onClick={() => handleNavClick('generator')}
-              className={`px-3.5 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
                 activeTab === 'generator'
                   ? 'text-neutral-900 bg-neutral-100 font-semibold'
                   : 'hover:text-neutral-900 hover:bg-neutral-50'
               }`}
             >
               <Sparkles className="w-4 h-4 text-amber-500" />
-              Generator
-              <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-md bg-amber-100 text-amber-800 ml-1">
+              <span>Generator</span>
+              <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-md bg-amber-100 text-amber-800 ml-0.5">
                 Space
               </span>
             </button>
 
             <button
-              id="nav-photo-extractor"
-              onClick={() => handleNavClick('tools', 'image-extractor')}
-              className={`px-3.5 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
-                activeTab === 'tools'
-                  ? 'text-neutral-900 bg-neutral-100 font-semibold'
-                  : 'hover:text-neutral-900 hover:bg-neutral-50'
-              }`}
-            >
-              <ImageIcon className="w-4 h-4 text-emerald-500" />
-              Photo Extractor
-            </button>
-
-            <button
-              id="nav-color-hex"
-              onClick={() => handleNavClick('color-detail')}
-              className={`px-3.5 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
-                activeTab === 'color-detail'
-                  ? 'text-neutral-900 bg-neutral-100 font-semibold'
-                  : 'hover:text-neutral-900 hover:bg-neutral-50'
-              }`}
-            >
-              <Layers className="w-4 h-4 text-cyan-600" />
-              Color-Hex
-            </button>
-
-            <button
               id="nav-tools"
               onClick={() => handleNavClick('tools')}
-              className={`px-3.5 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
                 activeTab === 'tools'
                   ? 'text-neutral-900 bg-neutral-100 font-semibold'
                   : 'hover:text-neutral-900 hover:bg-neutral-50'
               }`}
             >
               <Wrench className="w-4 h-4 text-purple-500" />
-              Tools
+              <span>Tools</span>
             </button>
 
             <button
               id="nav-collections"
               onClick={() => handleNavClick('collections')}
-              className={`px-3.5 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
                 activeTab === 'collections'
                   ? 'text-neutral-900 bg-neutral-100 font-semibold'
                   : 'hover:text-neutral-900 hover:bg-neutral-50'
               }`}
             >
               <Bookmark className="w-4 h-4 text-rose-500" />
-              Saved
+              <span>Saved</span>
               {(savedPaletteIds.length > 0 || likedPaletteIds.length > 0) && (
                 <span className="text-xs font-semibold px-1.5 py-0.2 rounded-full bg-neutral-200 text-neutral-700 ml-0.5">
                   {savedPaletteIds.length + likedPaletteIds.length}
@@ -162,43 +134,21 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCreate }) => {
           </nav>
         </div>
 
-        {/* Global Search Bar */}
-        <div className="hidden lg:flex items-center flex-1 max-w-md mx-4">
-          <div className="relative w-full">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
-            <input
-              id="header-search-input"
-              type="text"
-              placeholder="Search by color (blue, #F4A261), mood (sunset, luxury)..."
-              value={filters.searchQuery}
-              onChange={(e) => {
-                updateFilter('searchQuery', e.target.value);
-                if (activeTab !== 'discover') {
-                  closePalette();
-                  setActiveTab('discover');
-                }
-              }}
-              className="w-full pl-10 pr-9 py-2 rounded-xl text-sm bg-neutral-100/80 border border-neutral-200 focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all placeholder:text-neutral-400"
-            />
-            {filters.searchQuery && (
-              <button
-                onClick={() => updateFilter('searchQuery', '')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600 p-0.5 rounded-md"
-              >
-                <X className="w-3.5 h-3.5" />
-              </button>
-            )}
-          </div>
+        {/* Expansive Intelligent Search Bar (Desktop) */}
+        <div className="hidden md:flex flex-1 justify-center max-w-xl min-w-[280px] mx-2 lg:mx-4">
+          <IntelligentSearchBar />
         </div>
 
         {/* Right CTA Actions */}
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2 shrink-0">
           {/* Mobile Search Toggle */}
           <button
             id="mobile-search-toggle"
             onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
-            className="lg:hidden p-2 rounded-lg text-neutral-600 hover:bg-neutral-100"
-            aria-label="Toggle search"
+            className={`lg:hidden p-2 rounded-xl transition-colors ${
+              mobileSearchOpen ? 'bg-indigo-50 text-indigo-600' : 'text-neutral-600 hover:bg-neutral-100'
+            }`}
+            aria-label="Toggle search bar"
           >
             <Search className="w-5 h-5" />
           </button>
@@ -207,14 +157,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCreate }) => {
           <button
             id="header-create-palette-btn"
             onClick={onOpenCreate}
-            className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white text-sm font-semibold shadow-sm hover:shadow transition-all active:scale-98"
+            className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white text-sm font-semibold shadow-xs hover:shadow transition-all active:scale-98"
           >
             <Plus className="w-4 h-4" />
             <span>Create Palette</span>
           </button>
 
           {/* Live Palette Count Badge */}
-          <div className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-50/80 border border-indigo-100 text-indigo-700 text-xs font-semibold">
+          <div className="hidden 2xl:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-50/80 border border-indigo-100 text-indigo-700 text-xs font-semibold">
             <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
             <span>7,900+ Original Palettes</span>
           </div>
@@ -223,8 +173,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCreate }) => {
           <button
             id="mobile-menu-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-neutral-700 hover:bg-neutral-100"
-            aria-label="Open menu"
+            className="md:hidden p-2 rounded-xl text-neutral-700 hover:bg-neutral-100 transition-colors"
+            aria-label="Open navigation menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -233,32 +183,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCreate }) => {
 
       {/* Mobile Search Bar Expansion */}
       {mobileSearchOpen && (
-        <div className="lg:hidden px-4 pb-3 pt-1 border-t border-neutral-100 bg-white">
-          <div className="relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
-            <input
-              type="text"
-              autoFocus
-              placeholder="Search colors, tags, hex..."
-              value={filters.searchQuery}
-              onChange={(e) => {
-                updateFilter('searchQuery', e.target.value);
-                if (activeTab !== 'discover') {
-                  closePalette();
-                  setActiveTab('discover');
-                }
-              }}
-              className="w-full pl-10 pr-9 py-2 rounded-xl text-sm bg-neutral-100 border border-neutral-200 outline-none focus:bg-white focus:border-indigo-500"
-            />
-            {filters.searchQuery && (
-              <button
-                onClick={() => updateFilter('searchQuery', '')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400"
-              >
-                <X className="w-3.5 h-3.5" />
-              </button>
-            )}
-          </div>
+        <div className="lg:hidden px-4 pb-3 pt-2 border-t border-neutral-200/80 bg-neutral-50/95 backdrop-blur-md animate-in slide-in-from-top-2 duration-150">
+          <IntelligentSearchBar
+            isMobile
+            onCloseMobile={() => setMobileSearchOpen(false)}
+          />
         </div>
       )}
 
