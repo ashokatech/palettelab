@@ -1,21 +1,31 @@
 import React from 'react';
 import { usePalette } from '../context/PaletteContext';
-import { Sparkles, Palette, Layers } from 'lucide-react';
 import { CATEGORIES } from '../data/seedPalettes';
-import { ColorTone } from '../types';
+import { ColorTone, ToolSubTab } from '../types';
 
 export const SeoFooter: React.FC = () => {
-  const { updateFilter, setActiveTab, closePalette } = usePalette();
+  const { updateFilter, setActiveTab, closePalette, setToolSubTab } = usePalette();
 
-  const seoColorLinks: { tone: ColorTone; label: string; slug: string }[] = [
-    { tone: 'blue', label: 'Blue Color Palettes', slug: 'palettes/blue' },
-    { tone: 'red', label: 'Red Color Palettes', slug: 'palettes/red' },
-    { tone: 'green', label: 'Green Color Palettes', slug: 'palettes/green' },
-    { tone: 'purple', label: 'Purple Color Palettes', slug: 'palettes/purple' },
-    { tone: 'pink', label: 'Pastel Pink Palettes', slug: 'palettes/pink' },
-    { tone: 'dark', label: 'Dark Mode Palettes', slug: 'palettes/dark' },
-    { tone: 'neutral', label: 'Neutral & Earthy Palettes', slug: 'palettes/neutral' },
-    { tone: 'orange', label: 'Sunset & Warm Palettes', slug: 'palettes/warm' },
+  const seoColorLinks: { tone: ColorTone; label: string }[] = [
+    { tone: 'blue', label: 'Blue Color Palettes' },
+    { tone: 'red', label: 'Red Color Palettes' },
+    { tone: 'green', label: 'Green Color Palettes' },
+    { tone: 'purple', label: 'Purple Color Palettes' },
+    { tone: 'pink', label: 'Pink & Pastel Palettes' },
+    { tone: 'orange', label: 'Orange & Sunset Palettes' },
+    { tone: 'teal', label: 'Teal & Cyan Palettes' },
+    { tone: 'neutral', label: 'Neutral & Earth Palettes' },
+  ];
+
+  const toolLinks: { tab: ToolSubTab; label: string; desc: string }[] = [
+    { tab: 'image-extractor', label: 'Photo Extractor', desc: 'Extract colors from image' },
+    { tab: 'contrast-checker', label: 'WCAG Contrast Matrix', desc: '5x5 contrast checker' },
+    { tab: 'gradient-maker', label: 'Gradient Studio', desc: 'CSS & Tailwind gradients' },
+    { tab: 'color-blindness', label: 'Color Blind Simulator', desc: ' Daltonism audit' },
+    { tab: 'brand-colors', label: 'Brand Tokens', desc: 'Famous brand palettes' },
+    { tab: 'ui-preview', label: 'UI Mockup Preview', desc: 'SaaS & Mobile preview' },
+    { tab: 'ai-studio', label: 'Prompt Studio', desc: 'Text to palette' },
+    { tab: 'shades-tints', label: 'Shades & Tints', desc: 'Monochrome scales' },
   ];
 
   const handleCategoryClick = (catKey: string) => {
@@ -32,13 +42,20 @@ export const SeoFooter: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleToolClick = (tool: ToolSubTab) => {
+    closePalette();
+    setToolSubTab(tool);
+    setActiveTab('tools');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <footer id="main-seo-footer" className="bg-neutral-900 text-neutral-300 border-t border-neutral-800 mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-12">
         
         {/* Brand & Mission Header */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-neutral-800">
-          <div className="md:col-span-2 space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-neutral-800">
+          <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-xl bg-neutral-800 flex items-center justify-center p-1 border border-neutral-700">
                 <div className="w-full h-full rounded-lg grid grid-cols-2 grid-rows-2 gap-0.5 overflow-hidden">
@@ -55,21 +72,18 @@ export const SeoFooter: React.FC = () => {
             
             <p className="text-sm text-neutral-400 max-w-md leading-relaxed">
               PaletteLab is an original color discovery platform and harmonic generator built for
-              designers, developers, and creators. Explore 7,900+ mathematically generated color schemes, copy CSS &
-              Tailwind variables in one click, and check WCAG contrast compliance. No scraping — 100% original.
+              designers, developers, and creators. Explore 7,900+ mathematically generated color schemes, copy CSS &amp;
+              Tailwind variables in one click, and check WCAG contrast compliance. 100% original — no scraping.
             </p>
           </div>
 
-          {/* Popular Categories */}
-          <div className="space-y-3">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">Top Categories</h4>
+          {/* Categories — all 11, not just 7 */}
+          <div className="md:col-span-2 space-y-3">
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider">Categories</h4>
             <ul className="space-y-1.5 text-xs text-neutral-400">
-              {CATEGORIES.slice(1, 8).map((cat) => (
+              {CATEGORIES.filter(c=>c.key!=='all').map((cat) => (
                 <li key={cat.key}>
-                  <button
-                    onClick={() => handleCategoryClick(cat.key)}
-                    className="hover:text-white transition-colors"
-                  >
+                  <button onClick={() => handleCategoryClick(cat.key)} className="hover:text-white transition-colors text-left">
                     {cat.name} Palettes
                   </button>
                 </li>
@@ -77,17 +91,28 @@ export const SeoFooter: React.FC = () => {
             </ul>
           </div>
 
-          {/* Color Palettes Directory (Programmatic SEO Directory) */}
-          <div className="space-y-3">
+          {/* Color Collections */}
+          <div className="md:col-span-2 space-y-3">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider">Color Collections</h4>
             <ul className="space-y-1.5 text-xs text-neutral-400">
               {seoColorLinks.map((link) => (
-                <li key={link.slug}>
-                  <button
-                    onClick={() => handleColorClick(link.tone)}
-                    className="hover:text-white transition-colors"
-                  >
+                <li key={link.label}>
+                  <button onClick={() => handleColorClick(link.tone)} className="hover:text-white transition-colors text-left">
                     {link.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Tools — previously hidden, now SEO-indexable deep links */}
+          <div className="md:col-span-3 space-y-3">
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider">Design Tools</h4>
+            <ul className="space-y-1.5 text-xs text-neutral-400">
+              {toolLinks.map((t) => (
+                <li key={t.tab}>
+                  <button onClick={() => handleToolClick(t.tab)} className="hover:text-white transition-colors text-left">
+                    {t.label} <span className="text-neutral-500 hidden xl:inline">— {t.desc}</span>
                   </button>
                 </li>
               ))}
@@ -97,13 +122,13 @@ export const SeoFooter: React.FC = () => {
 
         {/* Footer Bottom Bar + Legal (AdSense required) */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
-          <p>© {new Date().getFullYear()} PaletteLab. Crafted for modern web & UI design.</p>
+          <p>© {new Date().getFullYear()} PaletteLab. 7,900+ original palettes • WCAG 2.1 • 100% math-generated</p>
           <div className="flex items-center gap-4">
             <a href="/privacy.html" className="hover:text-white transition-colors underline underline-offset-4">Privacy</a>
             <span>•</span>
             <a href="/terms.html" className="hover:text-white transition-colors underline underline-offset-4">Terms</a>
             <span>•</span>
-            <span className="hidden sm:inline">WCAG 2.1 Compliant</span>
+            <a href="/sitemap.xml" className="hover:text-white transition-colors underline underline-offset-4">Sitemap</a>
           </div>
         </div>
 

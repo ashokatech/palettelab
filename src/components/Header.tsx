@@ -101,18 +101,39 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCreate }) => {
               </span>
             </button>
 
-            <button
-              id="nav-tools"
-              onClick={() => handleNavClick('tools')}
-              className={`px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
-                activeTab === 'tools'
-                  ? 'text-neutral-900 bg-neutral-100 font-semibold'
-                  : 'hover:text-neutral-900 hover:bg-neutral-50'
-              }`}
-            >
-              <Wrench className="w-4 h-4 text-purple-500" />
-              <span>Tools</span>
-            </button>
+            <div className="relative group">
+              <button
+                id="nav-tools"
+                onClick={() => handleNavClick('tools')}
+                className={`px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
+                  activeTab === 'tools'
+                    ? 'text-neutral-900 bg-neutral-100 font-semibold'
+                    : 'hover:text-neutral-900 hover:bg-neutral-50'
+                }`}
+              >
+                <Wrench className="w-4 h-4 text-purple-500" />
+                <span>Tools</span>
+                <span className="text-[10px] leading-none">▼</span>
+              </button>
+              {/* Hover mega-menu — makes 7 tools discoverable without extra click */}
+              <div className="absolute left-0 top-full pt-2 hidden group-hover:block z-50">
+                <div className="bg-white border border-neutral-200 rounded-2xl shadow-xl p-2 w-64 grid grid-cols-1 gap-1">
+                  {[
+                    ['image-extractor','Photo Extractor','ImageIcon','text-emerald-500'],
+                    ['contrast-checker','WCAG Matrix','Check','text-emerald-500'],
+                    ['gradient-maker','Gradient Studio','Sliders','text-rose-500'],
+                    ['ui-preview','UI Mockup','Laptop','text-amber-500'],
+                    ['color-blindness','Color Blind Sim','Eye','text-emerald-500'],
+                    ['brand-colors','Brand Tokens','Layers','text-indigo-500'],
+                    ['ai-studio','Prompt Studio','Sparkles','text-purple-500'],
+                  ].map(([key,label])=> (
+                    <button key={key} onClick={()=>handleNavClick('tools', key)} className="text-left px-3 py-2 rounded-xl hover:bg-neutral-50 text-neutral-700 text-xs font-medium">
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
 
             <button
               id="nav-collections"

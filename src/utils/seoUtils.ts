@@ -16,7 +16,7 @@ export interface PaletteSeoData {
  * Generate Schema.org JSON-LD structured microdata for Google Rich Snippets
  */
 export function generatePaletteJsonLd(paletteName: string, colors: string[], category: string, slug: string) {
-  const pageUrl = `https://palettelab.app/?tab=palette-detail&palette=${slug}`;
+  const pageUrl = `https://palettelab.in/?tab=palette-detail&palette=${slug}`;
 
   return {
     '@context': 'https://schema.org',
@@ -29,7 +29,7 @@ export function generatePaletteJsonLd(paletteName: string, colors: string[], cat
     'author': {
       '@type': 'Organization',
       'name': 'PaletteLab',
-      'url': 'https://palettelab.app',
+      'url': 'https://palettelab.in',
     },
     'color': colors,
   };
@@ -39,7 +39,7 @@ export function generatePaletteJsonLd(paletteName: string, colors: string[], cat
  * Generate Schema.org JSON-LD microdata for Hex Color Encyclopedia pages
  */
 export function generateColorEncyclopediaJsonLd(hex: string, rgb: string, hsl: string) {
-  const pageUrl = `https://palettelab.app/?tab=color-detail&hex=${hex.replace('#', '')}`;
+  const pageUrl = `https://palettelab.in/?tab=color-detail&hex=${hex.replace('#', '')}`;
 
   return {
     '@context': 'https://schema.org',

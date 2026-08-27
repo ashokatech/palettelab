@@ -29,10 +29,18 @@ const LazyFallback: React.FC = () => (
 const MainContent: React.FC = () => {
   const {
     activeTab,
+    setActiveTab,
+    setToolSubTab,
     selectedPalette,
     filteredPalettes,
     resetFilters,
   } = usePalette();
+
+  const goTool = (tool: any) => {
+    setToolSubTab(tool);
+    setActiveTab('tools');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(24);
@@ -135,35 +143,29 @@ const MainContent: React.FC = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="p-5 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs space-y-2.5">
-                    <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
-                      <Zap className="w-5 h-5" />
-                    </div>
+                  <button onClick={() => setActiveTab('generator')} className="text-left p-5 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs space-y-2.5 hover:border-indigo-200 hover:shadow-xs transition-all">
+                    <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center"><Zap className="w-5 h-5" /></div>
                     <h3 className="text-sm font-bold text-neutral-900">Spacebar Harmonic Studio</h3>
-                    <p className="text-xs text-neutral-500 leading-relaxed">
-                      Generate balanced color harmonies on the fly with custom color locking, mood presets, and instant Tailwind CSS tokens.
-                    </p>
-                  </div>
-
-                  <div className="p-5 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs space-y-2.5">
-                    <div className="w-9 h-9 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
-                      <ImageIcon className="w-5 h-5" />
-                    </div>
-                    <h3 className="text-sm font-bold text-neutral-900">Deep Photo Color Extraction</h3>
-                    <p className="text-xs text-neutral-500 leading-relaxed">
-                      Drop any photograph to automatically extract vibrant, pastel, dark, and highlight color dimensions with a live magnifier eyedropper.
-                    </p>
-                  </div>
-
-                  <div className="p-5 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs space-y-2.5">
-                    <div className="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
-                      <Layers className="w-5 h-5" />
-                    </div>
+                    <p className="text-xs text-neutral-500 leading-relaxed">Press Space to generate, lock colors, and export Tailwind CSS tokens instantly.</p>
+                  </button>
+                  <button onClick={() => goTool('image-extractor')} className="text-left p-5 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs space-y-2.5 hover:border-indigo-200 hover:shadow-xs transition-all">
+                    <div className="w-9 h-9 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center"><ImageIcon className="w-5 h-5" /></div>
+                    <h3 className="text-sm font-bold text-neutral-900">Photo Color Extractor</h3>
+                    <p className="text-xs text-neutral-500 leading-relaxed">Drop any photo → 7-dimension palette (Vibrant/Pastel/Shadows/Highlights/Warm/Cool) with loupe eyedropper.</p>
+                  </button>
+                  <button onClick={() => goTool('contrast-checker')} className="text-left p-5 rounded-2xl bg-white border border-neutral-200/90 shadow-2xs space-y-2.5 hover:border-indigo-200 hover:shadow-xs transition-all">
+                    <div className="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center"><Layers className="w-5 h-5" /></div>
                     <h3 className="text-sm font-bold text-neutral-900">Color Encyclopedia & WCAG</h3>
-                    <p className="text-xs text-neutral-500 leading-relaxed">
-                      Explore detailed mathematical conversion across RGB, HSL, CMYK, LAB, 20-step tints/shades, and strict WCAG contrast compliance.
-                    </p>
-                  </div>
+                    <p className="text-xs text-neutral-500 leading-relaxed">RGB/HSL/CMYK/LAB, 20-step tints/shades, 5×5 contrast matrix, and blindness simulator.</p>
+                  </button>
+                </div>
+                {/* Deep links to 7 tools — previously hidden behind 1 Tools pill, now homepage + SEO */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 pt-2">
+                  {[
+                    ['Photo Extractor','image-extractor'],['WCAG Matrix','contrast-checker'],['Gradient Studio','gradient-maker'],['UI Mockups','ui-preview'],['Blindness Sim','color-blindness'],['Brand Tokens','brand-colors'],['Prompt Studio','ai-studio'],
+                  ].map(([label,tool])=>(
+                    <button key={tool as string} onClick={() => goTool(tool as any)} className="px-3 py-2.5 rounded-xl bg-neutral-900 text-white text-xs font-semibold hover:bg-neutral-800 transition-colors">{label}</button>
+                  ))}
                 </div>
               </div>
 

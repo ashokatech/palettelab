@@ -202,7 +202,7 @@ export const PaletteProvider: React.FC<{ children: React.ReactNode }> = ({ child
           'brand-colors': 'Famous Tech & Brand Design Tokens',
           'gradient-maker': 'CSS Linear & Radial Gradient Generator',
           'ui-preview': 'Live UI Dashboard & Mobile Mockup Previewer',
-          'ai-studio': 'Semantic Color Palette Studio',
+          'ai-studio': 'Prompt Studio — Text to Palette',
           'shades-tints': 'Tints, Shades & Monochromatic Scale Generator',
         };
         dynamicTitle = `${toolNames[toolSubTab] || 'Design Tools'} - Free Online Suite | PaletteLab`;

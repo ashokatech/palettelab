@@ -42,6 +42,7 @@ export const ToolsView: React.FC = () => {
     setGeneratorPaletteFromColors,
     saveNewPalette,
     palettes,
+    generatorSlots,
   } = usePalette();
 
   // -------------------------------------------------------------
@@ -90,6 +91,21 @@ export const ToolsView: React.FC = () => {
       return `conic-gradient(from ${gradientAngle}deg at 50% 50%, ${stopsStr})`;
     }
   };
+
+  const getTailwindGradient = () => {
+    if (gradientType === 'linear') {
+      const dirMap: Record<number,string> = {0:'to-t',45:'to-tr',90:'to-r',135:'to-br',180:'to-b',225:'to-bl',270:'to-l',315:'to-tl'};
+      const closest = Object.keys(dirMap).map(Number).reduce((p,c)=> Math.abs(c-gradientAngle) < Math.abs(p-gradientAngle) ? c : p, 90);
+      const dir = dirMap[closest] || 'to-r';
+      if (gradColors.length===2) return `bg-gradient-${dir} from-[${gradColors[0].hex}] to-[${gradColors[1].hex}]`;
+      if (gradColors.length===3) return `bg-gradient-${dir} from-[${gradColors[0].hex}] via-[${gradColors[1].hex}] to-[${gradColors[2].hex}]`;
+      return `bg-[linear-gradient(${gradientAngle}deg,${gradColors.map(c=>`${c.hex} ${c.stop}%`).join(',')})]`;
+    }
+    if (gradientType==='radial') return `bg-[radial-gradient(circle_at_center,${gradColors.map(c=>`${c.hex} ${c.stop}%`).join(',')})]`;
+    return `bg-[conic-gradient(from_${gradientAngle}deg_at_50%_50%,${gradColors.map(c=>`${c.hex} ${c.stop}%`).join(',')})]`;
+  };
+
+  const [gradCodeTab, setGradCodeTab] = useState<'css'|'tailwind'>('css');
 
   const gradientPresets = [
     {
@@ -217,8 +233,8 @@ export const ToolsView: React.FC = () => {
           </p>
         </div>
 
-        {/* Tab Pills */}
-        <div className="flex flex-wrap items-center bg-neutral-100 p-1 rounded-2xl text-xs font-semibold text-neutral-600 gap-1">
+        {/* Tab Pills — horizontal scroll on mobile, previously wrapped + hidden */}
+        <div className="flex items-center bg-neutral-100 p-1 rounded-2xl text-xs font-semibold text-neutral-600 gap-1 overflow-x-auto scrollbar-hide flex-nowrap max-w-full">
           <button
             onClick={() => setToolSubTab('image-extractor')}
             className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5 ${
@@ -300,7 +316,7 @@ export const ToolsView: React.FC = () => {
             }`}
           >
             <Sparkles className="w-3.5 h-3.5 text-purple-500" />
-            <span>AI Studio</span>
+            <span>Prompt Studio</span>
           </button>
         </div>
       </div>
@@ -797,13 +813,32 @@ export const ToolsView: React.FC = () => {
                 </div>
               </div>
 
-              {/* Code Snippet Box */}
+              {/* Cross-tool import — previously had to retype HEX manually */}
+              <div className="flex gap-2">
+                <button onClick={() => {
+                  const rp = palettes[Math.floor(Math.random()*palettes.length)];
+                  const gp = (rp?.colors || ['#4F46E5','#06B6D4','#10B981']).slice(0,5);
+                  setGradColors(gp.map((hex,i)=>({hex, stop: Math.round(i*100/Math.max(1,gp.length-1))})))
+                }} className="flex-1 px-3 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold">Load Random Palette</button>
+                <button onClick={() => {
+                  const gs = generatorSlots.map(s=>s.hex);
+                  if (gs.length) setGradColors(gs.map((hex,i)=>({hex, stop: Math.round(i*100/Math.max(1,gs.length-1))})))
+                }} className="px-3 py-2 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-700 text-xs font-semibold">From Generator</button>
+              </div>
+
+              {/* Code Snippet Box — now CSS + Tailwind */}
               <div className="space-y-2">
-                <label className="text-xs font-bold text-neutral-700">CSS Code</label>
+                <div className="flex items-center gap-2">
+                  <label className="text-xs font-bold text-neutral-700">Code</label>
+                  <div className="flex bg-neutral-100 p-0.5 rounded-lg text-[11px] font-semibold">
+                    <button onClick={()=>setGradCodeTab('css')} className={`px-2.5 py-1 rounded-md ${gradCodeTab==='css'?'bg-white shadow-xs text-neutral-900':'text-neutral-500'}`}>CSS</button>
+                    <button onClick={()=>setGradCodeTab('tailwind')} className={`px-2.5 py-1 rounded-md ${gradCodeTab==='tailwind'?'bg-white shadow-xs text-neutral-900':'text-neutral-500'}`}>Tailwind</button>
+                  </div>
+                </div>
                 <div className="relative bg-neutral-900 text-neutral-100 p-4 rounded-xl font-mono text-xs overflow-x-auto">
-                  <code>background: {getGradientCss()};</code>
+                  <code>{gradCodeTab==='css' ? `background: ${getGradientCss()};` : getTailwindGradient()}</code>
                   <button
-                    onClick={() => copyValue(`background: ${getGradientCss()};`, 'Copied Gradient CSS')}
+                    onClick={() => copyValue(gradCodeTab==='css' ? `background: ${getGradientCss()};` : getTailwindGradient(), gradCodeTab==='css' ? 'Copied Gradient CSS' : 'Copied Tailwind Gradient')}
                     className="absolute top-3 right-3 px-3 py-1 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-200 text-xs font-medium flex items-center gap-1 border border-neutral-700"
                   >
                     <Copy className="w-3 h-3" />
@@ -874,7 +909,11 @@ export const ToolsView: React.FC = () => {
 
           {/* Palette Color Pickers for UI */}
           <div className="space-y-2">
-            <label className="text-xs font-bold text-neutral-700">Active Theme Colors:</label>
+            <div className="flex items-center gap-2">
+              <label className="text-xs font-bold text-neutral-700">Active Theme Colors:</label>
+              <button onClick={()=> setUiMockPalette(generatorSlots.map(s=>s.hex).slice(0,5))} className="px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 text-xs font-semibold">From Generator</button>
+              <button onClick={() => { const rp=palettes[Math.floor(Math.random()*palettes.length)]; if(rp) setUiMockPalette(rp.colors.slice(0,5)); }} className="px-2.5 py-1 rounded-lg bg-neutral-100 text-neutral-700 text-xs font-semibold">Random Palette</button>
+            </div>
             <div className="flex flex-wrap items-center gap-3">
               {uiMockPalette.map((hex, idx) => (
                 <div key={idx} className="flex items-center gap-2 bg-neutral-50 px-2.5 py-1.5 rounded-xl border border-neutral-200">
