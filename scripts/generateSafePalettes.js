@@ -116,9 +116,9 @@ for (const theme of SAFE_THEMES) {
   }
 }
 
-// 2. Generate 3500 algorithmic golden-ratio palettes with unique names
+// 2. Generate 7500 algorithmic golden-ratio palettes with unique names — fire-and-forget scale for $2500/mo (8000 total = 300 theme + 7500 golden)
 const GOLDEN_THEMES = [];
-for (let i=0;i<3500;i++) {
+for (let i=0;i<7500;i++) {
   const adj = EXTRA_ADJECTIVES[i % EXTRA_ADJECTIVES.length];
   const noun = EXTRA_NOUNS[Math.floor(i / EXTRA_ADJECTIVES.length) % EXTRA_NOUNS.length];
   const cat = CATEGORIES[i % CATEGORIES.length];
@@ -152,6 +152,8 @@ for (const g of GOLDEN_THEMES) {
 palettes.sort((a,b) => hashString(a.slug) - hashString(b.slug));
 
 const outPath = path.join(__dirname, '..', 'src', 'data', 'generated_palettes.json');
+const publicPath = path.join(__dirname, '..', 'public', 'generated_palettes.json');
 fs.writeFileSync(outPath, JSON.stringify(palettes, null, 2), 'utf-8');
-console.log(`Generated ${palettes.length} safe palettes -> ${outPath}`);
+fs.writeFileSync(publicPath, JSON.stringify(palettes), 'utf-8'); // minified for fetch, cached
+console.log(`Generated ${palettes.length} safe palettes -> ${outPath} + ${publicPath}`);
 console.log(`Sample: ${palettes[0].name} ${palettes[0].colors.join(', ')}`);

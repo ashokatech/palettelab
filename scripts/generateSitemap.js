@@ -3,7 +3,7 @@ import path from 'path';
 
 async function buildSitemap() {
   console.log('Generating dynamic XML sitemap for Google Search Console...');
-  const baseUrl = 'https://palettelab.app';
+  const baseUrl = (process.env.APP_URL || process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}` || 'https://palettelab.vercel.app').replace(/\/$/, '');
 
   // Now uses 100% original generated + curated data — no scraped sources.
   const generatedPath = path.join(process.cwd(), 'src', 'data', 'generated_palettes.json');

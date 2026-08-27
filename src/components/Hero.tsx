@@ -49,7 +49,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCreate }) => {
           </h1>
 
           <p className="text-sm sm:text-base text-neutral-600 leading-relaxed max-w-2xl mx-auto">
-            3,900+ original color schemes, instant spacebar generator, photo color extraction, and CSS/Tailwind export — 100% mathematically generated.
+            7,900+ original color schemes, instant spacebar generator, photo color extraction, and CSS/Tailwind export — 100% mathematically generated.
           </p>
         </div>
 

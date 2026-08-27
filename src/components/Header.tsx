@@ -216,7 +216,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCreate }) => {
           {/* Live Palette Count Badge */}
           <div className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-50/80 border border-indigo-100 text-indigo-700 text-xs font-semibold">
             <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
-            <span>3,900+ Original Palettes</span>
+            <span>7,900+ Original Palettes</span>
           </div>
 
           {/* Mobile Hamburger */}

@@ -55,7 +55,7 @@ export const SeoFooter: React.FC = () => {
             
             <p className="text-sm text-neutral-400 max-w-md leading-relaxed">
               PaletteLab is an original color discovery platform and harmonic generator built for
-              designers, developers, and creators. Explore 3,900+ mathematically generated color schemes, copy CSS &
+              designers, developers, and creators. Explore 7,900+ mathematically generated color schemes, copy CSS &
               Tailwind variables in one click, and check WCAG contrast compliance. No scraping — 100% original.
             </p>
           </div>

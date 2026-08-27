@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { Palette, FilterState, ActiveTab, ToolSubTab, ToastMessage, ColorBlindnessType } from '../types';
-import { INITIAL_PALETTES } from '../data/seedPalettes';
+import { INITIAL_PALETTES, loadGeneratedPalettes } from '../data/seedPalettes';
 import { generateHarmonicPalette, detectColorTone, normalizeHex } from '../utils/colorUtils';
 import confetti from 'canvas-confetti';
 
@@ -86,6 +86,22 @@ export const PaletteProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }
   });
 
+  // Fire-and-forget: load 7800 generated palettes async after paint — no bundle cost
+  useEffect(() => {
+    loadGeneratedPalettes().then((generated) => {
+      if (!generated.length) return;
+      setPalettes((prev) => {
+        if (prev.some((p) => p.id.startsWith('gen-'))) return prev;
+        try {
+          const savedCustoms = JSON.parse(localStorage.getItem('palettelab_custom_palettes') || '[]');
+          return [...savedCustoms, ...generated, ...INITIAL_PALETTES];
+        } catch {
+          return [...generated, ...INITIAL_PALETTES];
+        }
+      });
+    });
+  }, []);
+
   // Initialize state with URL parameters if present
   const [filters, setFilters] = useState<FilterState>(() => {
     try {
@@ -164,7 +180,7 @@ export const PaletteProvider: React.FC<{ children: React.ReactNode }> = ({ child
     try {
       const params = new URLSearchParams();
       let dynamicTitle = 'PaletteLab — Free Color Palette Generator & Design Tools';
-      let dynamicDescription = 'Discover 3,900+ original color palettes, extract colors from photos, explore HEX codes, and generate harmonic design schemes instantly. 100% original.';
+      let dynamicDescription = 'Discover 7,900+ original color palettes, extract colors from photos, explore HEX codes, and generate harmonic design schemes instantly. 100% original.';
 
       if (activeTab === 'palette-detail' && selectedPalette) {
         params.set('tab', 'palette-detail');

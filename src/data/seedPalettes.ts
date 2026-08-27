@@ -1,8 +1,8 @@
 import { Palette } from '../types';
-import generatedPalettes from './generated_palettes.json';
 
-// Curated 105 original hand-crafted palettes remain fully owned.
-// Generated palettes are 100% algorithmic (math-based HSL + golden ratio), no scraping, no trademark infringement.
+// Lightweight immediate bundle: only hand-curated originals (120). 
+// 7800 generated palettes are fetched at runtime from /generated_palettes.json — cuts main JS by ~1.4MB.
+import originalSeeds from './originalSeeds.json';
 
 export const CATEGORIES = [
   { key: 'all', name: 'All Palettes' },
@@ -18,10 +18,19 @@ export const CATEGORIES = [
   { key: 'luxury', name: 'Luxury' },
 ];
 
-// Original 105 — extract from previous file to keep, then merge with generated.
-import originalSeeds from './originalSeeds.json';
+export const INITIAL_PALETTES: Palette[] = [...(originalSeeds as Palette[])];
 
-export const INITIAL_PALETTES: Palette[] = [
-  ...(generatedPalettes as Palette[]),
-  ...(originalSeeds as Palette[]),
-];
+// Async loader for the 7800+ generated chunk — fetch only, not bundled (fire-and-forget scale).
+let generatedCache: Palette[] | null = null;
+export async function loadGeneratedPalettes(): Promise<Palette[]> {
+  if (generatedCache) return generatedCache;
+  try {
+    const res = await fetch('/generated_palettes.json', { cache: 'force-cache' });
+    if (!res.ok) return [];
+    const data = (await res.json()) as Palette[];
+    generatedCache = data;
+    return data;
+  } catch {
+    return [];
+  }
+}
