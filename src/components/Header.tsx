@@ -10,7 +10,10 @@ import {
   Plus, 
   Menu, 
   X, 
-  Heart,
+  CheckCircle,
+  Sliders,
+  Eye,
+  Laptop,
   Layers,
   Image as ImageIcon
 } from 'lucide-react';
@@ -24,6 +27,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCreate }) => {
     activeTab, 
     setActiveTab, 
     setToolSubTab,
+    toolSubTab,
     closePalette, 
     likedPaletteIds, 
     savedPaletteIds 
@@ -101,39 +105,18 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCreate }) => {
               </span>
             </button>
 
-            <div className="relative group">
-              <button
-                id="nav-tools"
-                onClick={() => handleNavClick('tools')}
-                className={`px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
-                  activeTab === 'tools'
-                    ? 'text-neutral-900 bg-neutral-100 font-semibold'
-                    : 'hover:text-neutral-900 hover:bg-neutral-50'
-                }`}
-              >
-                <Wrench className="w-4 h-4 text-purple-500" />
-                <span>Tools</span>
-                <span className="text-[10px] leading-none">▼</span>
-              </button>
-              {/* Hover mega-menu — makes 7 tools discoverable without extra click */}
-              <div className="absolute left-0 top-full pt-2 hidden group-hover:block z-50">
-                <div className="bg-white border border-neutral-200 rounded-2xl shadow-xl p-2 w-64 grid grid-cols-1 gap-1">
-                  {[
-                    ['image-extractor','Photo Extractor','ImageIcon','text-emerald-500'],
-                    ['contrast-checker','WCAG Matrix','Check','text-emerald-500'],
-                    ['gradient-maker','Gradient Studio','Sliders','text-rose-500'],
-                    ['ui-preview','UI Mockup','Laptop','text-amber-500'],
-                    ['color-blindness','Color Blind Sim','Eye','text-emerald-500'],
-                    ['brand-colors','Brand Tokens','Layers','text-indigo-500'],
-                    ['ai-studio','Prompt Studio','Sparkles','text-purple-500'],
-                  ].map(([key,label])=> (
-                    <button key={key} onClick={()=>handleNavClick('tools', key)} className="text-left px-3 py-2 rounded-xl hover:bg-neutral-50 text-neutral-700 text-xs font-medium">
-                      {label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <button
+              id="nav-tools"
+              onClick={() => handleNavClick('tools')}
+              className={`px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 ${
+                activeTab === 'tools'
+                  ? 'text-neutral-900 bg-neutral-100 font-semibold'
+                  : 'hover:text-neutral-900 hover:bg-neutral-50'
+              }`}
+            >
+              <Wrench className="w-4 h-4 text-purple-500" />
+              <span>Tools</span>
+            </button>
 
             <button
               id="nav-collections"
@@ -199,6 +182,39 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCreate }) => {
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
+        </div>
+      </div>
+
+      {/* Smart Tools Rail — front and center, not dropdown. Money tools always visible, horizontal scroll on mobile */}
+      <div className="border-t border-neutral-100 bg-gradient-to-r from-white via-indigo-50/20 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-2 py-2.5 overflow-x-auto scrollbar-hide scroll-smooth">
+            <span className="hidden lg:inline text-[11px] font-bold tracking-wider text-neutral-400 mr-1 whitespace-nowrap shrink-0">TOOLS →</span>
+            {[
+              {key:'image-extractor', label:'Extractor', Icon: ImageIcon, color:'text-emerald-600 bg-emerald-50 border-emerald-200', badge: null},
+              {key:'contrast-checker', label:'WCAG Matrix', Icon: CheckCircle, color:'text-emerald-700 bg-emerald-50 border-emerald-200', badge:'HOT'},
+              {key:'gradient-maker', label:'Gradients', Icon: Sliders, color:'text-rose-600 bg-rose-50 border-rose-200', badge:null},
+              {key:'ui-preview', label:'UI Mockup', Icon: Laptop, color:'text-amber-600 bg-amber-50 border-amber-200', badge:null},
+              {key:'color-blindness', label:'Blind Sim', Icon: Eye, color:'text-teal-600 bg-teal-50 border-teal-200', badge:null},
+              {key:'brand-colors', label:'Brand Tokens', Icon: Layers, color:'text-indigo-600 bg-indigo-50 border-indigo-200', badge:null},
+              {key:'ai-studio', label:'Prompt Studio', Icon: Sparkles, color:'text-purple-600 bg-purple-50 border-purple-200', badge:'NEW'},
+            ].map((t) => {
+              const isActive = activeTab==='tools' && toolSubTab===t.key;
+              return (
+                <button
+                  key={t.key}
+                  onClick={() => handleNavClick('tools', t.key)}
+                  className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap border transition-all shrink-0 ${
+                    isActive ? 'bg-neutral-900 text-white border-neutral-900 shadow-sm' : `bg-white ${t.color} hover:shadow-xs hover:scale-[1.02]`
+                  }`}
+                >
+                  <t.Icon className={`w-3.5 h-3.5 ${isActive ? 'text-white' : ''}`} />
+                  <span>{t.label}</span>
+                  {t.badge && <span className={`ml-1 px-1.5 py-0.5 rounded text-[9px] font-bold leading-none ${isActive ? 'bg-white/20 text-white' : t.badge==='HOT' ? 'bg-amber-500 text-white' : 'bg-purple-600 text-white'}`}>{t.badge}</span>}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
