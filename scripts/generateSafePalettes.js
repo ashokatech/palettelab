@@ -116,19 +116,26 @@ for (const theme of SAFE_THEMES) {
   }
 }
 
-// 2. Generate 7500 algorithmic golden-ratio palettes with unique names — fire-and-forget scale for $2500/mo (8000 total = 300 theme + 7500 golden)
+// 2. Generate 7500 category-TRUE palettes — colors MATCH category label (fixes "random colors under Pastel")
+const CAT_THEMES = {};
+for (const th of SAFE_THEMES) {
+  if (!CAT_THEMES[th.category]) CAT_THEMES[th.category] = [];
+  CAT_THEMES[th.category].push(th);
+}
+const FALLBACK = SAFE_THEMES;
 const GOLDEN_THEMES = [];
 for (let i=0;i<7500;i++) {
   const adj = EXTRA_ADJECTIVES[i % EXTRA_ADJECTIVES.length];
   const noun = EXTRA_NOUNS[Math.floor(i / EXTRA_ADJECTIVES.length) % EXTRA_NOUNS.length];
   const cat = CATEGORIES[i % CATEGORIES.length];
-  const seed = `${adj}-${noun}-${i}-${cat}`;
+  const pool = CAT_THEMES[cat] || FALLBACK.filter(t=>t.category===cat).length ? FALLBACK.filter(t=>t.category===cat) : FALLBACK;
+  const actualPool = pool.length ? pool : FALLBACK;
+  const theme = actualPool[hashString(cat+'-'+i) % actualPool.length];
   const count = (i % 3 === 0) ? 4 : (i % 3 === 1) ? 5 : 6;
-  const colors = generateGoldenPalette(seed, count);
-  const name = `${adj} ${noun} ${i > 20 ? '' : ''}`.trim() + ` ${String(i+1).padStart(4,'0')}`; // ensure uniqueness
+  const colors = generatePaletteVariant(theme, 2000+i, count);
   const cleanName = `${adj} ${noun}`;
   const slug = `${adj.toLowerCase()}-${noun.toLowerCase()}-${String(i+1).padStart(4,'0')}`;
-  GOLDEN_THEMES.push({ seed, count, colors, name: cleanName, slug, cat });
+  GOLDEN_THEMES.push({ theme, count, colors, name: cleanName, slug, cat });
 }
 
 for (const g of GOLDEN_THEMES) {
@@ -143,7 +150,7 @@ for (const g of GOLDEN_THEMES) {
     copies: 70 + (hashString(g.slug+'c') % 1200),
     saves: 50 + (hashString(g.slug+'s') % 700),
     category: g.cat,
-    tags: [g.cat.toLowerCase(), 'harmonic', 'algorithmic', g.count === 4 ? '4-colors' : g.count === 5 ? '5-colors' : '6-colors'],
+    tags: [...g.theme.tags, g.cat.toLowerCase(), g.count === 4 ? '4-colors' : g.count === 5 ? '5-colors' : '6-colors'],
     createdAt: `2025-0${2 + (hashString(g.slug)%4)}-${String(10+hashString(g.slug)%18).padStart(2,'0')}`,
   });
 }
