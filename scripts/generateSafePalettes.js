@@ -69,7 +69,8 @@ function rgbToHex(r,g,b){ const toHex=c=>{ const h=Math.max(0,Math.min(255,Math.
 function clamp(v,min,max){ return Math.max(min, Math.min(max,v)); }
 
 function generatePaletteVariant(theme, variantIdx, count) {
-  const hash = hashString(theme.slug + ':' + variantIdx);
+  // RANK #1 entropy: include count and cat in hash — prevents 50% duplicate collisions (was 3926 dups)
+  const hash = hashString(`${theme.slug}:${variantIdx}:${count}:${theme.category}`);
   const cat = theme.category;
   const baseHue = theme.hues[hash % theme.hues.length];
   const baseSat = theme.sat[0] + (hash % (theme.sat[1]-theme.sat[0]+1));
@@ -98,8 +99,8 @@ function generatePaletteVariant(theme, variantIdx, count) {
   const satBounds = [theme.sat[0], theme.sat[1]];
 
   const harmonyPick = (()=> {
-    if (cat==='Pastel' || cat==='Neutral' || cat==='Minimal') return 'analogous'; // CEO: 100% category-true, no modern fallthrough
-    if (cat==='Nature') return ['analogous','analogous','modern'][hash%3];
+    // RANK #1 FIX: Warm/Cool are hue-defined — must NOT leak opposite hues (was 20%/17% fail). Force analogous only.
+    if (cat==='Pastel' || cat==='Neutral' || cat==='Minimal' || cat==='Warm' || cat==='Cool' || cat==='Nature') return 'analogous';
     if (cat==='Vibrant' || cat==='Luxury') return ['complementary','triadic','analogous'][hash%3];
     if (cat==='Dark') return ['analogous','complementary'][hash%2];
     return ['analogous','complementary','triadic','modern'][hash%4];
@@ -137,7 +138,7 @@ function generateGoldenPalette(seed, count) {
 const palettes = [];
 let idCounter = 1000;
 
-// 1. Generate 15 variants per safe theme = 300 palettes
+// 1. Generate 15 variants per safe theme = 300 palettes — RANK #1: category tag always included (was missing 165)
 for (const theme of SAFE_THEMES) {
   for (let v = 0; v < 15; v++) {
     const variation = v === 0 ? '' : ` ${EXTRA_ADJECTIVES[v % EXTRA_ADJECTIVES.length]}`;
@@ -145,6 +146,10 @@ for (const theme of SAFE_THEMES) {
     const count = v % 3 === 0 ? 4 : v % 3 === 1 ? 5 : 6;
     const colors = generatePaletteVariant(theme, v, count);
     const slug = `${theme.slug}${v === 0 ? '' : `-${v}`}`;
+    const catTag = theme.category.toLowerCase();
+    const tags = [...theme.tags];
+    if (!tags.includes(catTag)) tags.push(catTag);
+    tags.push(count === 4 ? '4-colors' : count === 5 ? '5-colors' : '6-colors');
     palettes.push({
       id: `gen-${idCounter++}`,
       slug,
@@ -156,7 +161,7 @@ for (const theme of SAFE_THEMES) {
       copies: 100 + (hashString(slug+'copies') % 1500),
       saves: 80 + (hashString(slug+'saves') % 900),
       category: theme.category,
-      tags: [...theme.tags, count === 4 ? '4-colors' : count === 5 ? '5-colors' : '6-colors'],
+      tags,
       createdAt: `2025-0${3 + (v%4)}-${String(10+v%18).padStart(2,'0')}`,
       isFeatured: v < 2,
     });
@@ -202,6 +207,49 @@ for (const g of GOLDEN_THEMES) {
   });
 }
 
+// RANK #1 dedupe — eliminate 50% duplicate junk (was 1287 groups, 3926 dups) — keep first, refill with jitter until unique
+const uniqueMap = new Map();
+const deduped = [];
+let dupDrop = 0;
+for (const p of palettes) {
+  const key = p.colors.join(',');
+  if (!uniqueMap.has(key)) { uniqueMap.set(key, true); deduped.push(p); }
+  else dupDrop++;
+}
+// Refill to target with jittered variants if duplicates dropped
+let refillIdx = 90000;
+while (deduped.length < 7860) {
+  const cat = CATEGORIES[deduped.length % CATEGORIES.length];
+  const pool = CAT_THEMES[cat] || FALLBACK;
+  const actualPool = pool.length ? pool : FALLBACK;
+  const theme = actualPool[hashString(cat+'-refill-'+refillIdx) % actualPool.length];
+  const count = (refillIdx % 3 === 0) ? 4 : (refillIdx % 3 === 1) ? 5 : 6;
+  const colors = generatePaletteVariant(theme, refillIdx, count);
+  const key = colors.join(',');
+  if (!uniqueMap.has(key)) {
+    uniqueMap.set(key, true);
+    const slug = `refill-${refillIdx}`;
+    deduped.push({
+      id: `gen-${idCounter++}`,
+      slug,
+      name: `${theme.name} Refill`,
+      colors,
+      creator: { id: 'palettelab', name: 'PaletteLab Studio', verified: true },
+      likes: 120 + (hashString(slug) % 1600),
+      views: 900 + (hashString(slug+'v') % 11000),
+      copies: 70 + (hashString(slug+'c') % 1200),
+      saves: 50 + (hashString(slug+'s') % 700),
+      category: cat,
+      tags: [...theme.tags, cat.toLowerCase(), count === 4 ? '4-colors' : count === 5 ? '5-colors' : '6-colors'],
+      createdAt: `2025-03-15`,
+    });
+  }
+  refillIdx++;
+  if (refillIdx > 200000) break; // safety
+}
+palettes.length = 0;
+palettes.push(...deduped);
+
 // Shuffle deterministic
 palettes.sort((a,b) => hashString(a.slug) - hashString(b.slug));
 
@@ -209,5 +257,5 @@ const outPath = path.join(__dirname, '..', 'src', 'data', 'generated_palettes.js
 const publicPath = path.join(__dirname, '..', 'public', 'generated_palettes.json');
 fs.writeFileSync(outPath, JSON.stringify(palettes, null, 2), 'utf-8');
 fs.writeFileSync(publicPath, JSON.stringify(palettes), 'utf-8'); // minified for fetch, cached
-console.log(`Generated ${palettes.length} safe palettes -> ${outPath} + ${publicPath}`);
+console.log(`Generated ${palettes.length} safe palettes (dropped ${dupDrop} dups, refilled ${Math.max(0,7860 - (7860-dupDrop))}) -> ${outPath} + ${publicPath}`);
 console.log(`Sample: ${palettes[0].name} ${palettes[0].colors.join(', ')}`);
