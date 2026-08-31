@@ -1031,6 +1031,31 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=emerald-depth-10</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=emerald-depth-11</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=emerald-depth-12</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=emerald-depth-13</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=emerald-depth-14</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://palettelab.in/?tab=palette-detail&amp;palette=gentle-bloom-0054</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -1312,6 +1337,51 @@
   </url>
   <url>
     <loc>https://palettelab.in/?tab=palette-detail&amp;palette=gentle-veil-7354</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=noir-gold-9</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=noir-gold-8</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=noir-gold-7</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=noir-gold-6</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=noir-gold-5</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=noir-gold-4</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=noir-gold-3</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=noir-gold-2</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=noir-gold-1</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -7981,6 +8051,51 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=cool-flint-1</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=cool-flint-2</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=cool-flint-3</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=cool-flint-4</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=cool-flint-5</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=cool-flint-6</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=cool-flint-7</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=cool-flint-8</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=cool-flint-9</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://palettelab.in/?tab=palette-detail&amp;palette=dusky-echo-7338</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -8937,6 +9052,11 @@
   </url>
   <url>
     <loc>https://palettelab.in/?tab=palette-detail&amp;palette=cool-stone-0251</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=emerald-depth</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -13506,6 +13626,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=warm-linen</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://palettelab.in/?tab=palette-detail&amp;palette=bold-dawn-7382</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -13597,6 +13722,51 @@
   </url>
   <url>
     <loc>https://palettelab.in/?tab=palette-detail&amp;palette=bold-dawn-0182</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=emerald-depth-1</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=emerald-depth-2</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=emerald-depth-3</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=emerald-depth-4</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=emerald-depth-5</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=emerald-depth-6</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=emerald-depth-7</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=emerald-depth-8</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=emerald-depth-9</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -17256,6 +17426,51 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=warm-linen-1</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=warm-linen-2</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=warm-linen-3</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=warm-linen-4</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=warm-linen-5</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=warm-linen-6</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=warm-linen-7</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=warm-linen-8</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=warm-linen-9</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://palettelab.in/?tab=palette-detail&amp;palette=rich-gleam-7295</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -18012,6 +18227,11 @@
   </url>
   <url>
     <loc>https://palettelab.in/?tab=palette-detail&amp;palette=bright-gleam-7297</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=noir-gold</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -25311,6 +25531,31 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=cool-flint-14</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=cool-flint-13</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=cool-flint-12</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=cool-flint-11</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=cool-flint-10</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://palettelab.in/?tab=palette-detail&amp;palette=deep-space-ii-14</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -31991,6 +32236,31 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=noir-gold-10</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=noir-gold-11</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=noir-gold-12</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=noir-gold-13</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=noir-gold-14</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://palettelab.in/?tab=palette-detail&amp;palette=bright-bloom-0057</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -34786,6 +35056,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=cool-flint</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://palettelab.in/?tab=palette-detail&amp;palette=harvest-amber-10</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -34922,6 +35197,31 @@
   </url>
   <url>
     <loc>https://palettelab.in/?tab=palette-detail&amp;palette=monochrome-stone-10</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=warm-linen-10</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=warm-linen-11</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=warm-linen-12</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=warm-linen-13</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://palettelab.in/?tab=palette-detail&amp;palette=warm-linen-14</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

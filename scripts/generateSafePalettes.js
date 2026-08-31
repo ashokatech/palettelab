@@ -48,28 +48,75 @@ const SAFE_THEMES = [
   { name: 'Alpine Meadow', slug: 'alpine-meadow', hues: [130,100,140,90,120], sat: [40,75], light: [30,80], category: 'Nature', tags: ['alpine','meadow','green','field'] },
   { name: 'Copper Dusk', slug: 'copper-dusk', hues: [20,25,15,30,18], sat: [55,85], light: [20,70], category: 'Warm', tags: ['copper','dusk','rust','ember'] },
   { name: 'Monochrome Stone', slug: 'monochrome-stone', hues: [30,0,210,0,35], sat: [0,12], light: [12,92], category: 'Minimal', tags: ['stone','monochrome','minimal','concrete'] },
+  // --- NEUTRAL & LUXURY EXTENSIONS — fixes empty Neutral/Trending pools that caused random mismatch ---
+  { name: 'Warm Linen', slug: 'warm-linen', hues: [35,40,30,45,25], sat: [12,28], light: [72,92], category: 'Neutral', tags: ['linen','warm','neutral','oat','greige'] },
+  { name: 'Cool Flint', slug: 'cool-flint', hues: [210,205,200,215,190], sat: [6,18], light: [68,90], category: 'Neutral', tags: ['flint','cool','neutral','stone','greige'] },
+  { name: 'Noir Gold', slug: 'noir-gold', hues: [45,42,38,50,35], sat: [55,85], light: [18,72], category: 'Luxury', tags: ['noir','gold','luxury','champagne','brass'] },
+  { name: 'Emerald Depth', slug: 'emerald-depth', hues: [165,155,170,150,160], sat: [55,80], light: [18,68], category: 'Luxury', tags: ['emerald','jewel','luxury','depth'] },
 ];
 
 const EXTRA_ADJECTIVES = ['Serene','Bold','Muted','Vivid','Soft','Deep','Calm','Radiant','Misty','Warm','Cool','Lush','Crisp','Gentle','Rich','Pale','Bright','Dusky','Fresh','Cozy'];
 const EXTRA_NOUNS = ['Horizon','Whisper','Bloom','Drift','Gleam','Haze','Echo','Veil','Glow','Dawn','Dusk','Breeze','Stone','Harbor','Trail','Field','Ridge','Bay','Vale','Cove'];
 
 const CATEGORIES = ['Nature','Warm','Cool','Pastel','Vibrant','Dark','Minimal','Luxury','Neutral','Trending'];
+// Trending is not a color — it is popularity; we keep it but map to curated warm/cool/vibrant pools for realism
+
+function hexToRgb(hex){ const c=hex.slice(1); return {r:parseInt(c.slice(0,2),16), g:parseInt(c.slice(2,4),16), b:parseInt(c.slice(4,6),16)}; }
+function rgbToHsl(r,g,b){ r/=255;g/=255;b/=255; const max=Math.max(r,g,b),min=Math.min(r,g,b); let h=0,s=0; const l=(max+min)/2; if(max!==min){ const d=max-min; s=l>0.5? d/(2-max-min): d/(max+min); switch(max){ case r: h=(g-b)/d+(g<b?6:0);break; case g: h=(b-r)/d+2;break; case b: h=(r-g)/d+4;break;} h/=6;} return {h:Math.round(h*360), s:Math.round(s*100), l:Math.round(l*100)}; }
+function hslToRgb(h,s,l){ h=(h%360+360)%360/360; s=Math.max(0,Math.min(100,s))/100; l=Math.max(0,Math.min(100,l))/100; let r,g,b; if(s===0){ r=g=b=l; } else { const hue2rgb=(p,q,t)=>{ if(t<0) t+=1; if(t>1) t-=1; if(t<1/6) return p+(q-p)*6*t; if(t<1/2) return q; if(t<2/3) return p+(q-p)*(2/3-t)*6; return p; }; const q=l<0.5? l*(1+s): l+s-l*s; const p=2*l-q; r=hue2rgb(p,q,h+1/3); g=hue2rgb(p,q,h); b=hue2rgb(p,q,h-1/3);} return {r:Math.round(r*255), g:Math.round(g*255), b:Math.round(b*255)}; }
+function rgbToHex(r,g,b){ const toHex=c=>{ const h=Math.max(0,Math.min(255,Math.round(c))).toString(16); return h.length===1?'0'+h:h;}; return `#${toHex(r)}${toHex(g)}${toHex(b)}`.toUpperCase(); }
+
+function clamp(v,min,max){ return Math.max(min, Math.min(max,v)); }
 
 function generatePaletteVariant(theme, variantIdx, count) {
-  const hash = hashString(theme.slug + variantIdx);
-  const colors = [];
-  for (let i = 0; i < count; i++) {
-    const hueBase = theme.hues[i % theme.hues.length];
-    const hueJitter = ((hash * (i + 1)) % 16) - 8;
-    const h = (hueBase + hueJitter + 360) % 360;
-    const sMin = theme.sat[0], sMax = theme.sat[1];
-    const s = sMin + ((hash * (i + 3)) % (sMax - sMin + 1));
-    const lMin = theme.light[0], lMax = theme.light[1];
-    const lStep = (lMax - lMin) / Math.max(1, count - 1);
-    const l = Math.min(lMax, Math.max(lMin, lMin + i * lStep + (((hash + i) % 10) - 5)));
-    colors.push(hslToHex(h, s, Math.round(l)));
+  const hash = hashString(theme.slug + ':' + variantIdx);
+  const cat = theme.category;
+  const baseHue = theme.hues[hash % theme.hues.length];
+  const baseSat = theme.sat[0] + (hash % (theme.sat[1]-theme.sat[0]+1));
+  // Category-tuned lightness anchors — CEO fix: anchors now ENFORCED across all harmonies
+  let baseLight;
+  if (cat==='Pastel') baseLight = 78 + (hash%12); // 78-89
+  else if (cat==='Dark') baseLight = 24 + (hash%16); // 24-39
+  else if (cat==='Vibrant') baseLight = 52 + (hash%14); // 52-65
+  else if (cat==='Luxury') baseLight = 38 + (hash%20); // 38-57
+  else if (cat==='Neutral') baseLight = 74 + (hash%16); // 74-89 — greige, linen, flint
+  else if (cat==='Minimal') baseLight = 42 + (hash%30); // allow mid but low sat enforces feel
+  else baseLight = theme.light[0] + ((theme.light[1]-theme.light[0])/2);
+  const baseHex = hslToHex(baseHue, baseSat, Math.round(baseLight));
+  const baseHsl = rgbToHsl(hexToRgb(baseHex).r, hexToRgb(baseHex).g, hexToRgb(baseHex).b);
+
+  // Category bounds — hard enforcement (prevents Pastel→dark, Dark→light, Neutral→neon)
+  const lightBounds = (()=> {
+    if (cat==='Pastel') return [76,92];
+    if (cat==='Dark') return [18,58];
+    if (cat==='Vibrant') return [42,72];
+    if (cat==='Luxury') return [24,68];
+    if (cat==='Neutral') return [70,92];
+    if (cat==='Minimal') return [18,92]; // wide light but sat bounds do the work
+    return [28,85];
+  })();
+  const satBounds = [theme.sat[0], theme.sat[1]];
+
+  const harmonyPick = (()=> {
+    if (cat==='Pastel' || cat==='Neutral' || cat==='Minimal') return 'analogous'; // CEO: 100% category-true, no modern fallthrough
+    if (cat==='Nature') return ['analogous','analogous','modern'][hash%3];
+    if (cat==='Vibrant' || cat==='Luxury') return ['complementary','triadic','analogous'][hash%3];
+    if (cat==='Dark') return ['analogous','complementary'][hash%2];
+    return ['analogous','complementary','triadic','modern'][hash%4];
+  })();
+
+  const satFor = (base, offset) => clamp(base + offset, Math.max(0,satBounds[0]-4), Math.min(100,satBounds[1]+4));
+  // All harmonies now anchor to baseHsl.l/s — no hard-coded 28+i*13 or 38+i*9 leaks
+  if (harmonyPick==='analogous') {
+    const step = cat==='Pastel'? 16 : cat==='Vibrant'? 26 : 20;
+    const cols=[]; for(let i=0;i<count;i++){ const h=(baseHsl.h + (i-Math.floor(count/2))*step +360)%360; const s=satFor(baseHsl.s, (i%2?5:-5)); const lRaw= baseHsl.l + (i%2? -7:9) + (i*2); const l=clamp(lRaw, lightBounds[0], lightBounds[1]); const rgb=hslToRgb(h,s,l); cols.push(rgbToHex(rgb.r,rgb.g,rgb.b)); } return cols;
+  } else if (harmonyPick==='complementary') {
+    const comp=(baseHsl.h+180)%360; const cols=[]; for(let i=0;i<count;i++){ const isComp=i>=Math.floor(count/2); const h=((isComp?comp:baseHsl.h)+(i*7)+360)%360; const s=satFor(baseHsl.s, (i%2?6:-6)); const lRaw= baseHsl.l + (i - Math.floor(count/2))*7 + (hash%4)-1; const l=clamp(lRaw, lightBounds[0], lightBounds[1]); const rgb=hslToRgb(h,s,l); cols.push(rgbToHex(rgb.r,rgb.g,rgb.b)); } return cols;
+  } else if (harmonyPick==='triadic') {
+    const cols=[]; for(let i=0;i<count;i++){ const h=(baseHsl.h + i*120 + i*5)%360; const s=satFor(baseHsl.s, -3 + i*3); const lRaw= baseHsl.l + (i%3 -1)*8 + (hash%3); const l=clamp(lRaw, lightBounds[0], lightBounds[1]); const rgb=hslToRgb(h,s,l); cols.push(rgbToHex(rgb.r,rgb.g,rgb.b)); } return cols;
+  } else {
+    const cols=[]; for(let i=0;i<count;i++){ const h=(baseHsl.h + i*28)%360; const s=satFor(baseHsl.s, -2 + i*2); const lRaw= baseHsl.l + (i - (count-1)/2)*5 + ((hash+i)%4)-1; const l=clamp(lRaw, lightBounds[0], lightBounds[1]); const rgb=hslToRgb(h,s,l); cols.push(rgbToHex(rgb.r,rgb.g,rgb.b)); } return cols;
   }
-  return colors;
 }
 
 function generateGoldenPalette(seed, count) {
