@@ -41,11 +41,6 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://palettelab.in/?tab=tools&amp;tool=gradient-studio</loc>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
     <loc>https://palettelab.in/?tab=tools&amp;tool=ai-studio</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>

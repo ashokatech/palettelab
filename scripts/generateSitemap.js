@@ -24,7 +24,6 @@ async function buildSitemap() {
     '?tab=tools&tool=color-blindness',
     '?tab=tools&tool=brand-colors',
     '?tab=tools&tool=gradient-maker',
-    '?tab=tools&tool=gradient-studio',
     '?tab=tools&tool=ai-studio',
     '?category=pastel',
     '?category=warm',

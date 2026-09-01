@@ -1,7 +1,3 @@
-# PaletteLab ads.txt — Replace with your real AdSense line after approval
-# Format: google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
-# Get this from AdSense > Account > Settings > ads.txt
-# Until you have it, this file prevents ad fraud warnings.
-
-# Placeholder — update before submitting to AdSense:
-# google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+google.com, pub-PLACEHOLDER, DIRECT, f08c47fec0942fa0
+# Replace pub-PLACEHOLDER with your AdSense publisher ID (VITE_ADSENSE_CLIENT without ca-pub- prefix)
+# Then redeploy. See MONETIZATION_v2.md section 1.
