@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy } from 'react';
+import React, { useState, Suspense, lazy, useEffect } from 'react';
 import { PaletteProvider, usePalette } from './context/PaletteContext';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
@@ -7,7 +7,7 @@ import { PaletteCard } from './components/PaletteCard';
 import { PaletteMockupCard } from './components/PaletteMockupCard';
 import { CreatePaletteModal } from './components/CreatePaletteModal';
 import { ToastContainer } from './components/ToastContainer';
-import { AdContainer } from './components/AdContainer';
+import { AdContainer, useInjectAdSenseScript } from './components/AdContainer';
 import { SeoFooter } from './components/SeoFooter';
 import { SeoFaqSection } from './components/SeoFaqSection';
 import { Sparkles, RotateCcw, Zap, Layers, Image as ImageIcon } from 'lucide-react';
@@ -41,6 +41,9 @@ const MainContent: React.FC = () => {
     setActiveTab('tools');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Inject AdSense loader script once on mount
+  useInjectAdSenseScript();
 
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(24);

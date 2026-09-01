@@ -10,7 +10,10 @@ async function buildSitemap() {
   const originalPath = path.join(process.cwd(), 'src', 'data', 'originalSeeds.json');
   const generatedPalettes = JSON.parse(fs.readFileSync(generatedPath, 'utf-8'));
   const originalSeeds = JSON.parse(fs.readFileSync(originalPath, 'utf-8'));
-  const allPalettes = [...generatedPalettes, ...originalSeeds];
+  // Dedupe by slug: citrus-grove exists in both generated and originalSeeds
+  const paletteMap = new Map();
+  [...generatedPalettes, ...originalSeeds].forEach(p => paletteMap.set(p.slug, p));
+  const allPalettes = [...paletteMap.values()];
 
   const staticRoutes = [
     '',
@@ -69,7 +72,7 @@ async function buildSitemap() {
   const robotsTxt = `User-agent: *\nAllow: /\nSitemap: ${baseUrl}/sitemap.xml\n`;
   fs.writeFileSync(path.join(publicDir, 'robots.txt'), robotsTxt, 'utf-8');
 
-  console.log(`Successfully generated sitemap.xml with ${staticRoutes.length + allPalettes.length + colorSamples.length} URLs in public/`);
+  console.log(`Successfully generated sitemap.xml with ${staticRoutes.length + allPalettes.length + colorSamples.length} URLs (${allPalettes.length} unique palettes) in public/`);
 }
 
 buildSitemap();

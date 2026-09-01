@@ -6,27 +6,11 @@ import { ColorTone, ToolSubTab } from '../types';
 export const SeoFooter: React.FC = () => {
   const { updateFilter, setActiveTab, closePalette, setToolSubTab } = usePalette();
 
-  const seoColorLinks: { tone: ColorTone; label: string }[] = [
-    { tone: 'blue', label: 'Blue Color Palettes' },
-    { tone: 'red', label: 'Red Color Palettes' },
-    { tone: 'green', label: 'Green Color Palettes' },
-    { tone: 'purple', label: 'Purple Color Palettes' },
-    { tone: 'pink', label: 'Pink & Pastel Palettes' },
-    { tone: 'orange', label: 'Orange & Sunset Palettes' },
-    { tone: 'teal', label: 'Teal & Cyan Palettes' },
-    { tone: 'neutral', label: 'Neutral & Earth Palettes' },
-  ];
-
-  const toolLinks: { tab: ToolSubTab; label: string; desc: string }[] = [
-    { tab: 'image-extractor', label: 'Photo Extractor', desc: 'Extract colors from image' },
-    { tab: 'contrast-checker', label: 'WCAG Contrast Matrix', desc: '5x5 contrast checker' },
-    { tab: 'gradient-maker', label: 'Gradient Studio', desc: 'CSS & Tailwind gradients' },
-    { tab: 'color-blindness', label: 'Color Blind Simulator', desc: ' Daltonism audit' },
-    { tab: 'brand-colors', label: 'Brand Tokens', desc: 'Famous brand palettes' },
-    { tab: 'ui-preview', label: 'UI Mockup Preview', desc: 'SaaS & Mobile preview' },
-    { tab: 'ai-studio', label: 'Prompt Studio', desc: 'Text to palette' },
-    { tab: 'shades-tints', label: 'Shades & Tints', desc: 'Monochrome scales' },
-  ];
+  // SPA-safe anchor handler — prevents full navigation but lets crawlers follow real hrefs
+  const spaNavigate = (fn: () => void) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    fn();
+  };
 
   const handleCategoryClick = (catKey: string) => {
     closePalette();
@@ -35,25 +19,33 @@ export const SeoFooter: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleColorClick = (tone: ColorTone) => {
-    closePalette();
-    updateFilter('colorTone', tone);
-    setActiveTab('discover');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const seoColorLinks: { tone: ColorTone; label: string; param: string }[] = [
+    { tone: 'blue', label: 'Blue Color Palettes', param: '?tab=discover&category=cool' },
+    { tone: 'red', label: 'Red Color Palettes', param: '?tab=discover&category=warm' },
+    { tone: 'green', label: 'Green Color Palettes', param: '?tab=discover&category=nature' },
+    { tone: 'purple', label: 'Purple & Pastel Palettes', param: '?tab=discover&category=pastel' },
+    { tone: 'pink', label: 'Pink & Soft Palettes', param: '?tab=discover&colorTone=pink' },
+    { tone: 'orange', label: 'Orange & Sunset Palettes', param: '?tab=discover&category=warm' },
+    { tone: 'teal', label: 'Teal & Cyan Palettes', param: '?tab=discover&category=cool' },
+    { tone: 'neutral', label: 'Neutral & Earth Palettes', param: '?tab=discover&category=neutral' },
+  ];
 
-  const handleToolClick = (tool: ToolSubTab) => {
-    closePalette();
-    setToolSubTab(tool);
-    setActiveTab('tools');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const toolLinks: { tab: ToolSubTab; label: string; desc: string }[] = [
+    { tab: 'image-extractor', label: 'Photo Extractor', desc: 'Extract colors from image' },
+    { tab: 'contrast-checker', label: 'WCAG Contrast Matrix', desc: '5x5 contrast checker' },
+    { tab: 'gradient-maker', label: 'Gradient Studio', desc: 'CSS & Tailwind gradients' },
+    { tab: 'color-blindness', label: 'Color Blind Simulator', desc: 'Daltonism audit' },
+    { tab: 'brand-colors', label: 'Brand Tokens', desc: 'Famous brand palettes' },
+    { tab: 'ui-preview', label: 'UI Mockup Preview', desc: 'SaaS & Mobile preview' },
+    { tab: 'ai-studio', label: 'Prompt Studio', desc: 'Text to palette' },
+    { tab: 'shades-tints', label: 'Shades & Tints', desc: 'Monochrome scales' },
+  ];
 
   return (
     <footer id="main-seo-footer" className="bg-neutral-900 text-neutral-300 border-t border-neutral-800 mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 space-y-12">
-        
-        {/* Brand & Mission Header */}
+
+        {/* Brand & Mission */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-neutral-800">
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-2.5">
@@ -69,7 +61,6 @@ export const SeoFooter: React.FC = () => {
                 Palette<span className="text-indigo-400">Lab</span>
               </span>
             </div>
-            
             <p className="text-sm text-neutral-400 max-w-md leading-relaxed">
               PaletteLab is an original color discovery platform and harmonic generator built for
               designers, developers, and creators. Explore 7,900+ mathematically generated color schemes, copy CSS &amp;
@@ -77,43 +68,65 @@ export const SeoFooter: React.FC = () => {
             </p>
           </div>
 
-          {/* Categories — all 11, not just 7 */}
+          {/* Categories — crawlable anchors */}
           <div className="md:col-span-2 space-y-3">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider">Categories</h4>
             <ul className="space-y-1.5 text-xs text-neutral-400">
               {CATEGORIES.filter(c=>c.key!=='all').map((cat) => (
                 <li key={cat.key}>
-                  <button onClick={() => handleCategoryClick(cat.key)} className="hover:text-white transition-colors text-left">
+                  <a
+                    href={`?tab=discover&category=${cat.key}`}
+                    onClick={spaNavigate(() => handleCategoryClick(cat.key))}
+                    className="hover:text-white transition-colors text-left"
+                  >
                     {cat.name} Palettes
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Color Collections */}
+          {/* Color Collections — crawlable anchors */}
           <div className="md:col-span-2 space-y-3">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider">Color Collections</h4>
             <ul className="space-y-1.5 text-xs text-neutral-400">
               {seoColorLinks.map((link) => (
                 <li key={link.label}>
-                  <button onClick={() => handleColorClick(link.tone)} className="hover:text-white transition-colors text-left">
+                  <a
+                    href={link.param}
+                    onClick={spaNavigate(() => {
+                      closePalette();
+                      updateFilter('colorTone', link.tone);
+                      setActiveTab('discover');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    })}
+                    className="hover:text-white transition-colors text-left"
+                  >
                     {link.label}
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Tools — previously hidden, now SEO-indexable deep links */}
+          {/* Tools — crawlable anchors */}
           <div className="md:col-span-3 space-y-3">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider">Design Tools</h4>
             <ul className="space-y-1.5 text-xs text-neutral-400">
               {toolLinks.map((t) => (
                 <li key={t.tab}>
-                  <button onClick={() => handleToolClick(t.tab)} className="hover:text-white transition-colors text-left">
+                  <a
+                    href={`?tab=tools&tool=${t.tab}`}
+                    onClick={spaNavigate(() => {
+                      closePalette();
+                      setToolSubTab(t.tab);
+                      setActiveTab('tools');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    })}
+                    className="hover:text-white transition-colors text-left"
+                  >
                     {t.label} <span className="text-neutral-500 hidden xl:inline">— {t.desc}</span>
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>

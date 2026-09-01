@@ -2,12 +2,54 @@ import React, { createContext, useContext, useState, useEffect, useCallback, use
 import { Palette, FilterState, ActiveTab, ToolSubTab, ToastMessage, ColorBlindnessType } from '../types';
 import { INITIAL_PALETTES, loadGeneratedPalettes } from '../data/seedPalettes';
 import { generateHarmonicPalette, detectColorTone, normalizeHex } from '../utils/colorUtils';
+import { buildPaletteHeadTags, buildColorHeadTags } from '../utils/seoUtils';
 import confetti from 'canvas-confetti';
 
 interface GeneratorSlot {
   id: string;
   hex: string;
   isLocked: boolean;
+}
+
+/** Applies server-format head-tag string to the live DOM on client SPA navigation. */
+function applySeoHead(tags: string) {
+  if (typeof document === 'undefined') return;
+  const doc = new DOMParser().parseFromString(`<head>${tags}</head>`, 'text/html');
+  const head = document.head;
+  // Remove previously-injected dynamic tags (static homepage tags are left untouched).
+  head.querySelectorAll('link[data-seo-dynamic], meta[data-seo-dynamic], script[data-seo-dynamic]').forEach((el) => el.remove());
+  const sync = (selector: string, create: (src: Element) => HTMLElement | null) => {
+    const src = doc.head.querySelector(selector);
+    if (!src) return;
+    const node = create(src);
+    if (node) {
+      node.setAttribute('data-seo-dynamic', '1');
+      head.appendChild(node);
+    }
+  };
+  const title = doc.head.querySelector('title');
+  if (title) document.title = title.textContent || '';
+  sync('link[rel="canonical"]', (s) => {
+    const l = document.createElement('link'); l.rel = 'canonical'; l.href = s.getAttribute('href') || ''; return l;
+  });
+  sync('meta[property="og:title"]', (s) => {
+    const m = document.createElement('meta'); m.setAttribute('property', 'og:title'); m.content = s.getAttribute('content') || ''; return m;
+  });
+  sync('meta[property="og:description"]', (s) => {
+    const m = document.createElement('meta'); m.setAttribute('property', 'og:description'); m.content = s.getAttribute('content') || ''; return m;
+  });
+  sync('meta[property="og:url"]', (s) => {
+    const m = document.createElement('meta'); m.setAttribute('property', 'og:url'); m.content = s.getAttribute('content') || ''; return m;
+  });
+  sync('meta[property="og:image"]', (s) => {
+    const m = document.createElement('meta'); m.setAttribute('property', 'og:image'); m.content = s.getAttribute('content') || ''; return m;
+  });
+  sync('meta[name="twitter:title"]', (s) => {
+    const m = document.createElement('meta'); m.setAttribute('name', 'twitter:title'); m.content = s.getAttribute('content') || ''; return m;
+  });
+  sync('script[type="application/ld+json"]', (s) => {
+    const el = document.createElement('script'); el.type = 'application/ld+json'; el.textContent = s.textContent || ''; return el;
+  });
 }
 
 interface PaletteContextType {
@@ -166,7 +208,7 @@ export const PaletteProvider: React.FC<{ children: React.ReactNode }> = ({ child
     try {
       const params = new URLSearchParams(window.location.search);
       const toolParam = params.get('tool') as ToolSubTab | null;
-      if (toolParam && ['image-extractor', 'contrast-checker', 'color-blindness', 'brand-colors', 'gradient-studio'].includes(toolParam)) {
+      if (toolParam && ['image-extractor', 'contrast-checker', 'color-blindness', 'brand-colors', 'gradient-maker', 'ui-preview', 'ai-studio', 'shades-tints'].includes(toolParam)) {
         return toolParam;
       }
     } catch {
@@ -230,6 +272,25 @@ export const PaletteProvider: React.FC<{ children: React.ReactNode }> = ({ child
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
         metaDesc.setAttribute('content', dynamicDescription);
+      }
+
+      // Sync canonical + OG + Twitter + JSON-LD from shared seoUtils source of truth (client SPA navigation)
+      try {
+        let headTags = '';
+        if (activeTab === 'palette-detail' && selectedPalette) {
+          headTags = buildPaletteHeadTags({
+            name: selectedPalette.name,
+            slug: selectedPalette.slug,
+            colors: selectedPalette.colors,
+            category: selectedPalette.category,
+            creatorName: selectedPalette.creator?.name,
+          });
+        } else if (activeTab === 'color-detail') {
+          headTags = buildColorHeadTags(selectedHex);
+        }
+        if (headTags) applySeoHead(headTags);
+      } catch {
+        // non-fatal SEO
       }
 
       // Update URL without triggering page reload

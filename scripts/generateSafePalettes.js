@@ -53,6 +53,14 @@ const SAFE_THEMES = [
   { name: 'Cool Flint', slug: 'cool-flint', hues: [210,205,200,215,190], sat: [6,18], light: [68,90], category: 'Neutral', tags: ['flint','cool','neutral','stone','greige'] },
   { name: 'Noir Gold', slug: 'noir-gold', hues: [45,42,38,50,35], sat: [55,85], light: [18,72], category: 'Luxury', tags: ['noir','gold','luxury','champagne','brass'] },
   { name: 'Emerald Depth', slug: 'emerald-depth', hues: [165,155,170,150,160], sat: [55,80], light: [18,68], category: 'Luxury', tags: ['emerald','jewel','luxury','depth'] },
+  // --- COOL REBALANCE: add 3 themes to fix 542 vs 786 uniform (-31%) ---
+  { name: 'Glacier Blue', slug: 'glacier-blue', hues: [200,195,205,210,190], sat: [45,75], light: [35,80], category: 'Cool', tags: ['glacier','blue','ice','cool'] },
+  { name: 'Steel Teal', slug: 'steel-teal', hues: [185,190,195,180,200], sat: [40,70], light: [30,75], category: 'Cool', tags: ['steel','teal','metallic','cool'] },
+  { name: 'Polar Frost', slug: 'polar-frost', hues: [205,210,200,195,215], sat: [35,65], light: [45,88], category: 'Cool', tags: ['polar','frost','crisp','cool'] },
+  // --- NATURE REBALANCE: 3→6 themes to fix 665 vs ~786 uniform ---
+  { name: 'Tropical Canopy', slug: 'tropical-canopy', hues: [125,130,110,140,120], sat: [45,78], light: [25,68], category: 'Nature', tags: ['tropical','canopy','jungle','green'] },
+  { name: 'Autumn Vineyard', slug: 'autumn-vineyard', hues: [35,50,20,40,30], sat: [50,82], light: [25,65], category: 'Nature', tags: ['autumn','vineyard','harvest','earth'] },
+  { name: 'Desert Bloom', slug: 'desert-bloom', hues: [140,30,15,50,155], sat: [45,85], light: [30,75], category: 'Nature', tags: ['desert','bloom','wildflower','cactus'] },
 ];
 
 const EXTRA_ADJECTIVES = ['Serene','Bold','Muted','Vivid','Soft','Deep','Calm','Radiant','Misty','Warm','Cool','Lush','Crisp','Gentle','Rich','Pale','Bright','Dusky','Fresh','Cozy'];
@@ -67,6 +75,7 @@ function hslToRgb(h,s,l){ h=(h%360+360)%360/360; s=Math.max(0,Math.min(100,s))/1
 function rgbToHex(r,g,b){ const toHex=c=>{ const h=Math.max(0,Math.min(255,Math.round(c))).toString(16); return h.length===1?'0'+h:h;}; return `#${toHex(r)}${toHex(g)}${toHex(b)}`.toUpperCase(); }
 
 function clamp(v,min,max){ return Math.max(min, Math.min(max,v)); }
+function clampHue(h,cat){ if(cat==='Warm'){ if(h>60 && h<335) return h<200?60:335; } if(cat==='Cool'){ if(h<170 || h>260) return h<170?170:260; } return h; }
 
 function generatePaletteVariant(theme, variantIdx, count) {
   // RANK #1 entropy: include count and cat in hash — prevents 50% duplicate collisions (was 3926 dups)
@@ -94,6 +103,7 @@ function generatePaletteVariant(theme, variantIdx, count) {
     if (cat==='Luxury') return [24,68];
     if (cat==='Neutral') return [70,92];
     if (cat==='Minimal') return [18,92]; // wide light but sat bounds do the work
+    if (cat==='Trending') return [18,92]; // full range, popularity not color
     return [28,85];
   })();
   const satBounds = [theme.sat[0], theme.sat[1]];
@@ -109,8 +119,8 @@ function generatePaletteVariant(theme, variantIdx, count) {
   const satFor = (base, offset) => clamp(base + offset, Math.max(0,satBounds[0]-4), Math.min(100,satBounds[1]+4));
   // All harmonies now anchor to baseHsl.l/s — no hard-coded 28+i*13 or 38+i*9 leaks
   if (harmonyPick==='analogous') {
-    const step = cat==='Pastel'? 16 : cat==='Vibrant'? 26 : 20;
-    const cols=[]; for(let i=0;i<count;i++){ const h=(baseHsl.h + (i-Math.floor(count/2))*step +360)%360; const s=satFor(baseHsl.s, (i%2?5:-5)); const lRaw= baseHsl.l + (i%2? -7:9) + (i*2); const l=clamp(lRaw, lightBounds[0], lightBounds[1]); const rgb=hslToRgb(h,s,l); cols.push(rgbToHex(rgb.r,rgb.g,rgb.b)); } return cols;
+    const step = cat==='Pastel'? 16 : cat==='Warm'? 14 : cat==='Cool'? 14 : cat==='Vibrant'? 26 : 20;
+    const cols=[]; for(let i=0;i<count;i++){ let h=(baseHsl.h + (i-Math.floor(count/2))*step +360)%360; h=clampHue(h,cat); const s=satFor(baseHsl.s, (i%2?5:-5)); const lRaw= baseHsl.l + (i%2? -7:9) + (i*2); const l=clamp(lRaw, lightBounds[0], lightBounds[1]); const rgb=hslToRgb(h,s,l); cols.push(rgbToHex(rgb.r,rgb.g,rgb.b)); } return cols;
   } else if (harmonyPick==='complementary') {
     const comp=(baseHsl.h+180)%360; const cols=[]; for(let i=0;i<count;i++){ const isComp=i>=Math.floor(count/2); const h=((isComp?comp:baseHsl.h)+(i*7)+360)%360; const s=satFor(baseHsl.s, (i%2?6:-6)); const lRaw= baseHsl.l + (i - Math.floor(count/2))*7 + (hash%4)-1; const l=clamp(lRaw, lightBounds[0], lightBounds[1]); const rgb=hslToRgb(h,s,l); cols.push(rgbToHex(rgb.r,rgb.g,rgb.b)); } return cols;
   } else if (harmonyPick==='triadic') {
@@ -191,6 +201,10 @@ for (let i=0;i<7500;i++) {
 }
 
 for (const g of GOLDEN_THEMES) {
+  const catTag = g.cat.toLowerCase();
+  const tags = [...g.theme.tags];
+  if (!tags.includes(catTag)) tags.push(catTag);
+  tags.push(g.count === 4 ? '4-colors' : g.count === 5 ? '5-colors' : '6-colors');
   palettes.push({
     id: `gen-${idCounter++}`,
     slug: g.slug,
@@ -202,7 +216,7 @@ for (const g of GOLDEN_THEMES) {
     copies: 70 + (hashString(g.slug+'c') % 1200),
     saves: 50 + (hashString(g.slug+'s') % 700),
     category: g.cat,
-    tags: [...g.theme.tags, g.cat.toLowerCase(), g.count === 4 ? '4-colors' : g.count === 5 ? '5-colors' : '6-colors'],
+    tags,
     createdAt: `2025-0${2 + (hashString(g.slug)%4)}-${String(10+hashString(g.slug)%18).padStart(2,'0')}`,
   });
 }
@@ -229,6 +243,13 @@ while (deduped.length < 7860) {
   if (!uniqueMap.has(key)) {
     uniqueMap.set(key, true);
     const slug = `refill-${refillIdx}`;
+    const catTag = cat.toLowerCase();
+    const tags = [...theme.tags];
+    if (!tags.includes(catTag)) tags.push(catTag);
+    tags.push(count === 4 ? '4-colors' : count === 5 ? '5-colors' : '6-colors');
+    // Staggered dates 2025-02..05 via hash to avoid spike
+    const month = 2 + (hashString(slug) % 4);
+    const day = 10 + (hashString(slug+'d') % 18);
     deduped.push({
       id: `gen-${idCounter++}`,
       slug,
@@ -240,8 +261,8 @@ while (deduped.length < 7860) {
       copies: 70 + (hashString(slug+'c') % 1200),
       saves: 50 + (hashString(slug+'s') % 700),
       category: cat,
-      tags: [...theme.tags, cat.toLowerCase(), count === 4 ? '4-colors' : count === 5 ? '5-colors' : '6-colors'],
-      createdAt: `2025-03-15`,
+      tags,
+      createdAt: `2025-0${month}-${String(day).padStart(2,'0')}`,
     });
   }
   refillIdx++;
