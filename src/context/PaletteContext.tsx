@@ -3,6 +3,7 @@ import { Palette, FilterState, ActiveTab, ToolSubTab, ToastMessage, ColorBlindne
 import { INITIAL_PALETTES, loadGeneratedPalettes } from '../data/seedPalettes';
 import { generateHarmonicPalette, detectColorTone, normalizeHex } from '../utils/colorUtils';
 import { buildPaletteHeadTags, buildColorHeadTags } from '../utils/seoUtils';
+import { trackEvent } from '../utils/analytics';
 import confetti from 'canvas-confetti';
 
 interface GeneratorSlot {
@@ -180,7 +181,7 @@ export const PaletteProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [selectedPalette, setSelectedPalette] = useState<Palette | null>(() => {
     try {
       const params = new URLSearchParams(window.location.search);
-      const palSlug = params.get('palette') || (window.location.hash.startsWith('#palette-') ? window.location.hash.replace('#palette-', '') : null);
+      const palSlug = params.get('palette') || (window.location.hash.startsWith('#palette-') ? window.location.hash.replace('#palette-', '') : null) || (window.location.pathname.match(/^\/palette\/([a-z0-9][a-z0-9\-]*[a-z0-9])$/) || [])[1] || null;
       if (palSlug) {
         const found = INITIAL_PALETTES.find((p) => p.slug === palSlug.toLowerCase() || p.id === palSlug);
         if (found) return found;
@@ -227,11 +228,20 @@ export const PaletteProvider: React.FC<{ children: React.ReactNode }> = ({ child
       if (activeTab === 'palette-detail' && selectedPalette) {
         params.set('tab', 'palette-detail');
         params.set('palette', selectedPalette.slug);
+        // Keep canonical clean path in history
+        const newUrl = `/${selectedPalette.slug}`;
+        if (window.location.pathname !== newUrl) {
+          window.history.replaceState({ tab: 'palette-detail', palette: selectedPalette.slug }, '', newUrl);
+        }
         dynamicTitle = `${selectedPalette.name} Color Palette (${selectedPalette.colors.join(', ')}) - PaletteLab`;
         dynamicDescription = `Explore the ${selectedPalette.name} color scheme by ${selectedPalette.creator.name}. Includes ${selectedPalette.colors.length} hex codes, CSS variables, and Tailwind config.`;
       } else if (activeTab === 'color-detail') {
+        const hexParam = selectedHex.replace('#','');
         params.set('tab', 'color-detail');
-        params.set('hex', selectedHex.replace('#', ''));
+        params.set('hex', hexParam);
+        if (window.location.pathname !== `/color/${hexParam}`) {
+          window.history.replaceState({ tab: 'color-detail', hex: hexParam }, '', `/color/${hexParam}`);
+        }
         dynamicTitle = `Color ${selectedHex.toUpperCase()} - Hex Codes, RGB, HSL, Harmonies & Meaning - PaletteLab`;
         dynamicDescription = `Detailed color breakdown for ${selectedHex.toUpperCase()}: RGB, HSL, CMYK values, color blindness simulation, and WCAG accessibility contrast ratios.`;
       } else if (activeTab === 'tools') {
@@ -356,6 +366,7 @@ export const PaletteProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const copyValue = useCallback(async (value: string, label: string = 'Copied to clipboard', hexPreview?: string) => {
     try {
       await navigator.clipboard.writeText(value);
+      trackEvent('copy', { label, value: value.slice(0,30), hexPreview });
       showToast({
         type: 'copy',
         title: label,
@@ -381,16 +392,32 @@ export const PaletteProvider: React.FC<{ children: React.ReactNode }> = ({ child
   }, []);
 
   const openPalette = useCallback((paletteOrSlug: Palette | string) => {
+    const paletteObj = typeof paletteOrSlug === 'string'
+      ? palettes.find((p) => p.slug === paletteOrSlug.toLowerCase().trim() || p.id === paletteOrSlug.toLowerCase().trim())
+      : paletteOrSlug;
+    if (paletteObj) {
+      trackEvent('open_palette', { slug: (paletteObj as Palette).slug, category: (paletteObj as Palette).category });
+      // Recently viewed ring buffer (12)
+      try {
+        const raw = JSON.parse(localStorage.getItem('palettelab_recent') || '[]');
+        const next = [(paletteObj as Palette).id, ...raw.filter((id:string)=>id!==(paletteObj as Palette).id)].slice(0,12);
+        localStorage.setItem('palettelab_recent', JSON.stringify(next));
+      } catch {}
+    }
     if (typeof paletteOrSlug === 'string') {
       const clean = paletteOrSlug.toLowerCase().trim();
       const found = palettes.find((p) => p.slug === clean || p.id === clean);
       if (found) {
         setSelectedPalette(found);
         setActiveTab('palette-detail');
+        window.history.pushState({ tab: 'palette-detail', palette: found.slug }, '', `/${found.slug}`);
       }
     } else {
       setSelectedPalette(paletteOrSlug);
       setActiveTab('palette-detail');
+      if ('slug' in paletteOrSlug) {
+        window.history.pushState({ tab: 'palette-detail', palette: (paletteOrSlug as Palette).slug }, '', `/${(paletteOrSlug as Palette).slug}`);
+      }
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [palettes]);
@@ -401,14 +428,18 @@ export const PaletteProvider: React.FC<{ children: React.ReactNode }> = ({ child
   }, []);
 
   const openColorDetail = useCallback((hex: string) => {
-    setSelectedHex(normalizeHex(hex));
+    trackEvent('open_color_detail', { hex: normalizeHex(hex) });
+    const norm = normalizeHex(hex);
+    setSelectedHex(norm);
     setActiveTab('color-detail');
+    window.history.pushState({ tab: 'color-detail', hex: norm.replace('#','') }, '', `/color/${norm.replace('#','')}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   const toggleLike = useCallback((paletteId: string, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
     const isLiked = likedPaletteIds.includes(paletteId);
+    trackEvent(isLiked ? 'unlike' : 'like', { paletteId });
     
     if (!isLiked) {
       confetti({
@@ -456,6 +487,7 @@ export const PaletteProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const toggleSave = useCallback((paletteId: string, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
     const isSaved = savedPaletteIds.includes(paletteId);
+    trackEvent(isSaved ? 'unsave' : 'save', { paletteId });
     if (!isSaved) {
       setSavedPaletteIds((prev) => [...prev, paletteId]);
       setPalettes((prev) =>

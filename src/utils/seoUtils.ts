@@ -38,7 +38,7 @@ export function paletteDescription(p: PaletteSeoInput): string {
 }
 
 export function paletteCanonical(p: PaletteSeoInput, base = baseUrl()): string {
-  return `${base}/?tab=palette-detail&palette=${p.slug}`;
+  return `${base}/${p.slug}`;
 }
 
 export function generatePaletteJsonLd(p: PaletteSeoInput, base = baseUrl()) {
@@ -105,7 +105,7 @@ export function colorDescription(hex: string) {
 }
 
 export function colorCanonical(hex: string, base = baseUrl()): string {
-  return `${base}/?tab=color-detail&hex=${hex.replace('#', '')}`;
+  return `${base}/color/${hex.replace('#', '')}`;
 }
 
 export function generateColorEncyclopediaJsonLd(hex: string, base = baseUrl()) {

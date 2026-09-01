@@ -5,15 +5,23 @@ async function buildSitemap() {
   console.log('Generating dynamic XML sitemap for Google Search Console...');
   const baseUrl = (process.env.APP_URL || process.env.CF_PAGES_URL && `${process.env.CF_PAGES_URL}` || process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}` || 'https://palettelab.in').replace(/\/$/, '');
 
-  // Now uses 100% original generated + curated data — no scraped sources.
   const generatedPath = path.join(process.cwd(), 'src', 'data', 'generated_palettes.json');
   const originalPath = path.join(process.cwd(), 'src', 'data', 'originalSeeds.json');
   const generatedPalettes = JSON.parse(fs.readFileSync(generatedPath, 'utf-8'));
   const originalSeeds = JSON.parse(fs.readFileSync(originalPath, 'utf-8'));
-  // Dedupe by slug: citrus-grove exists in both generated and originalSeeds
   const paletteMap = new Map();
   [...generatedPalettes, ...originalSeeds].forEach(p => paletteMap.set(p.slug, p));
   const allPalettes = [...paletteMap.values()];
+
+  // Collect ALL unique hex values across all palettes for color encyclopedia pages
+  const allHexSet = new Set();
+  for (const p of allPalettes) {
+    for (const c of (p.colors || [])) {
+      const h = c.replace('#','').toUpperCase();
+      if (/^[0-9A-Fa-f]{3,6}$/.test(h)) allHexSet.add(h);
+    }
+  }
+  const allHexes = [...allHexSet].slice(0, 500); // Google index cap ~500 unique color pages
 
   const staticRoutes = [
     '',
@@ -45,16 +53,16 @@ async function buildSitemap() {
     xml += `  <url>\n    <loc>${loc}</loc>\n    <changefreq>daily</changefreq>\n    <priority>1.0</priority>\n  </url>\n`;
   }
 
-  // Dynamic palette pages
+  // Dynamic palette pages — CLEAN URLs
   for (const palette of allPalettes) {
-    const loc = `${baseUrl}/?tab=palette-detail&amp;palette=${palette.slug}`;
+    const loc = `${baseUrl}/${palette.slug}`;
     xml += `  <url>\n    <loc>${loc}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
   }
 
-  // Color encyclopedia samples for top hexes
-  const colorSamples = ['264653','2A9D8F','E9C46A','F4A261','E76F51','3B82F6','EF4444','10B981'];
-  for (const hex of colorSamples) {
-    xml += `  <url>\n    <loc>${baseUrl}/?tab=color-detail&amp;hex=${hex}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>\n`;
+  // Color encyclopedia — CLEAN URLs (every unique hex)
+  for (const hex of allHexes) {
+    const loc = `${baseUrl}/color/${hex}`;
+    xml += `  <url>\n    <loc>${loc}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>\n`;
   }
 
   xml += `</urlset>`;
@@ -68,10 +76,10 @@ async function buildSitemap() {
   fs.writeFileSync(sitemapPath, xml, 'utf-8');
 
   // Generate robots.txt
-  const robotsTxt = `User-agent: *\nAllow: /\nSitemap: ${baseUrl}/sitemap.xml\n`;
+  const robotsTxt = `User-agent: *\nAllow: /\nSitemap: ${baseUrl}/sitemap.xml`;
   fs.writeFileSync(path.join(publicDir, 'robots.txt'), robotsTxt, 'utf-8');
 
-  console.log(`Successfully generated sitemap.xml with ${staticRoutes.length + allPalettes.length + colorSamples.length} URLs (${allPalettes.length} unique palettes) in public/`);
+  console.log(`Successfully generated sitemap.xml with ${staticRoutes.length + allPalettes.length + allHexes.length} URLs (${allPalettes.length} palettes + ${allHexes.length} color pages) in public/`);
 }
 
 buildSitemap();

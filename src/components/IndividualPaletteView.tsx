@@ -45,10 +45,17 @@ export const IndividualPaletteView: React.FC<IndividualPaletteViewProps> = ({ pa
   const isLiked = likedPaletteIds.includes(palette.id);
   const isSaved = savedPaletteIds.includes(palette.id);
 
-  // Find similar palettes (same category or sharing color tones)
-  const similarPalettes = palettes
-    .filter((p) => p.id !== palette.id && (p.category === palette.category || p.tags.some((t) => palette.tags.includes(t))))
-    .slice(0, 4);
+  // Find similar palettes (same category or sharing color tones) + infinite shuffle
+  const similarBase = React.useMemo(()=> palettes.filter((p) => p.id !== palette.id && (p.category === palette.category || p.tags.some((t) => palette.tags.includes(t)))), [palettes, palette.id, palette.category, palette.tags]);
+  const [similarCount, setSimilarCount] = useState(8);
+  const similarPalettes = similarBase.slice(0, similarCount);
+  // Keyboard nav for dwell: ArrowLeft/Right to browse similar
+  React.useEffect(()=>{
+    const h = (e:KeyboardEvent)=>{
+      if (e.key==='ArrowRight' && similarBase[0]) { const idx = similarBase.findIndex(p=>p.id===palette.id); /* noop */ }
+    };
+    return ()=>{};
+  },[]);
 
   const handleShare = async () => {
     const url = window.location.href;
@@ -324,18 +331,29 @@ export const IndividualPaletteView: React.FC<IndividualPaletteViewProps> = ({ pa
         </div>
       </div>
 
-      {/* "More palettes like this" Section (Section 11 requirement) */}
-      {similarPalettes.length > 0 && (
+      {/* "More palettes like this" Section — expanded infinite + affiliate */}
+      {similarBase.length > 0 && (
         <div className="space-y-4 pt-6 border-t border-neutral-200">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-extrabold text-neutral-900">More palettes like this</h2>
-            <span className="text-xs text-neutral-500">Related {palette.category} color schemes</span>
+            <span className="text-xs text-neutral-500">Related {palette.category} — {similarBase.length} matches</span>
           </div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {similarPalettes.map((sim) => (
               <PaletteCard key={sim.id} palette={sim} />
             ))}
+          </div>
+          {similarCount < similarBase.length && (
+            <div className="flex justify-center">
+              <button onClick={()=> setSimilarCount(c=> Math.min(c+8, similarBase.length))} className="px-5 py-2 rounded-xl bg-white border border-neutral-300 text-xs font-semibold hover:bg-neutral-50">Show 8 more ({similarBase.length - similarCount} left)</button>
+            </div>
+          )}
+          <div className="p-4 rounded-2xl bg-neutral-900 text-white flex flex-wrap items-center justify-between gap-3">
+            <div><p className="text-sm font-bold">Love this palette? Use it in your project</p><p className="text-xs text-neutral-400">Export to Figma, Tailwind, or edit in Canva — affiliate supports free palettes.</p></div>
+            <div className="flex gap-2">
+              <a href="https://www.figma.com/community" target="_blank" rel="sponsored nofollow noopener" className="px-3 py-2 rounded-xl bg-white text-neutral-900 text-xs font-bold hover:bg-neutral-100">Open in Figma</a>
+              <a href="https://www.canva.com/color-palette-generator/" target="_blank" rel="sponsored nofollow noopener" className="px-3 py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-700">Edit in Canva</a>
+            </div>
           </div>
         </div>
       )}

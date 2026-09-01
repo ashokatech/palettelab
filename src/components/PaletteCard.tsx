@@ -39,7 +39,7 @@ export const PaletteCard: React.FC<PaletteCardProps> = ({ palette }) => {
 
   const handleShare = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    const url = `${window.location.origin}/?tab=palette-detail&palette=${palette.slug}`;
+    const url = `${window.location.origin}/${palette.slug}`;
     if (navigator.share) {
       try {
         await navigator.share({

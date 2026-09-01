@@ -744,7 +744,7 @@ export const ToolsView: React.FC = () => {
                 }} className="px-3 py-2 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-700 text-xs font-semibold">From Generator</button>
               </div>
 
-              {/* Code Snippet Box — now CSS + Tailwind */}
+              {/* Code Snippet Box — now CSS + Tailwind + affiliate */}
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <label className="text-xs font-bold text-neutral-700">Code</label>
@@ -762,6 +762,10 @@ export const ToolsView: React.FC = () => {
                     <Copy className="w-3 h-3" />
                     <span>Copy</span>
                   </button>
+                </div>
+                <div className="flex gap-2 text-xs">
+                  <a href="https://tailwindui.com/?ref=palettelab" target="_blank" rel="sponsored nofollow noopener" className="flex-1 py-2 rounded-xl bg-indigo-600 text-white font-semibold text-center hover:bg-indigo-700">Get Tailwind UI (30% off via us)</a>
+                  <a href="https://www.canva.com/join/?ref=palettelab" target="_blank" rel="sponsored nofollow noopener" className="px-4 py-2 rounded-xl bg-white border border-neutral-300 font-semibold hover:bg-neutral-50">Edit in Canva Pro</a>
                 </div>
               </div>
             </div>

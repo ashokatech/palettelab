@@ -10,8 +10,10 @@ import { ToastContainer } from './components/ToastContainer';
 import { AdContainer, useInjectAdSenseScript } from './components/AdContainer';
 import { SeoFooter } from './components/SeoFooter';
 import { SeoFaqSection } from './components/SeoFaqSection';
+import { DailyPaletteChallenge, RecentlyViewedRail, NewsletterModal } from './components/RetentionWidgets';
 import { Sparkles, RotateCcw, Zap, Layers, Image as ImageIcon } from 'lucide-react';
 import { PaletteViewMode } from './types';
+import { initAnalytics, trackEvent } from './utils/analytics';
 
 // Heavy views lazy-loaded — cuts initial JS ~40%
 const PaletteGenerator = lazy(() => import('./components/PaletteGenerator').then(m => ({ default: m.PaletteGenerator })));
@@ -42,12 +44,34 @@ const MainContent: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Inject AdSense loader script once on mount
+  // Inject AdSense + Analytics once on mount
   useInjectAdSenseScript();
+  useEffect(() => { initAnalytics(); }, []);
+  // Reset visible count when filters change
+  useEffect(() => { setVisibleCount(24); }, [filteredPalettes.length]);
 
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(24);
   const [viewMode, setViewMode] = useState<PaletteViewMode>('grid');
+  const loadMoreRef = React.useRef<HTMLDivElement>(null);
+
+  // Infinite scroll observer
+  useEffect(() => {
+    if (activeTab !== 'discover' && (activeTab as string) !== undefined) {
+      // only run on discover feed; still safe elsewhere
+    }
+    const el = loadMoreRef.current;
+    if (!el) return;
+    if (visibleCount >= filteredPalettes.length) return;
+    const io = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        setVisibleCount((prev) => Math.min(prev + 24, filteredPalettes.length));
+        trackEvent('feed_infinite_load', { visibleCount });
+      }
+    }, { rootMargin: '600px' });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [visibleCount, filteredPalettes.length, activeTab]);
 
   return (
     <div className="min-h-screen flex flex-col bg-neutral-50/50 text-neutral-900 font-sans antialiased selection:bg-indigo-100 selection:text-indigo-900">
@@ -75,6 +99,8 @@ const MainContent: React.FC = () => {
           <div className="space-y-8">
             {/* Interactive Hero */}
             <Hero onOpenCreate={() => setCreateModalOpen(true)} />
+            <DailyPaletteChallenge />
+            <RecentlyViewedRail />
 
             {/* Discovery Feed Section */}
             <div id="palette-discovery-grid" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
@@ -100,14 +126,19 @@ const MainContent: React.FC = () => {
                     ))}
                   </div>
 
-                  {/* Load More Button */}
+                  {/* Infinite sentinel + fallback button */}
                   {visibleCount < filteredPalettes.length && (
-                    <div className="flex justify-center pt-6">
+                    <div ref={loadMoreRef} className="flex flex-col items-center gap-4 pt-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full opacity-60">
+                        {Array.from({ length: 4 }).map((_, i) => (
+                          <div key={i} className="h-64 rounded-2xl bg-neutral-200 animate-pulse border border-neutral-200" />
+                        ))}
+                      </div>
                       <button
-                        onClick={() => setVisibleCount((prev) => prev + 24)}
+                        onClick={() => setVisibleCount((prev) => Math.min(prev + 24, filteredPalettes.length))}
                         className="px-6 py-2.5 rounded-xl bg-white border border-neutral-300 hover:border-neutral-400 text-neutral-800 font-semibold text-sm shadow-2xs hover:bg-neutral-50 transition-all"
                       >
-                        Load More Palettes ({filteredPalettes.length - visibleCount} remaining)
+                        Load More ({filteredPalettes.length - visibleCount} remaining)
                       </button>
                     </div>
                   )}
@@ -189,6 +220,9 @@ const MainContent: React.FC = () => {
         isOpen={createModalOpen}
         onClose={() => setCreateModalOpen(false)}
       />
+
+      {/* Retention: newsletter */}
+      <NewsletterModal />
 
       {/* Global Toast Notification System */}
       <ToastContainer />

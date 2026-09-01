@@ -31,8 +31,64 @@ function loadPaletteIndex(): Map<string, SeededPalette> {
   return map;
 }
 
+function buildColorEncyclopediaContent(hex: string): { title: string; description: string; bodyHtml: string } {
+  const h = hex.replace('#','');
+  const r = parseInt(h.slice(0,2), 16);
+  const g = parseInt(h.slice(2,4), 16);
+  const b = parseInt(h.slice(4,6), 16);
+  const hsl = {
+    h: Math.round((r===g && g===b) ? 0 : r>g ? (g-b)/(1-Math.abs(2*Math.max(r,g,b)-1-Math.min(r,g,b)))*60+(r>=g?0:360) : ((g-b)/(1-Math.abs(2*Math.max(r,g,b)-1-Math.min(r,g,b))))*60+(g>=b?0:360)),
+    s: Math.round(Math.max(r,g,b)===0 ? 0 : (Math.max(r,g,b)-Math.min(r,g,b))/(1-Math.abs(2*Math.max(r,g,b)-1-Math.min(r,g,b)))*100),
+    l: Math.round((Math.max(r,g,b)+Math.min(r,g,b))/2*100)
+  };
+  const hexStr = `#${h.toUpperCase()}`;
+  const rgbStr = `RGB(${r}, ${g}, ${b})`;
+  const colorFamilies: Record<string, string[]> = {
+    red: ['Red','Crimson','Vermillion','Scarlet','Ruby'],
+    orange: ['Orange','Amber','Coral','Peach','Tangerine'],
+    yellow: ['Yellow','Gold','Amber','Lemon','Canary'],
+    green: ['Green','Emerald','Forest','Mint','Jade'],
+    blue: ['Blue','Navy','Azure','Cerulean','Indigo'],
+    purple: ['Purple','Violet','Mauve','Lavender','Plum'],
+    pink: ['Pink','Rose','Blush','Coral','Salmon'],
+    teal: ['Teal','Cyan','Aqua','Turquoise','Seafoam'],
+    neutral: ['Neutral','Gray','Charcoal','Beige','Stone'],
+  };
+  let family = 'neutral';
+  for (const [f, colors] of Object.entries(colorFamilies)) {
+    const hue = hsl.h;
+    if (f==='red' && (hue>=340 || hue<20)) { family='red'; break; }
+    if (f==='orange' && hue>=20 && hue<40) { family='orange'; break; }
+    if (f==='yellow' && hue>=40 && hue<70) { family='yellow'; break; }
+    if (f==='green' && hue>=70 && hue<170) { family='green'; break; }
+    if (f==='blue' && hue>=170 && hue<260) { family='blue'; break; }
+    if (f==='purple' && hue>=260 && hue<300) { family='purple'; break; }
+    if (f==='pink' && hue>=300 && hue<340) { family='pink'; break; }
+    if (f==='teal' && hue>=160 && hue<190) { family='teal'; break; }
+    if (f==='neutral' && (hsl.s<10 || hsl.l>90 || hsl.l<15)) { family='neutral'; break; }
+  }
+  const meanings: Record<string, string> = {
+    red: 'Red is the color of energy, passion, and urgency. It increases heart rate and creates a sense of excitement. In design, red draws immediate attention — perfect for CTAs, warnings, and accent walls. Culturally, it symbolizes luck in China and love in the West.',
+    orange: 'Orange combines the energy of red and the happiness of yellow. It represents enthusiasm, creativity, and warmth. Orange is less intense than red but still grabs attention — widely used in adventure sports branding and food packaging.',
+    yellow: 'Yellow is the color of sunshine, optimism, and clarity. It stimulates mental activity and generates positive energy. Use yellow for caution signs and cheerful branding — it’s the most visible color from a distance.',
+    green: 'Green is the color of nature, growth, and harmony. It represents renewal, health, and tranquility. Green has a calming effect on the mind and is associated with sustainability, finance, and environmental awareness.',
+    blue: 'Blue evokes trust, stability, and intelligence. It lowers heart rate and creates a sense of calm — the most universally liked color. Corporate, fintech, and healthcare brands rely on blue to project credibility and professionalism.',
+    purple: 'Purple combines the stability of blue and the energy of red. It symbolizes luxury, wisdom, and creativity. Historically reserved for royalty, purple signals premium quality and is popular in beauty and anti-aging products.',
+    pink: 'Pink represents romance, compassion, and tenderness. It embodies softness and nurturing energy. From bubblegum to femininity, pink ranges from bold and confident to delicate and soothing — universally recognized in culture.',
+    teal: 'Teal is a sophisticated blend of blue and green, representing sophistication and clarity. It balances the calm of blue with the renewal of green. Teal is popular in modern design for its refreshing, oceanic undertones.',
+    neutral: 'Neutral colors — gray, beige, charcoal — are the backbone of sophisticated design. They provide visual rest, complement bold accents, and convey professionalism. Neutrals are timeless and work across every industry.',
+  };
+  const relatedPalettes = [`${hexStr} Analogous`, `${hexStr} Monochromatic`, `${hexStr} Complementary`, `${hexStr} Triadic`];
+  const bodyHtml = `<p><strong>${hexStr} Color Meaning:</strong> ${meanings[family] || meanings.neutral}</p>
+<p><strong>Technical values:</strong> ${rgbStr} — HSL(${Math.round(hsl.h)}°, ${hsl.s}%, ${hsl.l}%).</p>
+<p><strong>Color family:</strong> ${family.charAt(0).toUpperCase()+family.slice(1)}. Related tones: ${relatedPalettes.join(', ')}.</p>
+<p>Use <strong>${hexStr}</strong> in UI backgrounds, text, buttons, or as part of a 5-color harmony. Check its <a href="/?tab=color-detail&hex=${hexStr.replace('#','')}">WCAG contrast</a> against white and dark backgrounds.</p>`;
+  const title = `${hexStr} Hex Color — Meaning, HSL(${Math.round(hsl.h)}°, ${hsl.s}%, ${hsl.l}%), RGB, WCAG Contrast & Related Palettes | PaletteLab`;
+  const description = `Complete breakdown of ${hexStr}: ${rgbStr}, HSL(${Math.round(hsl.h)}°, ${hsl.s}%, ${hsl.l}%), color meaning & psychology, WCAG AA/AAA contrast ratios, and matching palettes. Free, no sign-up.`;
+  return { title, description, bodyHtml };
+}
+
 function injectHead(indexHtml: string, headTags: string): string {
-  // Remove the static SPA title/description/canonical so the per-page ones win, then inject.
   let html = indexHtml;
   html = html.replace(/<title>[\s\S]*?<\/title>/i, '');
   html = html.replace(/<meta\s+name="description"[^>]*>/i, '');
@@ -90,6 +146,8 @@ async function startServer() {
     app.use(express.static(distPath, { index: false }));
 
     // SSR-lite: serve the SPA shell but inject per-page SEO head so crawlers & social see unique content.
+    // Supports clean paths: /palette/{slug}, /color/{hex}
+    // Also redirects old query-param URLs to clean paths for Google.
     app.get('*', (req, res, next) => {
       if (
         req.path.startsWith('/api/') ||
@@ -100,10 +158,18 @@ async function startServer() {
       ) {
         return next();
       }
-      const tab = req.query.tab as string | undefined;
+      // Clean-path handling
+      const cleanPath = req.path.replace(/\/$/, '');
+      const paletteMatch = cleanPath.match(/^\/palette\/([a-z0-9][a-z0-9\-]*[a-z0-9])$/);
+      const colorMatch = cleanPath.match(/^\/color\/([0-9a-fA-F]{3,6})$/);
+
       let headTags = '';
-      if (tab === 'palette-detail' && req.query.palette) {
-        const p = paletteIndex.get(String(req.query.palette).toLowerCase());
+      let slug: string | undefined;
+      let hex: string | undefined;
+
+      if (paletteMatch) {
+        slug = paletteMatch[1];
+        const p = paletteIndex.get(slug.toLowerCase());
         if (p) {
           headTags = buildPaletteHeadTags({
             name: p.name,
@@ -113,12 +179,41 @@ async function startServer() {
             creatorName: p.creator?.name,
           });
         }
-      } else if (tab === 'color-detail' && req.query.hex) {
-        headTags = buildColorHeadTags(String(req.query.hex));
+      } else if (colorMatch) {
+        hex = colorMatch[1].toUpperCase();
+        const normalized = `#${hex}`;
+        // validate hex
+        if (/^[0-9A-Fa-f]{3}$/.test(hex) || /^[0-9A-Fa-f]{6}$/.test(hex)) {
+          headTags = buildColorHeadTags(normalized);
+        }
+      } else if (req.query.tab === 'palette-detail' && req.query.palette) {
+        // Redirect old URL to clean path
+        const pSlug = String(req.query.palette).toLowerCase();
+        const p = paletteIndex.get(pSlug);
+        if (p) {
+          return res.redirect(301, `/${p.slug}`);
+        }
+        slug = pSlug;
+      } else if (req.query.tab === 'color-detail' && req.query.hex) {
+        const cHex = String(req.query.hex).replace('#','').toUpperCase();
+        if (/^[0-9A-Fa-f]{3,6}$/.test(cHex)) {
+          return res.redirect(301, `/color/${cHex}`);
+        }
+        hex = cHex;
+      } else {
+        // Homepage, categories, tools — let SPA handle
+        const html = shellHtml;
+        res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+        return res.send(html);
       }
-      const html = headTags ? injectHead(shellHtml, headTags) : shellHtml;
+
+      if (headTags) {
+        const html = injectHead(shellHtml, headTags);
+        res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+        return res.send(html);
+      }
       res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
-      res.send(html);
+      res.send(shellHtml);
     });
   }
 

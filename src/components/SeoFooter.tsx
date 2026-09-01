@@ -130,6 +130,14 @@ export const SeoFooter: React.FC = () => {
                 </li>
               ))}
             </ul>
+            <div className="pt-3 border-t border-neutral-800">
+              <h5 className="text-[11px] font-bold text-amber-300 uppercase tracking-wider mb-2">Recommended (affiliate)</h5>
+              <ul className="space-y-1 text-xs text-neutral-400">
+                <li><a href="https://tailwindui.com/?ref=palettelab" target="_blank" rel="sponsored nofollow noopener" className="hover:text-white">Tailwind UI →</a></li>
+                <li><a href="https://www.figma.com/community?ref=palettelab" target="_blank" rel="sponsored nofollow noopener" className="hover:text-white">Figma Community →</a></li>
+                <li><a href="https://www.canva.com/join/?ref=palettelab" target="_blank" rel="sponsored nofollow noopener" className="hover:text-white">Canva Pro →</a></li>
+              </ul>
+            </div>
           </div>
         </div>
 

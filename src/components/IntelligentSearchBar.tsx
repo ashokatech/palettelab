@@ -143,11 +143,7 @@ export const IntelligentSearchBar: React.FC<IntelligentSearchBarProps> = ({
     };
 
     window.addEventListener('keydown', handleGlobalKey);
-    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
-
-    function handleGlobalKeyDown(e: KeyboardEvent) {
-      handleGlobalKey(e);
-    }
+    return () => window.removeEventListener('keydown', handleGlobalKey);
   }, [isOpen]);
 
   // Click outside listener to dismiss suggestion dropdown

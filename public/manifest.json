@@ -1,0 +1,21 @@
+{
+  "name": "PaletteLab — Color Palettes & Design Tools",
+  "short_name": "PaletteLab",
+  "description": "7,900+ original color palettes, photo extractor, harmonic generator & WCAG tools",
+  "start_url": "/?tab=discover",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#171717",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='32' fill='%23171717'/><rect x='24' y='24' width='72' height='72' rx='12' fill='%23fbbf24'/><rect x='96' y='24' width='72' height='72' rx='12' fill='%23f43f5e'/><rect x='24' y='96' width='72' height='72' rx='12' fill='%232dd4bf'/><rect x='96' y='96' width='72' height='72' rx='12' fill='%234f46e5'/></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='64' fill='%23171717'/><rect x='48' y='48' width='200' height='200' rx='24' fill='%23fbbf24'/><rect x='264' y='48' width='200' height='200' rx='24' fill='%23f43f5e'/><rect x='48' y='264' width='200' height='200' rx='24' fill='%232dd4bf'/><rect x='264' y='264' width='200' height='200' rx='24' fill='%234f46e5'/></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
