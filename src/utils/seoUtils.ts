@@ -13,7 +13,7 @@ export interface PaletteSeoInput {
   description?: string;
 }
 
-const DEFAULT_BASE = 'https://palettelab.in';
+const DEFAULT_BASE = 'https://palettelab.co';
 
 export function baseUrl(): string {
   const env: any = (typeof import.meta !== 'undefined' ? (import.meta as any).env : undefined) || {};
