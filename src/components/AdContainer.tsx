@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-const ADSENSE_CLIENT_ID = (import.meta.env.VITE_ADSENSE_CLIENT as string) || 'ca-pub-PLACEHOLDER';
+const ADSENSE_CLIENT_ID = (import.meta.env.VITE_ADSENSE_CLIENT as string) || 'ca-pub-1115653654197981';
 
 interface AdContainerProps {
   type?: 'native-card' | 'sidebar' | 'banner';
