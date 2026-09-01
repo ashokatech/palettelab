@@ -303,11 +303,13 @@ export const PaletteProvider: React.FC<{ children: React.ReactNode }> = ({ child
         // non-fatal SEO
       }
 
-      // Update URL without triggering page reload
-      const newQuery = params.toString();
-      const newUrl = newQuery ? `?${newQuery}` : window.location.pathname;
-      if (window.location.search !== `?${newQuery}`) {
-        window.history.replaceState({ tab: activeTab, hex: selectedHex }, '', newUrl);
+      // Update URL without triggering page reload — skip for clean palette/color paths
+      if (activeTab !== 'palette-detail' && activeTab !== 'color-detail') {
+        const newQuery = params.toString();
+        const newUrl = newQuery ? `?${newQuery}` : window.location.pathname;
+        if (window.location.search !== `?${newQuery}`) {
+          window.history.replaceState({ tab: activeTab, hex: selectedHex }, '', newUrl);
+        }
       }
     } catch {
       // Safe fallback

@@ -10,7 +10,7 @@ import { ToastContainer } from './components/ToastContainer';
 import { AdContainer, useInjectAdSenseScript } from './components/AdContainer';
 import { SeoFooter } from './components/SeoFooter';
 import { SeoFaqSection } from './components/SeoFaqSection';
-import { DailyPaletteChallenge, RecentlyViewedRail, NewsletterModal } from './components/RetentionWidgets';
+import { DailyPaletteChallenge, RecentlyViewedRail } from './components/RetentionWidgets';
 import { Sparkles, RotateCcw, Zap, Layers, Image as ImageIcon } from 'lucide-react';
 import { PaletteViewMode } from './types';
 import { initAnalytics, trackEvent } from './utils/analytics';
@@ -220,9 +220,6 @@ const MainContent: React.FC = () => {
         isOpen={createModalOpen}
         onClose={() => setCreateModalOpen(false)}
       />
-
-      {/* Retention: newsletter */}
-      <NewsletterModal />
 
       {/* Global Toast Notification System */}
       <ToastContainer />
