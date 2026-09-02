@@ -1,3 +1,3 @@
-google.com, pub-1115653654197981, DIRECT, f08c47fec0942fa0
-# AdSense verified for palettelab.co — ca-pub-1115653654197981
+google.com, pub-3515483416271038, DIRECT, f08c47fec0942fa0
+# AdSense verified for palettelab.co — ca-pub-3515483416271038
 # Auto-ads will activate after Google reviews palettelab.co (1-2 days)

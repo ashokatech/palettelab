@@ -108,6 +108,9 @@ const MainContent: React.FC = () => {
               {/* Category & Attribute Filters */}
               <DiscoveryFilters viewMode={viewMode} setViewMode={setViewMode} />
 
+              {/* Banner Ad — below filters, above results */}
+              <AdContainer type="banner" className="max-w-4xl mx-auto" />
+
               {/* Responsive Palettes Grid */}
               {filteredPalettes.length > 0 ? (
                 <div className="space-y-8">
@@ -119,8 +122,8 @@ const MainContent: React.FC = () => {
                         ) : (
                           <PaletteCard palette={palette} />
                         )}
-                        {(index + 1) % 8 === 0 && (
-                          <AdContainer type="native-card" index={Math.floor(index / 8)} key={`ad-${index}`} />
+                        {(index + 1) % 6 === 0 && (
+                          <AdContainer type="native-card" index={Math.floor(index / 6)} key={`ad-${index}`} />
                         )}
                       </React.Fragment>
                     ))}

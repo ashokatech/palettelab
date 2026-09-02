@@ -1,6 +1,41 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 
-const ADSENSE_CLIENT_ID = (import.meta.env.VITE_ADSENSE_CLIENT as string) || 'ca-pub-1115653654197981';
+/**
+ * AdSense config — fully env-driven.
+ * Set these in .env (local) or Cloudflare/Vercel env (production):
+ *   VITE_ADSENSE_CLIENT        = ca-pub-XXXXXXXXXXXXXXXX  (your AdSense publisher ID)
+ *   VITE_ADSENSE_SLOT_NATIVE   = <numeric slot>           (In-feed/native ad unit slot)
+ *   VITE_ADSENSE_SLOT_SIDEBAR  = <numeric slot>           (Sidebar rectangle 300×250 slot)
+ *   VITE_ADSENSE_SLOT_BANNER   = <numeric slot>           (Responsive banner slot)
+ *   VITE_ADSENSE_AUTO_ADS      = 1                        (optional: enable Google Auto-ads)
+ */
+const ADSENSE_CLIENT_ID = (import.meta.env.VITE_ADSENSE_CLIENT as string) || '';
+
+/** Real AdSense client looks like ca-pub-XXXXXXXXXXXXXXXX (16 digits after ca-pub-) */
+const isRealClient =
+  ADSENSE_CLIENT_ID.startsWith('ca-pub-') &&
+  ADSENSE_CLIENT_ID !== 'ca-pub-PLACEHOLDER' &&
+  ADSENSE_CLIENT_ID !== 'ca-pub-XXXXXXXX' &&
+  ADSENSE_CLIENT_ID !== 'ca-pub-XXXXXXXXXXXXXXXX';
+
+/** Slot IDs from env — empty string = not configured */
+const SLOTS: Record<string, string> = {
+  native: ((import.meta.env.VITE_ADSENSE_SLOT_NATIVE as string) || '').trim(),
+  sidebar: ((import.meta.env.VITE_ADSENSE_SLOT_SIDEBAR as string) || '').trim(),
+  banner: ((import.meta.env.VITE_ADSENSE_SLOT_BANNER as string) || '').trim(),
+};
+
+const AUTO_ADS = (import.meta.env.VITE_ADSENSE_AUTO_ADS as string) === '1';
+
+/** Check if a slot ID looks like a real numeric AdSense slot */
+function isValidSlot(id: string): boolean {
+  return /^\d{5,15}$/.test(id);
+}
+
+/** Whether a given ad type has a real, configured slot */
+export function canShowAd(type: 'native-card' | 'sidebar' | 'banner'): boolean {
+  return isRealClient && isValidSlot(SLOTS[type] || '');
+}
 
 interface AdContainerProps {
   type?: 'native-card' | 'sidebar' | 'banner';
@@ -10,99 +45,110 @@ interface AdContainerProps {
 }
 
 export const AdContainer: React.FC<AdContainerProps> = ({
-  type = 'native-card',
-  index = 0,
-  adSlot = '1234567890',
-  className = '',
+  type = 'native-card', index = 0, adSlot, className = '',
 }) => {
   const adRef = useRef<HTMLDivElement>(null);
+  const resolvedSlot = adSlot || SLOTS[type] || '';
+  const hasRealSlot = isRealClient && isValidSlot(resolvedSlot);
+
+  const pushAd = useCallback(() => {
+    try {
+      if (typeof window === 'undefined' || !hasRealSlot) return;
+      const ins = adRef.current?.querySelector('ins.adsbygoogle') as HTMLElement | null;
+      if (!ins || ins.dataset.adsbygooglePushed === '1') return;
+      ins.dataset.adsbygooglePushed = '1';
+      ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+    } catch { /* blocked or StrictMode */ }
+  }, [hasRealSlot]);
 
   useEffect(() => {
-    try {
-      if (typeof window !== 'undefined' && ADSENSE_CLIENT_ID !== 'ca-pub-PLACEHOLDER') {
-        ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
-      }
-    } catch { /* Safe catch for StrictMode or blocked */ }
-  }, []);
+    const id = requestAnimationFrame(pushAd);
+    return () => cancelAnimationFrame(id);
+  }, [pushAd]);
 
-  const isRealAdSense = ADSENSE_CLIENT_ID !== 'ca-pub-PLACEHOLDER';
+  // SLOT NOT CONFIGURED — styled placeholder telling dev what to set
+  if (!hasRealSlot) {
+    return (
+      <div className={`bg-neutral-50 border border-dashed border-neutral-200 rounded-2xl p-5 flex flex-col items-center justify-center text-center min-h-[140px] ${className}`}>
+        <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center mb-2"><span className="text-sm">⚡</span></div>
+        <p className="text-xs font-semibold text-neutral-600">Ad Slot Not Configured</p>
+        <p className="text-[11px] text-neutral-400 mt-1 max-w-[220px] leading-snug">
+          Set <code className="bg-neutral-100 px-1 rounded">VITE_ADSENSE_SLOT_{type.toUpperCase()}</code> in <code className="bg-neutral-100 px-1 rounded">.env</code> to activate ads here.
+        </p>
+      </div>
+    );
+  }
 
-  // Native Grid Card — reserved height prevents CLS during ad load
+  // NATIVE CARD (In-feed ad between palette cards)
   if (type === 'native-card') {
     return (
-      <div className={`bg-neutral-900 text-white rounded-2xl p-5 border border-neutral-800 shadow-md flex flex-col justify-between relative overflow-hidden group transition-all duration-300 hover:shadow-xl hover:border-neutral-700 ${className}`}>
+      <div ref={adRef} className={`bg-neutral-900 text-white rounded-2xl p-5 border border-neutral-800 shadow-md flex flex-col justify-between relative overflow-hidden group transition-all duration-300 hover:shadow-xl hover:border-neutral-700 ${className}`}>
         <div className="flex items-center justify-between z-10 pb-2 border-b border-neutral-800">
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 text-[10px] font-bold tracking-wider text-amber-300 uppercase">Google AdSense</span>
-          <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">SPONSOR</span>
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 text-[10px] font-bold tracking-wider text-amber-300 uppercase">Ad</span>
+          <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">Sponsored</span>
         </div>
-        <div className="my-4 min-h-[120px] w-full flex flex-col justify-center items-center text-center z-10">
-          {isRealAdSense ? (
-            <ins className="adsbygoogle" style={{ display: 'block' }} data-ad-client={ADSENSE_CLIENT_ID} data-ad-slot={adSlot} data-ad-format="auto" data-full-width-responsive="true" />
-          ) : (
-            <div className="space-y-2 py-2">
-              <div className="w-10 h-10 rounded-xl bg-neutral-800 text-neutral-400 flex items-center justify-center mx-auto border border-neutral-700"><span className="text-amber-400">⚡</span></div>
-              <div>
-                <h4 className="text-xs font-bold text-neutral-200">Google Display Ad #{index + 1}</h4>
-                <p className="text-[11px] text-neutral-400 mt-1 max-w-[220px] mx-auto leading-snug">Add your AdSense ID in production.</p>
-              </div>
-            </div>
-          )}
+        <div className="my-2 min-h-[120px] w-full z-10">
+          <ins className="adsbygoogle" style={{ display: 'block', minHeight: 120 }} data-ad-client={ADSENSE_CLIENT_ID} data-ad-slot={resolvedSlot} data-ad-format="auto" data-full-width-responsive="true" />
         </div>
         <div className="pt-2 border-t border-neutral-800 flex items-center justify-between text-[10px] text-neutral-500 z-10">
-          <span>Ads by Google</span><span className="font-mono">#{adSlot}</span>
+          <span>Ads by Google</span>
         </div>
       </div>
     );
   }
 
-  // Sidebar Ad — tall rectangle (300×250) reserved space for CLS
+  // SIDEBAR (300x250 rectangle for palette detail / tools)
   if (type === 'sidebar') {
     return (
-      <div className={`p-4 rounded-2xl bg-neutral-900 border border-neutral-800 text-white shadow-xs space-y-3 ${className}`}>
+      <div ref={adRef} className={`p-4 rounded-2xl bg-neutral-900 border border-neutral-800 text-white shadow-xs space-y-3 ${className}`}>
         <div className="flex items-center justify-between text-[10px] font-semibold text-neutral-400 uppercase tracking-wider pb-2 border-b border-neutral-800">
-          <span>📢 Google Display Ad</span><span className="font-mono text-neutral-500">AD</span>
+          <span>Ad</span><span className="font-mono text-neutral-500">300x250</span>
         </div>
         <div className="min-h-[250px] w-full">
-          {isRealAdSense ? (
-            <ins className="adsbygoogle" style={{ display: 'block' }} data-ad-client={ADSENSE_CLIENT_ID} data-ad-slot={adSlot} data-ad-format="rectangle" />
-          ) : (
-            <div className="p-3 rounded-xl bg-neutral-800/80 border border-neutral-700/60 text-center space-y-1.5">
-              <h5 className="text-xs font-bold text-neutral-200">Sidebar Ad Unit</h5>
-              <p className="text-[11px] text-neutral-400">High-CPM placement for tools & palette detail pages.</p>
-            </div>
-          )}
+          <ins className="adsbygoogle" style={{ display: 'block', minHeight: 250 }} data-ad-client={ADSENSE_CLIENT_ID} data-ad-slot={resolvedSlot} data-ad-format="rectangle" />
         </div>
       </div>
     );
   }
 
-  // Banner / Mobile — sticky banner below content area
+  // BANNER (Responsive, below hero or between sections)
   return (
-    <div className={`w-full p-4 rounded-2xl bg-neutral-900 text-white flex flex-wrap items-center justify-between gap-4 border border-neutral-800 shadow-md ${className}`}>
-      <div className="flex items-center gap-3">
-        <div className="p-2 rounded-xl bg-amber-500/20 text-amber-300 font-bold text-xs uppercase tracking-wider border border-amber-500/30">GOOGLE AD</div>
-        <div>
-          <h4 className="text-xs sm:text-sm font-bold text-white">Responsive Ad Unit</h4>
-          <p className="text-xs text-neutral-400 hidden sm:block">Auto-adapts across desktop, tablet, mobile.</p>
-        </div>
+    <div ref={adRef} className={`w-full p-4 rounded-2xl bg-neutral-900 border border-neutral-800 shadow-md ${className}`}>
+      <div className="flex items-center justify-between text-[10px] font-semibold text-neutral-500 uppercase tracking-wider mb-3 pb-2 border-b border-neutral-800">
+        <span className="text-amber-300">Google Ad</span>
+      </div>
+      <div className="w-full min-h-[90px]">
+        <ins className="adsbygoogle" style={{ display: 'block', minHeight: 90 }} data-ad-client={ADSENSE_CLIENT_ID} data-ad-slot={resolvedSlot} data-ad-format="auto" data-full-width-responsive="true" />
       </div>
     </div>
   );
 };
 
-// Helper hook to inject AdSense loader script once on mount
+// Hook: inject AdSense loader + preconnect hints once on mount
 export function useInjectAdSenseScript() {
   useEffect(() => {
-    if (ADSENSE_CLIENT_ID !== 'ca-pub-PLACEHOLDER') {
-      const scriptId = 'adsbygoogle-script';
-      if (!document.getElementById(scriptId)) {
-        const s = document.createElement('script');
-        s.id = scriptId;
-        s.async = true;
-        s.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`;
-        s.crossOrigin = 'anonymous';
-        document.head.appendChild(s);
+    if (!isRealClient) return;
+    const scriptId = 'adsbygoogle-script';
+    if (!document.getElementById(scriptId)) {
+      // Preconnect hints speed up first ad load
+      const hints: [string, string][] = [
+        ['preconnect', 'https://pagead2.googlesyndication.com'],
+        ['dns-prefetch', 'https://pagead2.googlesyndication.com'],
+        ['dns-prefetch', 'https://googleads.g.doubleclick.net'],
+        ['dns-prefetch', 'https://adservice.google.com'],
+      ];
+      for (const [rel, href] of hints) {
+        if (!document.querySelector(`link[rel="${rel}"][href="${href}"]`)) {
+          const l = document.createElement('link');
+          l.rel = rel; l.href = href;
+          document.head.appendChild(l);
+        }
       }
+      const s = document.createElement('script');
+      s.id = scriptId; s.async = true; s.crossOrigin = 'anonymous';
+      s.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`;
+      if (AUTO_ADS) s.setAttribute('data-ad-client', ADSENSE_CLIENT_ID);
+      document.head.appendChild(s);
     }
   }, []);
 }

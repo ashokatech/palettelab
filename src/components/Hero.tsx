@@ -2,6 +2,7 @@ import React from 'react';
 import { usePalette } from '../context/PaletteContext';
 import { Gem, Sparkles, ArrowRight, Image as ImageIcon, Zap, ShieldCheck, Download, Code2 } from 'lucide-react';
 import { HeroInteractiveBar } from './HeroInteractiveBar';
+import { AdContainer } from './AdContainer';
 
 interface HeroProps {
   onOpenCreate: () => void;
@@ -91,6 +92,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCreate }) => {
             <span>WCAG 2.1 Accessibility</span>
           </div>
         </div>
+
+        {/* Banner Ad — below hero CTA */}
+        <AdContainer type="banner" className="max-w-4xl mx-auto" />
 
       </div>
     </section>

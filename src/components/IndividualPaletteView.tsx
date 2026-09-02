@@ -20,6 +20,7 @@ import {
   formatTailwindConfig 
 } from '../utils/colorUtils';
 import { PaletteCard } from './PaletteCard';
+import { AdContainer } from './AdContainer';
 
 interface IndividualPaletteViewProps {
   palette: Palette;
@@ -273,6 +274,9 @@ export const IndividualPaletteView: React.FC<IndividualPaletteViewProps> = ({ pa
         </div>
       </div>
 
+      {/* Sidebar Ad — below color breakdown table */}
+      <AdContainer type="sidebar" />
+
       {/* Code Snippet Box (:root CSS & Tailwind) */}
       <div className="bg-white rounded-2xl border border-neutral-200/90 p-6 shadow-xs space-y-4">
         <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
@@ -280,7 +284,6 @@ export const IndividualPaletteView: React.FC<IndividualPaletteViewProps> = ({ pa
             <Code className="w-5 h-5 text-indigo-600" />
             <h2 className="text-base font-bold text-neutral-900">Developer Code Snippets</h2>
           </div>
-
           <div className="flex items-center gap-1">
             {(['css', 'tailwind', 'json'] as const).map((tab) => (
               <button

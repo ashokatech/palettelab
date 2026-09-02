@@ -20,6 +20,12 @@
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
+
+    <!-- AdSense preconnect — speeds up first ad load -->
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net" />
+    <link rel="dns-prefetch" href="https://adservice.google.com" />
     <meta property="og:url" content="https://palettelab.co/" />
     <meta property="og:title" content="PaletteLab — Free Color Palettes & Design Tools for Creators" />
     <meta property="og:description" content="7,900+ original palettes, photo color extractor, harmonic generator, and WCAG checker. 100% original, mathematically generated." />
@@ -98,7 +104,7 @@
     }
     </script>
 
-    <!-- Monetization slots are injected after you add real IDs via .env — see README. No placeholders. -->
+    <!-- Google AdSense — injected via AdContainer.tsx (VITE_ADSENSE_CLIENT env) -->
   </head>
   <body>
     <div id="root"></div>

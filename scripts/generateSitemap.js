@@ -3,7 +3,7 @@ import path from 'path';
 
 async function buildSitemap() {
   console.log('Generating dynamic XML sitemap for Google Search Console...');
-  const baseUrl = (process.env.APP_URL || process.env.CF_PAGES_URL && `${process.env.CF_PAGES_URL}` || process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}` || 'https://palettelab.in').replace(/\/$/, '');
+  const baseUrl = (process.env.APP_URL || process.env.CF_PAGES_URL || process.env.VERCEL_URL || 'https://palettelab.co').replace(/\/$/, '');
 
   const generatedPath = path.join(process.cwd(), 'src', 'data', 'generated_palettes.json');
   const originalPath = path.join(process.cwd(), 'src', 'data', 'originalSeeds.json');
@@ -23,26 +23,9 @@ async function buildSitemap() {
   }
   const allHexes = [...allHexSet].slice(0, 500); // Google index cap ~500 unique color pages
 
-  const staticRoutes = [
-    '',
-    '?tab=discover',
-    '?tab=generator',
-    '?tab=tools&tool=image-extractor',
-    '?tab=tools&tool=contrast-checker',
-    '?tab=tools&tool=color-blindness',
-    '?tab=tools&tool=brand-colors',
-    '?tab=tools&tool=gradient-maker',
-    '?tab=tools&tool=ai-studio',
-    '?category=pastel',
-    '?category=warm',
-    '?category=cool',
-    '?category=dark',
-    '?category=nature',
-    '?category=luxury',
-    '?category=vibrant',
-    '?category=minimal',
-    '?category=neutral',
-  ];
+  // Only submit the canonical homepage — ?tab= and ?category= are SPA states,
+  // not real pages. Google treats them as duplicates and they dilute crawl budget.
+  const staticRoutes = [''];
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;

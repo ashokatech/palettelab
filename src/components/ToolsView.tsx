@@ -4,6 +4,7 @@ import { ToolSubTab } from '../types';
 import { ImageExtractorView } from './ImageExtractorView';
 import { ColorBlindnessView } from './ColorBlindnessView';
 import { BrandColorsView } from './BrandColorsView';
+import { AdContainer } from './AdContainer';
 import { generateSemanticPalette } from '../utils/semanticColorEngine';
 import {
   getContrastRatio,
@@ -1119,6 +1120,9 @@ export const ToolsView: React.FC = () => {
       {/* 7. TECH & BRAND DESIGN TOKENS DIRECTORY                   */}
       {/* ========================================================= */}
       {toolSubTab === 'brand-colors' && <BrandColorsView />}
+
+      {/* Sidebar Ad — between tool sections */}
+      <AdContainer type="sidebar" />
 
     </div>
   );
